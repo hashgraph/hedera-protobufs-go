@@ -43,10 +43,12 @@ type TokenServiceClient interface {
 	AssociateTokens(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
 	// Dissociates tokens from an account
 	DissociateTokens(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
+	// Updates the custom fee schedule on a token
+	UpdateTokenFeeSchedule(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
 	// Retrieves the metadata of a token
 	GetTokenInfo(ctx context.Context, in *Query, opts ...grpc.CallOption) (*Response, error)
 	// Gets info on NFTs N through M on the list of NFTs associated with a given account
-	GetAccountNftInfo(ctx context.Context, in *Query, opts ...grpc.CallOption) (*Response, error)
+	GetAccountNftInfos(ctx context.Context, in *Query, opts ...grpc.CallOption) (*Response, error)
 	// Retrieves the metadata of an NFT by TokenID and serial number
 	GetTokenNftInfo(ctx context.Context, in *Query, opts ...grpc.CallOption) (*Response, error)
 	// Gets info on NFTs N through M on the list of NFTs associated with a given Token of type NON_FUNGIBLE
@@ -169,6 +171,15 @@ func (c *tokenServiceClient) DissociateTokens(ctx context.Context, in *Transacti
 	return out, nil
 }
 
+func (c *tokenServiceClient) UpdateTokenFeeSchedule(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error) {
+	out := new(TransactionResponse)
+	err := c.cc.Invoke(ctx, "/proto.TokenService/updateTokenFeeSchedule", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *tokenServiceClient) GetTokenInfo(ctx context.Context, in *Query, opts ...grpc.CallOption) (*Response, error) {
 	out := new(Response)
 	err := c.cc.Invoke(ctx, "/proto.TokenService/getTokenInfo", in, out, opts...)
@@ -178,9 +189,9 @@ func (c *tokenServiceClient) GetTokenInfo(ctx context.Context, in *Query, opts .
 	return out, nil
 }
 
-func (c *tokenServiceClient) GetAccountNftInfo(ctx context.Context, in *Query, opts ...grpc.CallOption) (*Response, error) {
+func (c *tokenServiceClient) GetAccountNftInfos(ctx context.Context, in *Query, opts ...grpc.CallOption) (*Response, error) {
 	out := new(Response)
-	err := c.cc.Invoke(ctx, "/proto.TokenService/getAccountNftInfo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/proto.TokenService/getAccountNftInfos", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -233,10 +244,12 @@ type TokenServiceServer interface {
 	AssociateTokens(context.Context, *Transaction) (*TransactionResponse, error)
 	// Dissociates tokens from an account
 	DissociateTokens(context.Context, *Transaction) (*TransactionResponse, error)
+	// Updates the custom fee schedule on a token
+	UpdateTokenFeeSchedule(context.Context, *Transaction) (*TransactionResponse, error)
 	// Retrieves the metadata of a token
 	GetTokenInfo(context.Context, *Query) (*Response, error)
 	// Gets info on NFTs N through M on the list of NFTs associated with a given account
-	GetAccountNftInfo(context.Context, *Query) (*Response, error)
+	GetAccountNftInfos(context.Context, *Query) (*Response, error)
 	// Retrieves the metadata of an NFT by TokenID and serial number
 	GetTokenNftInfo(context.Context, *Query) (*Response, error)
 	// Gets info on NFTs N through M on the list of NFTs associated with a given Token of type NON_FUNGIBLE
@@ -295,12 +308,16 @@ func (UnimplementedTokenServiceServer) DissociateTokens(context.Context, *Transa
 	return nil, status.Errorf(codes.Unimplemented, "method DissociateTokens not implemented")
 }
 
+func (UnimplementedTokenServiceServer) UpdateTokenFeeSchedule(context.Context, *Transaction) (*TransactionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTokenFeeSchedule not implemented")
+}
+
 func (UnimplementedTokenServiceServer) GetTokenInfo(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTokenInfo not implemented")
 }
 
-func (UnimplementedTokenServiceServer) GetAccountNftInfo(context.Context, *Query) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAccountNftInfo not implemented")
+func (UnimplementedTokenServiceServer) GetAccountNftInfos(context.Context, *Query) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountNftInfos not implemented")
 }
 
 func (UnimplementedTokenServiceServer) GetTokenNftInfo(context.Context, *Query) (*Response, error) {
@@ -539,6 +556,24 @@ func _TokenService_DissociateTokens_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TokenService_UpdateTokenFeeSchedule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Transaction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TokenServiceServer).UpdateTokenFeeSchedule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.TokenService/updateTokenFeeSchedule",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TokenServiceServer).UpdateTokenFeeSchedule(ctx, req.(*Transaction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _TokenService_GetTokenInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Query)
 	if err := dec(in); err != nil {
@@ -557,20 +592,20 @@ func _TokenService_GetTokenInfo_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TokenService_GetAccountNftInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TokenService_GetAccountNftInfos_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Query)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TokenServiceServer).GetAccountNftInfo(ctx, in)
+		return srv.(TokenServiceServer).GetAccountNftInfos(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.TokenService/getAccountNftInfo",
+		FullMethod: "/proto.TokenService/getAccountNftInfos",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TokenServiceServer).GetAccountNftInfo(ctx, req.(*Query))
+		return srv.(TokenServiceServer).GetAccountNftInfos(ctx, req.(*Query))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -667,12 +702,16 @@ var TokenService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TokenService_DissociateTokens_Handler,
 		},
 		{
+			MethodName: "updateTokenFeeSchedule",
+			Handler:    _TokenService_UpdateTokenFeeSchedule_Handler,
+		},
+		{
 			MethodName: "getTokenInfo",
 			Handler:    _TokenService_GetTokenInfo_Handler,
 		},
 		{
-			MethodName: "getAccountNftInfo",
-			Handler:    _TokenService_GetAccountNftInfo_Handler,
+			MethodName: "getAccountNftInfos",
+			Handler:    _TokenService_GetAccountNftInfos_Handler,
 		},
 		{
 			MethodName: "getTokenNftInfo",
