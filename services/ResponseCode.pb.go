@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -25,40 +26,40 @@ type ResponseCodeEnum int32
 const (
 	ResponseCodeEnum_OK                                      ResponseCodeEnum = 0  // The transaction passed the precheck validations.
 	ResponseCodeEnum_INVALID_TRANSACTION                     ResponseCodeEnum = 1  // For any error not handled by specific error codes listed below.
-	ResponseCodeEnum_PAYER_ACCOUNT_NOT_FOUND                 ResponseCodeEnum = 2  //Payer account does not exist.
-	ResponseCodeEnum_INVALID_NODE_ACCOUNT                    ResponseCodeEnum = 3  //Node Account provided does not match the node account of the node the transaction was submitted to.
+	ResponseCodeEnum_PAYER_ACCOUNT_NOT_FOUND                 ResponseCodeEnum = 2  // Payer account does not exist.
+	ResponseCodeEnum_INVALID_NODE_ACCOUNT                    ResponseCodeEnum = 3  // Node Account provided does not match the node account of the node the transaction was submitted to.
 	ResponseCodeEnum_TRANSACTION_EXPIRED                     ResponseCodeEnum = 4  // Pre-Check error when TransactionValidStart + transactionValidDuration is less than current consensus time.
 	ResponseCodeEnum_INVALID_TRANSACTION_START               ResponseCodeEnum = 5  // Transaction start time is greater than current consensus time
-	ResponseCodeEnum_INVALID_TRANSACTION_DURATION            ResponseCodeEnum = 6  //valid transaction duration is a positive non zero number that does not exceed 120 seconds
+	ResponseCodeEnum_INVALID_TRANSACTION_DURATION            ResponseCodeEnum = 6  // valid transaction duration is a positive non zero number that does not exceed 120 seconds
 	ResponseCodeEnum_INVALID_SIGNATURE                       ResponseCodeEnum = 7  // The transaction signature is not valid
-	ResponseCodeEnum_MEMO_TOO_LONG                           ResponseCodeEnum = 8  //Transaction memo size exceeded 100 bytes
+	ResponseCodeEnum_MEMO_TOO_LONG                           ResponseCodeEnum = 8  // Transaction memo size exceeded 100 bytes
 	ResponseCodeEnum_INSUFFICIENT_TX_FEE                     ResponseCodeEnum = 9  // The fee provided in the transaction is insufficient for this type of transaction
 	ResponseCodeEnum_INSUFFICIENT_PAYER_BALANCE              ResponseCodeEnum = 10 // The payer account has insufficient cryptocurrency to pay the transaction fee
 	ResponseCodeEnum_DUPLICATE_TRANSACTION                   ResponseCodeEnum = 11 // This transaction ID is a duplicate of one that was submitted to this node or reached consensus in the last 180 seconds (receipt period)
-	ResponseCodeEnum_BUSY                                    ResponseCodeEnum = 12 //If API is throttled out
-	ResponseCodeEnum_NOT_SUPPORTED                           ResponseCodeEnum = 13 //The API is not currently supported
-	ResponseCodeEnum_INVALID_FILE_ID                         ResponseCodeEnum = 14 //The file id is invalid or does not exist
-	ResponseCodeEnum_INVALID_ACCOUNT_ID                      ResponseCodeEnum = 15 //The account id is invalid or does not exist
-	ResponseCodeEnum_INVALID_CONTRACT_ID                     ResponseCodeEnum = 16 //The contract id is invalid or does not exist
-	ResponseCodeEnum_INVALID_TRANSACTION_ID                  ResponseCodeEnum = 17 //Transaction id is not valid
-	ResponseCodeEnum_RECEIPT_NOT_FOUND                       ResponseCodeEnum = 18 //Receipt for given transaction id does not exist
-	ResponseCodeEnum_RECORD_NOT_FOUND                        ResponseCodeEnum = 19 //Record for given transaction id does not exist
-	ResponseCodeEnum_INVALID_SOLIDITY_ID                     ResponseCodeEnum = 20 //The solidity id is invalid or entity with this solidity id does not exist
+	ResponseCodeEnum_BUSY                                    ResponseCodeEnum = 12 // If API is throttled out
+	ResponseCodeEnum_NOT_SUPPORTED                           ResponseCodeEnum = 13 // The API is not currently supported
+	ResponseCodeEnum_INVALID_FILE_ID                         ResponseCodeEnum = 14 // The file id is invalid or does not exist
+	ResponseCodeEnum_INVALID_ACCOUNT_ID                      ResponseCodeEnum = 15 // The account id is invalid or does not exist
+	ResponseCodeEnum_INVALID_CONTRACT_ID                     ResponseCodeEnum = 16 // The contract id is invalid or does not exist
+	ResponseCodeEnum_INVALID_TRANSACTION_ID                  ResponseCodeEnum = 17 // Transaction id is not valid
+	ResponseCodeEnum_RECEIPT_NOT_FOUND                       ResponseCodeEnum = 18 // Receipt for given transaction id does not exist
+	ResponseCodeEnum_RECORD_NOT_FOUND                        ResponseCodeEnum = 19 // Record for given transaction id does not exist
+	ResponseCodeEnum_INVALID_SOLIDITY_ID                     ResponseCodeEnum = 20 // The solidity id is invalid or entity with this solidity id does not exist
 	ResponseCodeEnum_UNKNOWN                                 ResponseCodeEnum = 21 // The responding node has submitted the transaction to the network. Its final status is still unknown.
 	ResponseCodeEnum_SUCCESS                                 ResponseCodeEnum = 22 // The transaction succeeded
 	ResponseCodeEnum_FAIL_INVALID                            ResponseCodeEnum = 23 // There was a system error and the transaction failed because of invalid request parameters.
 	ResponseCodeEnum_FAIL_FEE                                ResponseCodeEnum = 24 // There was a system error while performing fee calculation, reserved for future.
 	ResponseCodeEnum_FAIL_BALANCE                            ResponseCodeEnum = 25 // There was a system error while performing balance checks, reserved for future.
-	ResponseCodeEnum_KEY_REQUIRED                            ResponseCodeEnum = 26 //Key not provided in the transaction body
-	ResponseCodeEnum_BAD_ENCODING                            ResponseCodeEnum = 27 //Unsupported algorithm/encoding used for keys in the transaction
-	ResponseCodeEnum_INSUFFICIENT_ACCOUNT_BALANCE            ResponseCodeEnum = 28 //When the account balance is not sufficient for the transfer
-	ResponseCodeEnum_INVALID_SOLIDITY_ADDRESS                ResponseCodeEnum = 29 //During an update transaction when the system is not able to find the Users Solidity address
-	ResponseCodeEnum_INSUFFICIENT_GAS                        ResponseCodeEnum = 30 //Not enough gas was supplied to execute transaction
-	ResponseCodeEnum_CONTRACT_SIZE_LIMIT_EXCEEDED            ResponseCodeEnum = 31 //contract byte code size is over the limit
-	ResponseCodeEnum_LOCAL_CALL_MODIFICATION_EXCEPTION       ResponseCodeEnum = 32 //local execution (query) is requested for a function which changes state
-	ResponseCodeEnum_CONTRACT_REVERT_EXECUTED                ResponseCodeEnum = 33 //Contract REVERT OPCODE executed
-	ResponseCodeEnum_CONTRACT_EXECUTION_EXCEPTION            ResponseCodeEnum = 34 //For any contract execution related error not handled by specific error codes listed above.
-	ResponseCodeEnum_INVALID_RECEIVING_NODE_ACCOUNT          ResponseCodeEnum = 35 //In Query validation, account with +ve(amount) value should be Receiving node account, the receiver account should be only one account in the list
+	ResponseCodeEnum_KEY_REQUIRED                            ResponseCodeEnum = 26 // Key not provided in the transaction body
+	ResponseCodeEnum_BAD_ENCODING                            ResponseCodeEnum = 27 // Unsupported algorithm/encoding used for keys in the transaction
+	ResponseCodeEnum_INSUFFICIENT_ACCOUNT_BALANCE            ResponseCodeEnum = 28 // When the account balance is not sufficient for the transfer
+	ResponseCodeEnum_INVALID_SOLIDITY_ADDRESS                ResponseCodeEnum = 29 // During an update transaction when the system is not able to find the Users Solidity address
+	ResponseCodeEnum_INSUFFICIENT_GAS                        ResponseCodeEnum = 30 // Not enough gas was supplied to execute transaction
+	ResponseCodeEnum_CONTRACT_SIZE_LIMIT_EXCEEDED            ResponseCodeEnum = 31 // contract byte code size is over the limit
+	ResponseCodeEnum_LOCAL_CALL_MODIFICATION_EXCEPTION       ResponseCodeEnum = 32 // local execution (query) is requested for a function which changes state
+	ResponseCodeEnum_CONTRACT_REVERT_EXECUTED                ResponseCodeEnum = 33 // Contract REVERT OPCODE executed
+	ResponseCodeEnum_CONTRACT_EXECUTION_EXCEPTION            ResponseCodeEnum = 34 // For any contract execution related error not handled by specific error codes listed above.
+	ResponseCodeEnum_INVALID_RECEIVING_NODE_ACCOUNT          ResponseCodeEnum = 35 // In Query validation, account with +ve(amount) value should be Receiving node account, the receiver account should be only one account in the list
 	ResponseCodeEnum_MISSING_QUERY_HEADER                    ResponseCodeEnum = 36 // Header is missing in Query request
 	ResponseCodeEnum_ACCOUNT_UPDATE_FAILED                   ResponseCodeEnum = 37 // The update of the account failed
 	ResponseCodeEnum_INVALID_KEY_ENCODING                    ResponseCodeEnum = 38 // Provided key encoding was not supported by the system
@@ -69,8 +70,8 @@ const (
 	ResponseCodeEnum_INVALID_PAYER_SIGNATURE                 ResponseCodeEnum = 43 // Payer signature is invalid
 	ResponseCodeEnum_KEY_NOT_PROVIDED                        ResponseCodeEnum = 44 // The keys were not provided in the request.
 	ResponseCodeEnum_INVALID_EXPIRATION_TIME                 ResponseCodeEnum = 45 // Expiration time provided in the transaction was invalid.
-	ResponseCodeEnum_NO_WACL_KEY                             ResponseCodeEnum = 46 //WriteAccess Control Keys are not provided for the file
-	ResponseCodeEnum_FILE_CONTENT_EMPTY                      ResponseCodeEnum = 47 //The contents of file are provided as empty.
+	ResponseCodeEnum_NO_WACL_KEY                             ResponseCodeEnum = 46 // WriteAccess Control Keys are not provided for the file
+	ResponseCodeEnum_FILE_CONTENT_EMPTY                      ResponseCodeEnum = 47 // The contents of file are provided as empty.
 	ResponseCodeEnum_INVALID_ACCOUNT_AMOUNTS                 ResponseCodeEnum = 48 // The crypto transfer credit and debit do not sum equal to 0
 	ResponseCodeEnum_EMPTY_TRANSACTION_BODY                  ResponseCodeEnum = 49 // Transaction body provided is empty
 	ResponseCodeEnum_INVALID_TRANSACTION_BODY                ResponseCodeEnum = 50 // Invalid transaction body provided
@@ -89,7 +90,7 @@ const (
 	ResponseCodeEnum_SERIALIZATION_FAILED                    ResponseCodeEnum = 63 // Serialization failure
 	ResponseCodeEnum_TRANSACTION_OVERSIZE                    ResponseCodeEnum = 64 // The size of the Transaction is greater than transactionMaxBytes
 	ResponseCodeEnum_TRANSACTION_TOO_MANY_LAYERS             ResponseCodeEnum = 65 // The Transaction has more than 50 levels
-	ResponseCodeEnum_CONTRACT_DELETED                        ResponseCodeEnum = 66 //Contract is marked as deleted
+	ResponseCodeEnum_CONTRACT_DELETED                        ResponseCodeEnum = 66 // Contract is marked as deleted
 	ResponseCodeEnum_PLATFORM_NOT_ACTIVE                     ResponseCodeEnum = 67 // the platform node is either disconnected or lagging behind.
 	ResponseCodeEnum_KEY_PREFIX_MISMATCH                     ResponseCodeEnum = 68 // one public key matches more than one prefixes on the signature map
 	ResponseCodeEnum_PLATFORM_TRANSACTION_NOT_CREATED        ResponseCodeEnum = 69 // transaction not created by platform due to large backlog
@@ -100,10 +101,10 @@ const (
 	ResponseCodeEnum_ACCOUNT_REPEATED_IN_ACCOUNT_AMOUNTS     ResponseCodeEnum = 74 // same accounts repeated in the transfer account list
 	ResponseCodeEnum_SETTING_NEGATIVE_ACCOUNT_BALANCE        ResponseCodeEnum = 75 // attempting to set negative balance value for crypto account
 	ResponseCodeEnum_OBTAINER_REQUIRED                       ResponseCodeEnum = 76 // when deleting smart contract that has crypto balance either transfer account or transfer smart contract is required
-	ResponseCodeEnum_OBTAINER_SAME_CONTRACT_ID               ResponseCodeEnum = 77 //when deleting smart contract that has crypto balance you can not use the same contract id as transferContractId as the one being deleted
-	ResponseCodeEnum_OBTAINER_DOES_NOT_EXIST                 ResponseCodeEnum = 78 //transferAccountId or transferContractId specified for contract delete does not exist
-	ResponseCodeEnum_MODIFYING_IMMUTABLE_CONTRACT            ResponseCodeEnum = 79 //attempting to modify (update or delete a immutable smart contract, i.e. one created without a admin key)
-	ResponseCodeEnum_FILE_SYSTEM_EXCEPTION                   ResponseCodeEnum = 80 //Unexpected exception thrown by file system functions
+	ResponseCodeEnum_OBTAINER_SAME_CONTRACT_ID               ResponseCodeEnum = 77 // when deleting smart contract that has crypto balance you can not use the same contract id as transferContractId as the one being deleted
+	ResponseCodeEnum_OBTAINER_DOES_NOT_EXIST                 ResponseCodeEnum = 78 // transferAccountId or transferContractId specified for contract delete does not exist
+	ResponseCodeEnum_MODIFYING_IMMUTABLE_CONTRACT            ResponseCodeEnum = 79 // attempting to modify (update or delete a immutable smart contract, i.e. one created without a admin key)
+	ResponseCodeEnum_FILE_SYSTEM_EXCEPTION                   ResponseCodeEnum = 80 // Unexpected exception thrown by file system functions
 	ResponseCodeEnum_AUTORENEW_DURATION_NOT_IN_RANGE         ResponseCodeEnum = 81 // the duration is not a subset of [MINIMUM_AUTORENEW_DURATION,MAXIMUM_AUTORENEW_DURATION]
 	ResponseCodeEnum_ERROR_DECODING_BYTESTRING               ResponseCodeEnum = 82 // Decoding the smart contract binary to a byte array failed. Check that the input is a valid hex string.
 	ResponseCodeEnum_CONTRACT_FILE_EMPTY                     ResponseCodeEnum = 83 // File to create a smart contract was of length zero
@@ -117,9 +118,9 @@ const (
 	ResponseCodeEnum_PAYER_ACCOUNT_UNAUTHORIZED              ResponseCodeEnum = 89  // The fee payer account doesn't have permission to submit such Transaction
 	ResponseCodeEnum_INVALID_FREEZE_TRANSACTION_BODY         ResponseCodeEnum = 90  // FreezeTransactionBody is invalid
 	ResponseCodeEnum_FREEZE_TRANSACTION_BODY_NOT_FOUND       ResponseCodeEnum = 91  // FreezeTransactionBody does not exist
-	ResponseCodeEnum_TRANSFER_LIST_SIZE_LIMIT_EXCEEDED       ResponseCodeEnum = 92  //Exceeded the number of accounts (both from and to) allowed for crypto transfer list
+	ResponseCodeEnum_TRANSFER_LIST_SIZE_LIMIT_EXCEEDED       ResponseCodeEnum = 92  // Exceeded the number of accounts (both from and to) allowed for crypto transfer list
 	ResponseCodeEnum_RESULT_SIZE_LIMIT_EXCEEDED              ResponseCodeEnum = 93  // Smart contract result size greater than specified maxResultSize
-	ResponseCodeEnum_NOT_SPECIAL_ACCOUNT                     ResponseCodeEnum = 94  //The payer account is not a special account(account 0.0.55)
+	ResponseCodeEnum_NOT_SPECIAL_ACCOUNT                     ResponseCodeEnum = 94  // The payer account is not a special account(account 0.0.55)
 	ResponseCodeEnum_CONTRACT_NEGATIVE_GAS                   ResponseCodeEnum = 95  // Negative gas was offered in smart contract call
 	ResponseCodeEnum_CONTRACT_NEGATIVE_VALUE                 ResponseCodeEnum = 96  // Negative value / initial balance was specified in a smart contract call / create
 	ResponseCodeEnum_INVALID_FEE_FILE                        ResponseCodeEnum = 97  // Failed to update fee file
@@ -135,7 +136,7 @@ const (
 	ResponseCodeEnum_TRANSFER_ACCOUNT_SAME_AS_DELETE_ACCOUNT ResponseCodeEnum = 107 // Transfer Account should not be same as Account to be deleted
 	ResponseCodeEnum_TOTAL_LEDGER_BALANCE_INVALID            ResponseCodeEnum = 108
 	ResponseCodeEnum_EXPIRATION_REDUCTION_NOT_ALLOWED        ResponseCodeEnum = 110 // The expiration date/time on a smart contract may not be reduced
-	ResponseCodeEnum_MAX_GAS_LIMIT_EXCEEDED                  ResponseCodeEnum = 111 //Gas exceeded currently allowable gas limit per transaction
+	ResponseCodeEnum_MAX_GAS_LIMIT_EXCEEDED                  ResponseCodeEnum = 111 // Gas exceeded currently allowable gas limit per transaction
 	ResponseCodeEnum_MAX_FILE_SIZE_EXCEEDED                  ResponseCodeEnum = 112 // File size exceeded the currently allowable limit
 	ResponseCodeEnum_INVALID_TOPIC_ID                        ResponseCodeEnum = 150 // The Topic ID specified is not in the system.
 	ResponseCodeEnum_INVALID_ADMIN_KEY                       ResponseCodeEnum = 155 // A provided admin key was invalid.
@@ -999,10 +1000,13 @@ func file_ResponseCode_proto_rawDescGZIP() []byte {
 	return file_ResponseCode_proto_rawDescData
 }
 
-var file_ResponseCode_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_ResponseCode_proto_goTypes = []interface{}{
-	(ResponseCodeEnum)(0), // 0: proto.ResponseCodeEnum
-}
+var (
+	file_ResponseCode_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+	file_ResponseCode_proto_goTypes   = []interface{}{
+		(ResponseCodeEnum)(0), // 0: proto.ResponseCodeEnum
+	}
+)
+
 var file_ResponseCode_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type

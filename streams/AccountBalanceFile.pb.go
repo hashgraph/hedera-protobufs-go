@@ -7,11 +7,12 @@
 package streams
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	services "github.com/hashgraph/hedera-protobufs-go/services"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -247,15 +248,18 @@ func file_AccountBalanceFile_proto_rawDescGZIP() []byte {
 	return file_AccountBalanceFile_proto_rawDescData
 }
 
-var file_AccountBalanceFile_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_AccountBalanceFile_proto_goTypes = []interface{}{
-	(*TokenUnitBalance)(nil),      // 0: proto.TokenUnitBalance
-	(*SingleAccountBalances)(nil), // 1: proto.SingleAccountBalances
-	(*AllAccountBalances)(nil),    // 2: proto.AllAccountBalances
-	(*services.TokenID)(nil),      // 3: proto.TokenID
-	(*services.AccountID)(nil),    // 4: proto.AccountID
-	(*services.Timestamp)(nil),    // 5: proto.Timestamp
-}
+var (
+	file_AccountBalanceFile_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+	file_AccountBalanceFile_proto_goTypes  = []interface{}{
+		(*TokenUnitBalance)(nil),      // 0: proto.TokenUnitBalance
+		(*SingleAccountBalances)(nil), // 1: proto.SingleAccountBalances
+		(*AllAccountBalances)(nil),    // 2: proto.AllAccountBalances
+		(*services.TokenID)(nil),      // 3: proto.TokenID
+		(*services.AccountID)(nil),    // 4: proto.AccountID
+		(*services.Timestamp)(nil),    // 5: proto.Timestamp
+	}
+)
+
 var file_AccountBalanceFile_proto_depIdxs = []int32{
 	3, // 0: proto.TokenUnitBalance.tokenId:type_name -> proto.TokenID
 	4, // 1: proto.SingleAccountBalances.accountID:type_name -> proto.AccountID

@@ -26,11 +26,12 @@
 package mirror
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	services "github.com/hashgraph/hedera-protobufs-go/services"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -272,14 +273,17 @@ func file_ConsensusService_proto_rawDescGZIP() []byte {
 	return file_ConsensusService_proto_rawDescData
 }
 
-var file_ConsensusService_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_ConsensusService_proto_goTypes = []interface{}{
-	(*ConsensusTopicQuery)(nil),                // 0: com.hedera.mirror.api.proto.ConsensusTopicQuery
-	(*ConsensusTopicResponse)(nil),             // 1: com.hedera.mirror.api.proto.ConsensusTopicResponse
-	(*services.TopicID)(nil),                   // 2: proto.TopicID
-	(*services.Timestamp)(nil),                 // 3: proto.Timestamp
-	(*services.ConsensusMessageChunkInfo)(nil), // 4: proto.ConsensusMessageChunkInfo
-}
+var (
+	file_ConsensusService_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+	file_ConsensusService_proto_goTypes  = []interface{}{
+		(*ConsensusTopicQuery)(nil),                // 0: com.hedera.mirror.api.proto.ConsensusTopicQuery
+		(*ConsensusTopicResponse)(nil),             // 1: com.hedera.mirror.api.proto.ConsensusTopicResponse
+		(*services.TopicID)(nil),                   // 2: proto.TopicID
+		(*services.Timestamp)(nil),                 // 3: proto.Timestamp
+		(*services.ConsensusMessageChunkInfo)(nil), // 4: proto.ConsensusMessageChunkInfo
+	}
+)
+
 var file_ConsensusService_proto_depIdxs = []int32{
 	2, // 0: com.hedera.mirror.api.proto.ConsensusTopicQuery.topicID:type_name -> proto.TopicID
 	3, // 1: com.hedera.mirror.api.proto.ConsensusTopicQuery.consensusStartTime:type_name -> proto.Timestamp

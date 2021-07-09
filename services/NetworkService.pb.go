@@ -7,9 +7,10 @@
 package services
 
 import (
+	reflect "reflect"
+
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	reflect "reflect"
 )
 
 const (
@@ -49,6 +50,7 @@ var file_NetworkService_proto_goTypes = []interface{}{
 	(*Response)(nil),            // 2: proto.Response
 	(*TransactionResponse)(nil), // 3: proto.TransactionResponse
 }
+
 var file_NetworkService_proto_depIdxs = []int32{
 	0, // 0: proto.NetworkService.getVersionInfo:input_type -> proto.Query
 	1, // 1: proto.NetworkService.uncheckedSubmit:input_type -> proto.Transaction

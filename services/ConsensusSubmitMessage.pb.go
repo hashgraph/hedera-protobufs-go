@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -190,13 +191,16 @@ func file_ConsensusSubmitMessage_proto_rawDescGZIP() []byte {
 	return file_ConsensusSubmitMessage_proto_rawDescData
 }
 
-var file_ConsensusSubmitMessage_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_ConsensusSubmitMessage_proto_goTypes = []interface{}{
-	(*ConsensusMessageChunkInfo)(nil),             // 0: proto.ConsensusMessageChunkInfo
-	(*ConsensusSubmitMessageTransactionBody)(nil), // 1: proto.ConsensusSubmitMessageTransactionBody
-	(*TransactionID)(nil),                         // 2: proto.TransactionID
-	(*TopicID)(nil),                               // 3: proto.TopicID
-}
+var (
+	file_ConsensusSubmitMessage_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+	file_ConsensusSubmitMessage_proto_goTypes  = []interface{}{
+		(*ConsensusMessageChunkInfo)(nil),             // 0: proto.ConsensusMessageChunkInfo
+		(*ConsensusSubmitMessageTransactionBody)(nil), // 1: proto.ConsensusSubmitMessageTransactionBody
+		(*TransactionID)(nil),                         // 2: proto.TransactionID
+		(*TopicID)(nil),                               // 3: proto.TopicID
+	}
+)
+
 var file_ConsensusSubmitMessage_proto_depIdxs = []int32{
 	2, // 0: proto.ConsensusMessageChunkInfo.initialTransactionID:type_name -> proto.TransactionID
 	3, // 1: proto.ConsensusSubmitMessageTransactionBody.topicID:type_name -> proto.TopicID

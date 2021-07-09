@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -171,15 +172,18 @@ func file_FileCreate_proto_rawDescGZIP() []byte {
 	return file_FileCreate_proto_rawDescData
 }
 
-var file_FileCreate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_FileCreate_proto_goTypes = []interface{}{
-	(*FileCreateTransactionBody)(nil), // 0: proto.FileCreateTransactionBody
-	(*Timestamp)(nil),                 // 1: proto.Timestamp
-	(*KeyList)(nil),                   // 2: proto.KeyList
-	(*ShardID)(nil),                   // 3: proto.ShardID
-	(*RealmID)(nil),                   // 4: proto.RealmID
-	(*Key)(nil),                       // 5: proto.Key
-}
+var (
+	file_FileCreate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_FileCreate_proto_goTypes  = []interface{}{
+		(*FileCreateTransactionBody)(nil), // 0: proto.FileCreateTransactionBody
+		(*Timestamp)(nil),                 // 1: proto.Timestamp
+		(*KeyList)(nil),                   // 2: proto.KeyList
+		(*ShardID)(nil),                   // 3: proto.ShardID
+		(*RealmID)(nil),                   // 4: proto.RealmID
+		(*Key)(nil),                       // 5: proto.Key
+	}
+)
+
 var file_FileCreate_proto_depIdxs = []int32{
 	1, // 0: proto.FileCreateTransactionBody.expirationTime:type_name -> proto.Timestamp
 	2, // 1: proto.FileCreateTransactionBody.keys:type_name -> proto.KeyList

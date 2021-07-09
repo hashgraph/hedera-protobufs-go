@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -97,11 +98,14 @@ func file_ConsensusDeleteTopic_proto_rawDescGZIP() []byte {
 	return file_ConsensusDeleteTopic_proto_rawDescData
 }
 
-var file_ConsensusDeleteTopic_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_ConsensusDeleteTopic_proto_goTypes = []interface{}{
-	(*ConsensusDeleteTopicTransactionBody)(nil), // 0: proto.ConsensusDeleteTopicTransactionBody
-	(*TopicID)(nil), // 1: proto.TopicID
-}
+var (
+	file_ConsensusDeleteTopic_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_ConsensusDeleteTopic_proto_goTypes  = []interface{}{
+		(*ConsensusDeleteTopicTransactionBody)(nil), // 0: proto.ConsensusDeleteTopicTransactionBody
+		(*TopicID)(nil), // 1: proto.TopicID
+	}
+)
+
 var file_ConsensusDeleteTopic_proto_depIdxs = []int32{
 	1, // 0: proto.ConsensusDeleteTopicTransactionBody.topicID:type_name -> proto.TopicID
 	1, // [1:1] is the sub-list for method output_type

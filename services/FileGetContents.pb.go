@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -82,7 +83,7 @@ type FileGetContentsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Header       *ResponseHeader                       `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`             //Standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
+	Header       *ResponseHeader                       `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`             // Standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
 	FileContents *FileGetContentsResponse_FileContents `protobuf:"bytes,2,opt,name=fileContents,proto3" json:"fileContents,omitempty"` // the file ID and contents (a state proof can be generated for this)
 }
 
@@ -235,15 +236,18 @@ func file_FileGetContents_proto_rawDescGZIP() []byte {
 	return file_FileGetContents_proto_rawDescData
 }
 
-var file_FileGetContents_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_FileGetContents_proto_goTypes = []interface{}{
-	(*FileGetContentsQuery)(nil),                 // 0: proto.FileGetContentsQuery
-	(*FileGetContentsResponse)(nil),              // 1: proto.FileGetContentsResponse
-	(*FileGetContentsResponse_FileContents)(nil), // 2: proto.FileGetContentsResponse.FileContents
-	(*QueryHeader)(nil),                          // 3: proto.QueryHeader
-	(*FileID)(nil),                               // 4: proto.FileID
-	(*ResponseHeader)(nil),                       // 5: proto.ResponseHeader
-}
+var (
+	file_FileGetContents_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+	file_FileGetContents_proto_goTypes  = []interface{}{
+		(*FileGetContentsQuery)(nil),                 // 0: proto.FileGetContentsQuery
+		(*FileGetContentsResponse)(nil),              // 1: proto.FileGetContentsResponse
+		(*FileGetContentsResponse_FileContents)(nil), // 2: proto.FileGetContentsResponse.FileContents
+		(*QueryHeader)(nil),                          // 3: proto.QueryHeader
+		(*FileID)(nil),                               // 4: proto.FileID
+		(*ResponseHeader)(nil),                       // 5: proto.ResponseHeader
+	}
+)
+
 var file_FileGetContents_proto_depIdxs = []int32{
 	3, // 0: proto.FileGetContentsQuery.header:type_name -> proto.QueryHeader
 	4, // 1: proto.FileGetContentsQuery.fileID:type_name -> proto.FileID

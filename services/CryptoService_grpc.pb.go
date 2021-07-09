@@ -4,6 +4,7 @@ package services
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -218,48 +219,60 @@ type CryptoServiceServer interface {
 }
 
 // UnimplementedCryptoServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedCryptoServiceServer struct {
-}
+type UnimplementedCryptoServiceServer struct{}
 
 func (UnimplementedCryptoServiceServer) CreateAccount(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccount not implemented")
 }
+
 func (UnimplementedCryptoServiceServer) UpdateAccount(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccount not implemented")
 }
+
 func (UnimplementedCryptoServiceServer) CryptoTransfer(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CryptoTransfer not implemented")
 }
+
 func (UnimplementedCryptoServiceServer) CryptoDelete(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CryptoDelete not implemented")
 }
+
 func (UnimplementedCryptoServiceServer) AddLiveHash(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddLiveHash not implemented")
 }
+
 func (UnimplementedCryptoServiceServer) DeleteLiveHash(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteLiveHash not implemented")
 }
+
 func (UnimplementedCryptoServiceServer) GetLiveHash(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLiveHash not implemented")
 }
+
 func (UnimplementedCryptoServiceServer) GetAccountRecords(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountRecords not implemented")
 }
+
 func (UnimplementedCryptoServiceServer) CryptoGetBalance(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CryptoGetBalance not implemented")
 }
+
 func (UnimplementedCryptoServiceServer) GetAccountInfo(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountInfo not implemented")
 }
+
 func (UnimplementedCryptoServiceServer) GetTransactionReceipts(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionReceipts not implemented")
 }
+
 func (UnimplementedCryptoServiceServer) GetFastTransactionRecord(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFastTransactionRecord not implemented")
 }
+
 func (UnimplementedCryptoServiceServer) GetTxRecordByTxID(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTxRecordByTxID not implemented")
 }
+
 func (UnimplementedCryptoServiceServer) GetStakersByAccountID(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetStakersByAccountID not implemented")
 }

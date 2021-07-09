@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -132,12 +133,15 @@ func file_ResponseHeader_proto_rawDescGZIP() []byte {
 	return file_ResponseHeader_proto_rawDescData
 }
 
-var file_ResponseHeader_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_ResponseHeader_proto_goTypes = []interface{}{
-	(*ResponseHeader)(nil), // 0: proto.ResponseHeader
-	(ResponseCodeEnum)(0),  // 1: proto.ResponseCodeEnum
-	(ResponseType)(0),      // 2: proto.ResponseType
-}
+var (
+	file_ResponseHeader_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_ResponseHeader_proto_goTypes  = []interface{}{
+		(*ResponseHeader)(nil), // 0: proto.ResponseHeader
+		(ResponseCodeEnum)(0),  // 1: proto.ResponseCodeEnum
+		(ResponseType)(0),      // 2: proto.ResponseType
+	}
+)
+
 var file_ResponseHeader_proto_depIdxs = []int32{
 	1, // 0: proto.ResponseHeader.nodeTransactionPrecheckCode:type_name -> proto.ResponseCodeEnum
 	2, // 1: proto.ResponseHeader.responseType:type_name -> proto.ResponseType

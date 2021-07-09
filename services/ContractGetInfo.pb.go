@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -82,7 +83,7 @@ type ContractGetInfoResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Header       *ResponseHeader                       `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`             //standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
+	Header       *ResponseHeader                       `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`             // standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
 	ContractInfo *ContractGetInfoResponse_ContractInfo `protobuf:"bytes,2,opt,name=contractInfo,proto3" json:"contractInfo,omitempty"` // the information about this contract instance (a state proof can be generated for this)
 }
 
@@ -335,20 +336,23 @@ func file_ContractGetInfo_proto_rawDescGZIP() []byte {
 	return file_ContractGetInfo_proto_rawDescData
 }
 
-var file_ContractGetInfo_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_ContractGetInfo_proto_goTypes = []interface{}{
-	(*ContractGetInfoQuery)(nil),                 // 0: proto.ContractGetInfoQuery
-	(*ContractGetInfoResponse)(nil),              // 1: proto.ContractGetInfoResponse
-	(*ContractGetInfoResponse_ContractInfo)(nil), // 2: proto.ContractGetInfoResponse.ContractInfo
-	(*QueryHeader)(nil),                          // 3: proto.QueryHeader
-	(*ContractID)(nil),                           // 4: proto.ContractID
-	(*ResponseHeader)(nil),                       // 5: proto.ResponseHeader
-	(*AccountID)(nil),                            // 6: proto.AccountID
-	(*Key)(nil),                                  // 7: proto.Key
-	(*Timestamp)(nil),                            // 8: proto.Timestamp
-	(*Duration)(nil),                             // 9: proto.Duration
-	(*TokenRelationship)(nil),                    // 10: proto.TokenRelationship
-}
+var (
+	file_ContractGetInfo_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+	file_ContractGetInfo_proto_goTypes  = []interface{}{
+		(*ContractGetInfoQuery)(nil),                 // 0: proto.ContractGetInfoQuery
+		(*ContractGetInfoResponse)(nil),              // 1: proto.ContractGetInfoResponse
+		(*ContractGetInfoResponse_ContractInfo)(nil), // 2: proto.ContractGetInfoResponse.ContractInfo
+		(*QueryHeader)(nil),                          // 3: proto.QueryHeader
+		(*ContractID)(nil),                           // 4: proto.ContractID
+		(*ResponseHeader)(nil),                       // 5: proto.ResponseHeader
+		(*AccountID)(nil),                            // 6: proto.AccountID
+		(*Key)(nil),                                  // 7: proto.Key
+		(*Timestamp)(nil),                            // 8: proto.Timestamp
+		(*Duration)(nil),                             // 9: proto.Duration
+		(*TokenRelationship)(nil),                    // 10: proto.TokenRelationship
+	}
+)
+
 var file_ContractGetInfo_proto_depIdxs = []int32{
 	3,  // 0: proto.ContractGetInfoQuery.header:type_name -> proto.QueryHeader
 	4,  // 1: proto.ContractGetInfoQuery.contractID:type_name -> proto.ContractID

@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -177,14 +178,17 @@ func file_NetworkGetVersionInfo_proto_rawDescGZIP() []byte {
 	return file_NetworkGetVersionInfo_proto_rawDescData
 }
 
-var file_NetworkGetVersionInfo_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_NetworkGetVersionInfo_proto_goTypes = []interface{}{
-	(*NetworkGetVersionInfoQuery)(nil),    // 0: proto.NetworkGetVersionInfoQuery
-	(*NetworkGetVersionInfoResponse)(nil), // 1: proto.NetworkGetVersionInfoResponse
-	(*QueryHeader)(nil),                   // 2: proto.QueryHeader
-	(*ResponseHeader)(nil),                // 3: proto.ResponseHeader
-	(*SemanticVersion)(nil),               // 4: proto.SemanticVersion
-}
+var (
+	file_NetworkGetVersionInfo_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+	file_NetworkGetVersionInfo_proto_goTypes  = []interface{}{
+		(*NetworkGetVersionInfoQuery)(nil),    // 0: proto.NetworkGetVersionInfoQuery
+		(*NetworkGetVersionInfoResponse)(nil), // 1: proto.NetworkGetVersionInfoResponse
+		(*QueryHeader)(nil),                   // 2: proto.QueryHeader
+		(*ResponseHeader)(nil),                // 3: proto.ResponseHeader
+		(*SemanticVersion)(nil),               // 4: proto.SemanticVersion
+	}
+)
+
 var file_NetworkGetVersionInfo_proto_depIdxs = []int32{
 	2, // 0: proto.NetworkGetVersionInfoQuery.header:type_name -> proto.QueryHeader
 	3, // 1: proto.NetworkGetVersionInfoResponse.header:type_name -> proto.ResponseHeader

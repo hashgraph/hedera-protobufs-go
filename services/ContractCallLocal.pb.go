@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -283,7 +284,7 @@ type ContractCallLocalResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Header         *ResponseHeader         `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`                 //standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
+	Header         *ResponseHeader         `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`                 // standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
 	FunctionResult *ContractFunctionResult `protobuf:"bytes,2,opt,name=functionResult,proto3" json:"functionResult,omitempty"` // the value returned by the function (if it completed and didn't fail)
 }
 
@@ -411,16 +412,19 @@ func file_ContractCallLocal_proto_rawDescGZIP() []byte {
 	return file_ContractCallLocal_proto_rawDescData
 }
 
-var file_ContractCallLocal_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
-var file_ContractCallLocal_proto_goTypes = []interface{}{
-	(*ContractLoginfo)(nil),           // 0: proto.ContractLoginfo
-	(*ContractFunctionResult)(nil),    // 1: proto.ContractFunctionResult
-	(*ContractCallLocalQuery)(nil),    // 2: proto.ContractCallLocalQuery
-	(*ContractCallLocalResponse)(nil), // 3: proto.ContractCallLocalResponse
-	(*ContractID)(nil),                // 4: proto.ContractID
-	(*QueryHeader)(nil),               // 5: proto.QueryHeader
-	(*ResponseHeader)(nil),            // 6: proto.ResponseHeader
-}
+var (
+	file_ContractCallLocal_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+	file_ContractCallLocal_proto_goTypes  = []interface{}{
+		(*ContractLoginfo)(nil),           // 0: proto.ContractLoginfo
+		(*ContractFunctionResult)(nil),    // 1: proto.ContractFunctionResult
+		(*ContractCallLocalQuery)(nil),    // 2: proto.ContractCallLocalQuery
+		(*ContractCallLocalResponse)(nil), // 3: proto.ContractCallLocalResponse
+		(*ContractID)(nil),                // 4: proto.ContractID
+		(*QueryHeader)(nil),               // 5: proto.QueryHeader
+		(*ResponseHeader)(nil),            // 6: proto.ResponseHeader
+	}
+)
+
 var file_ContractCallLocal_proto_depIdxs = []int32{
 	4, // 0: proto.ContractLoginfo.contractID:type_name -> proto.ContractID
 	4, // 1: proto.ContractFunctionResult.contractID:type_name -> proto.ContractID

@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -90,7 +91,7 @@ type TransactionGetReceiptResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Header                       *ResponseHeader       `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`                                             //Standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
+	Header                       *ResponseHeader       `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`                                             // Standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
 	Receipt                      *TransactionReceipt   `protobuf:"bytes,2,opt,name=receipt,proto3" json:"receipt,omitempty"`                                           // Either the receipt of processing the first consensus transaction with the given id whose status was neither <tt>INVALID_NODE_ACCOUNT</tt> nor <tt>INVALID_PAYER_SIGNATURE</tt>; <b>or</b>, if no such receipt exists, the receipt of processing the first transaction to reach consensus with the given transaction id.
 	DuplicateTransactionReceipts []*TransactionReceipt `protobuf:"bytes,4,rep,name=duplicateTransactionReceipts,proto3" json:"duplicateTransactionReceipts,omitempty"` // The receipts of processing all consensus transaction with the same id as the distinguished receipt above, in chronological order.
 }
@@ -202,15 +203,18 @@ func file_TransactionGetReceipt_proto_rawDescGZIP() []byte {
 	return file_TransactionGetReceipt_proto_rawDescData
 }
 
-var file_TransactionGetReceipt_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_TransactionGetReceipt_proto_goTypes = []interface{}{
-	(*TransactionGetReceiptQuery)(nil),    // 0: proto.TransactionGetReceiptQuery
-	(*TransactionGetReceiptResponse)(nil), // 1: proto.TransactionGetReceiptResponse
-	(*QueryHeader)(nil),                   // 2: proto.QueryHeader
-	(*TransactionID)(nil),                 // 3: proto.TransactionID
-	(*ResponseHeader)(nil),                // 4: proto.ResponseHeader
-	(*TransactionReceipt)(nil),            // 5: proto.TransactionReceipt
-}
+var (
+	file_TransactionGetReceipt_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+	file_TransactionGetReceipt_proto_goTypes  = []interface{}{
+		(*TransactionGetReceiptQuery)(nil),    // 0: proto.TransactionGetReceiptQuery
+		(*TransactionGetReceiptResponse)(nil), // 1: proto.TransactionGetReceiptResponse
+		(*QueryHeader)(nil),                   // 2: proto.QueryHeader
+		(*TransactionID)(nil),                 // 3: proto.TransactionID
+		(*ResponseHeader)(nil),                // 4: proto.ResponseHeader
+		(*TransactionReceipt)(nil),            // 5: proto.TransactionReceipt
+	}
+)
+
 var file_TransactionGetReceipt_proto_depIdxs = []int32{
 	2, // 0: proto.TransactionGetReceiptQuery.header:type_name -> proto.QueryHeader
 	3, // 1: proto.TransactionGetReceiptQuery.transactionID:type_name -> proto.TransactionID

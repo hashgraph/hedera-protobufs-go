@@ -4,6 +4,7 @@ package services
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -182,39 +183,48 @@ type SmartContractServiceServer interface {
 }
 
 // UnimplementedSmartContractServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedSmartContractServiceServer struct {
-}
+type UnimplementedSmartContractServiceServer struct{}
 
 func (UnimplementedSmartContractServiceServer) CreateContract(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateContract not implemented")
 }
+
 func (UnimplementedSmartContractServiceServer) UpdateContract(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateContract not implemented")
 }
+
 func (UnimplementedSmartContractServiceServer) ContractCallMethod(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ContractCallMethod not implemented")
 }
+
 func (UnimplementedSmartContractServiceServer) GetContractInfo(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetContractInfo not implemented")
 }
+
 func (UnimplementedSmartContractServiceServer) ContractCallLocalMethod(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ContractCallLocalMethod not implemented")
 }
+
 func (UnimplementedSmartContractServiceServer) ContractGetBytecode(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ContractGetBytecode not implemented")
 }
+
 func (UnimplementedSmartContractServiceServer) GetBySolidityID(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBySolidityID not implemented")
 }
+
 func (UnimplementedSmartContractServiceServer) GetTxRecordByContractID(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTxRecordByContractID not implemented")
 }
+
 func (UnimplementedSmartContractServiceServer) DeleteContract(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteContract not implemented")
 }
+
 func (UnimplementedSmartContractServiceServer) SystemDelete(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SystemDelete not implemented")
 }
+
 func (UnimplementedSmartContractServiceServer) SystemUndelete(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SystemUndelete not implemented")
 }

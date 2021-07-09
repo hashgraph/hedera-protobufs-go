@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -286,16 +287,19 @@ func file_TokenCreate_proto_rawDescGZIP() []byte {
 	return file_TokenCreate_proto_rawDescData
 }
 
-var file_TokenCreate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_TokenCreate_proto_goTypes = []interface{}{
-	(*TokenCreateTransactionBody)(nil), // 0: proto.TokenCreateTransactionBody
-	(*AccountID)(nil),                  // 1: proto.AccountID
-	(*Key)(nil),                        // 2: proto.Key
-	(*Timestamp)(nil),                  // 3: proto.Timestamp
-	(*Duration)(nil),                   // 4: proto.Duration
-	(TokenType)(0),                     // 5: proto.TokenType
-	(TokenSupplyType)(0),               // 6: proto.TokenSupplyType
-}
+var (
+	file_TokenCreate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_TokenCreate_proto_goTypes  = []interface{}{
+		(*TokenCreateTransactionBody)(nil), // 0: proto.TokenCreateTransactionBody
+		(*AccountID)(nil),                  // 1: proto.AccountID
+		(*Key)(nil),                        // 2: proto.Key
+		(*Timestamp)(nil),                  // 3: proto.Timestamp
+		(*Duration)(nil),                   // 4: proto.Duration
+		(TokenType)(0),                     // 5: proto.TokenType
+		(TokenSupplyType)(0),               // 6: proto.TokenSupplyType
+	}
+)
+
 var file_TokenCreate_proto_depIdxs = []int32{
 	1,  // 0: proto.TokenCreateTransactionBody.treasury:type_name -> proto.AccountID
 	2,  // 1: proto.TokenCreateTransactionBody.adminKey:type_name -> proto.Key

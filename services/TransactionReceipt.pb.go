@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -300,19 +301,22 @@ func file_TransactionReceipt_proto_rawDescGZIP() []byte {
 	return file_TransactionReceipt_proto_rawDescData
 }
 
-var file_TransactionReceipt_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_TransactionReceipt_proto_goTypes = []interface{}{
-	(*TransactionReceipt)(nil), // 0: proto.TransactionReceipt
-	(ResponseCodeEnum)(0),      // 1: proto.ResponseCodeEnum
-	(*AccountID)(nil),          // 2: proto.AccountID
-	(*FileID)(nil),             // 3: proto.FileID
-	(*ContractID)(nil),         // 4: proto.ContractID
-	(*ExchangeRateSet)(nil),    // 5: proto.ExchangeRateSet
-	(*TopicID)(nil),            // 6: proto.TopicID
-	(*TokenID)(nil),            // 7: proto.TokenID
-	(*ScheduleID)(nil),         // 8: proto.ScheduleID
-	(*TransactionID)(nil),      // 9: proto.TransactionID
-}
+var (
+	file_TransactionReceipt_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_TransactionReceipt_proto_goTypes  = []interface{}{
+		(*TransactionReceipt)(nil), // 0: proto.TransactionReceipt
+		(ResponseCodeEnum)(0),      // 1: proto.ResponseCodeEnum
+		(*AccountID)(nil),          // 2: proto.AccountID
+		(*FileID)(nil),             // 3: proto.FileID
+		(*ContractID)(nil),         // 4: proto.ContractID
+		(*ExchangeRateSet)(nil),    // 5: proto.ExchangeRateSet
+		(*TopicID)(nil),            // 6: proto.TopicID
+		(*TokenID)(nil),            // 7: proto.TokenID
+		(*ScheduleID)(nil),         // 8: proto.ScheduleID
+		(*TransactionID)(nil),      // 9: proto.TransactionID
+	}
+)
+
 var file_TransactionReceipt_proto_depIdxs = []int32{
 	1, // 0: proto.TransactionReceipt.status:type_name -> proto.ResponseCodeEnum
 	2, // 1: proto.TransactionReceipt.accountID:type_name -> proto.AccountID

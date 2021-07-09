@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -194,7 +195,7 @@ type CryptoGetStakersResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Header  *ResponseHeader  `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`   //Standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
+	Header  *ResponseHeader  `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`   // Standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
 	Stakers *AllProxyStakers `protobuf:"bytes,3,opt,name=stakers,proto3" json:"stakers,omitempty"` // List of accounts proxy staking to this account, and the amount each is currently proxy staking
 }
 
@@ -298,16 +299,19 @@ func file_CryptoGetStakers_proto_rawDescGZIP() []byte {
 	return file_CryptoGetStakers_proto_rawDescData
 }
 
-var file_CryptoGetStakers_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
-var file_CryptoGetStakers_proto_goTypes = []interface{}{
-	(*CryptoGetStakersQuery)(nil),    // 0: proto.CryptoGetStakersQuery
-	(*ProxyStaker)(nil),              // 1: proto.ProxyStaker
-	(*AllProxyStakers)(nil),          // 2: proto.AllProxyStakers
-	(*CryptoGetStakersResponse)(nil), // 3: proto.CryptoGetStakersResponse
-	(*QueryHeader)(nil),              // 4: proto.QueryHeader
-	(*AccountID)(nil),                // 5: proto.AccountID
-	(*ResponseHeader)(nil),           // 6: proto.ResponseHeader
-}
+var (
+	file_CryptoGetStakers_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+	file_CryptoGetStakers_proto_goTypes  = []interface{}{
+		(*CryptoGetStakersQuery)(nil),    // 0: proto.CryptoGetStakersQuery
+		(*ProxyStaker)(nil),              // 1: proto.ProxyStaker
+		(*AllProxyStakers)(nil),          // 2: proto.AllProxyStakers
+		(*CryptoGetStakersResponse)(nil), // 3: proto.CryptoGetStakersResponse
+		(*QueryHeader)(nil),              // 4: proto.QueryHeader
+		(*AccountID)(nil),                // 5: proto.AccountID
+		(*ResponseHeader)(nil),           // 6: proto.ResponseHeader
+	}
+)
+
 var file_CryptoGetStakers_proto_depIdxs = []int32{
 	4, // 0: proto.CryptoGetStakersQuery.header:type_name -> proto.QueryHeader
 	5, // 1: proto.CryptoGetStakersQuery.accountID:type_name -> proto.AccountID

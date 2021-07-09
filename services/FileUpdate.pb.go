@@ -7,11 +7,12 @@
 package services
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -143,14 +144,17 @@ func file_FileUpdate_proto_rawDescGZIP() []byte {
 	return file_FileUpdate_proto_rawDescData
 }
 
-var file_FileUpdate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_FileUpdate_proto_goTypes = []interface{}{
-	(*FileUpdateTransactionBody)(nil), // 0: proto.FileUpdateTransactionBody
-	(*FileID)(nil),                    // 1: proto.FileID
-	(*Timestamp)(nil),                 // 2: proto.Timestamp
-	(*KeyList)(nil),                   // 3: proto.KeyList
-	(*wrappers.StringValue)(nil),      // 4: google.protobuf.StringValue
-}
+var (
+	file_FileUpdate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_FileUpdate_proto_goTypes  = []interface{}{
+		(*FileUpdateTransactionBody)(nil), // 0: proto.FileUpdateTransactionBody
+		(*FileID)(nil),                    // 1: proto.FileID
+		(*Timestamp)(nil),                 // 2: proto.Timestamp
+		(*KeyList)(nil),                   // 3: proto.KeyList
+		(*wrappers.StringValue)(nil),      // 4: google.protobuf.StringValue
+	}
+)
+
 var file_FileUpdate_proto_depIdxs = []int32{
 	1, // 0: proto.FileUpdateTransactionBody.fileID:type_name -> proto.FileID
 	2, // 1: proto.FileUpdateTransactionBody.expirationTime:type_name -> proto.Timestamp

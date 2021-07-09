@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -215,15 +216,18 @@ func file_CryptoCreate_proto_rawDescGZIP() []byte {
 	return file_CryptoCreate_proto_rawDescData
 }
 
-var file_CryptoCreate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_CryptoCreate_proto_goTypes = []interface{}{
-	(*CryptoCreateTransactionBody)(nil), // 0: proto.CryptoCreateTransactionBody
-	(*Key)(nil),                         // 1: proto.Key
-	(*AccountID)(nil),                   // 2: proto.AccountID
-	(*Duration)(nil),                    // 3: proto.Duration
-	(*ShardID)(nil),                     // 4: proto.ShardID
-	(*RealmID)(nil),                     // 5: proto.RealmID
-}
+var (
+	file_CryptoCreate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_CryptoCreate_proto_goTypes  = []interface{}{
+		(*CryptoCreateTransactionBody)(nil), // 0: proto.CryptoCreateTransactionBody
+		(*Key)(nil),                         // 1: proto.Key
+		(*AccountID)(nil),                   // 2: proto.AccountID
+		(*Duration)(nil),                    // 3: proto.Duration
+		(*ShardID)(nil),                     // 4: proto.ShardID
+		(*RealmID)(nil),                     // 5: proto.RealmID
+	}
+)
+
 var file_CryptoCreate_proto_depIdxs = []int32{
 	1, // 0: proto.CryptoCreateTransactionBody.key:type_name -> proto.Key
 	2, // 1: proto.CryptoCreateTransactionBody.proxyAccountID:type_name -> proto.AccountID

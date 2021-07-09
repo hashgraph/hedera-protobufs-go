@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -29,7 +30,7 @@ type TransactionBody struct {
 	TransactionID            *TransactionID `protobuf:"bytes,1,opt,name=transactionID,proto3" json:"transactionID,omitempty"`                       // The ID for this transaction, which includes the payer's account (the account paying the transaction fee). If two transactions have the same transactionID, they won't both have an effect
 	NodeAccountID            *AccountID     `protobuf:"bytes,2,opt,name=nodeAccountID,proto3" json:"nodeAccountID,omitempty"`                       // The account of the node that submits the client's transaction to the network
 	TransactionFee           uint64         `protobuf:"varint,3,opt,name=transactionFee,proto3" json:"transactionFee,omitempty"`                    // The maximum transaction fee the client is willing to pay
-	TransactionValidDuration *Duration      `protobuf:"bytes,4,opt,name=transactionValidDuration,proto3" json:"transactionValidDuration,omitempty"` //The transaction is invalid if consensusTimestamp > transactionID.transactionValidStart + transactionValidDuration
+	TransactionValidDuration *Duration      `protobuf:"bytes,4,opt,name=transactionValidDuration,proto3" json:"transactionValidDuration,omitempty"` // The transaction is invalid if consensusTimestamp > transactionID.transactionValidStart + transactionValidDuration
 	// Deprecated: Do not use.
 	GenerateRecord bool   `protobuf:"varint,5,opt,name=generateRecord,proto3" json:"generateRecord,omitempty"` // Should a record of this transaction be generated? (A receipt is always generated, but the record is optional)
 	Memo           string `protobuf:"bytes,6,opt,name=memo,proto3" json:"memo,omitempty"`                      // Any notes or descriptions that should be put into the record (max length 100)
@@ -432,7 +433,7 @@ type TransactionBody_ContractUpdateInstance struct {
 }
 
 type TransactionBody_ContractDeleteInstance struct {
-	ContractDeleteInstance *ContractDeleteTransactionBody `protobuf:"bytes,22,opt,name=contractDeleteInstance,proto3,oneof"` //Delete contract and transfer remaining balance into specified account
+	ContractDeleteInstance *ContractDeleteTransactionBody `protobuf:"bytes,22,opt,name=contractDeleteInstance,proto3,oneof"` // Delete contract and transfer remaining balance into specified account
 }
 
 type TransactionBody_CryptoAddLiveHash struct {
@@ -480,7 +481,7 @@ type TransactionBody_SystemDelete struct {
 }
 
 type TransactionBody_SystemUndelete struct {
-	SystemUndelete *SystemUndeleteTransactionBody `protobuf:"bytes,21,opt,name=systemUndelete,proto3,oneof"` //To undelete an entity deleted by SystemDelete
+	SystemUndelete *SystemUndeleteTransactionBody `protobuf:"bytes,21,opt,name=systemUndelete,proto3,oneof"` // To undelete an entity deleted by SystemDelete
 }
 
 type TransactionBody_Freeze struct {
@@ -922,50 +923,53 @@ func file_TransactionBody_proto_rawDescGZIP() []byte {
 	return file_TransactionBody_proto_rawDescData
 }
 
-var file_TransactionBody_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_TransactionBody_proto_goTypes = []interface{}{
-	(*TransactionBody)(nil),                       // 0: proto.TransactionBody
-	(*TransactionID)(nil),                         // 1: proto.TransactionID
-	(*AccountID)(nil),                             // 2: proto.AccountID
-	(*Duration)(nil),                              // 3: proto.Duration
-	(*ContractCallTransactionBody)(nil),           // 4: proto.ContractCallTransactionBody
-	(*ContractCreateTransactionBody)(nil),         // 5: proto.ContractCreateTransactionBody
-	(*ContractUpdateTransactionBody)(nil),         // 6: proto.ContractUpdateTransactionBody
-	(*ContractDeleteTransactionBody)(nil),         // 7: proto.ContractDeleteTransactionBody
-	(*CryptoAddLiveHashTransactionBody)(nil),      // 8: proto.CryptoAddLiveHashTransactionBody
-	(*CryptoCreateTransactionBody)(nil),           // 9: proto.CryptoCreateTransactionBody
-	(*CryptoDeleteTransactionBody)(nil),           // 10: proto.CryptoDeleteTransactionBody
-	(*CryptoDeleteLiveHashTransactionBody)(nil),   // 11: proto.CryptoDeleteLiveHashTransactionBody
-	(*CryptoTransferTransactionBody)(nil),         // 12: proto.CryptoTransferTransactionBody
-	(*CryptoUpdateTransactionBody)(nil),           // 13: proto.CryptoUpdateTransactionBody
-	(*FileAppendTransactionBody)(nil),             // 14: proto.FileAppendTransactionBody
-	(*FileCreateTransactionBody)(nil),             // 15: proto.FileCreateTransactionBody
-	(*FileDeleteTransactionBody)(nil),             // 16: proto.FileDeleteTransactionBody
-	(*FileUpdateTransactionBody)(nil),             // 17: proto.FileUpdateTransactionBody
-	(*SystemDeleteTransactionBody)(nil),           // 18: proto.SystemDeleteTransactionBody
-	(*SystemUndeleteTransactionBody)(nil),         // 19: proto.SystemUndeleteTransactionBody
-	(*FreezeTransactionBody)(nil),                 // 20: proto.FreezeTransactionBody
-	(*ConsensusCreateTopicTransactionBody)(nil),   // 21: proto.ConsensusCreateTopicTransactionBody
-	(*ConsensusUpdateTopicTransactionBody)(nil),   // 22: proto.ConsensusUpdateTopicTransactionBody
-	(*ConsensusDeleteTopicTransactionBody)(nil),   // 23: proto.ConsensusDeleteTopicTransactionBody
-	(*ConsensusSubmitMessageTransactionBody)(nil), // 24: proto.ConsensusSubmitMessageTransactionBody
-	(*UncheckedSubmitBody)(nil),                   // 25: proto.UncheckedSubmitBody
-	(*TokenCreateTransactionBody)(nil),            // 26: proto.TokenCreateTransactionBody
-	(*TokenFreezeAccountTransactionBody)(nil),     // 27: proto.TokenFreezeAccountTransactionBody
-	(*TokenUnfreezeAccountTransactionBody)(nil),   // 28: proto.TokenUnfreezeAccountTransactionBody
-	(*TokenGrantKycTransactionBody)(nil),          // 29: proto.TokenGrantKycTransactionBody
-	(*TokenRevokeKycTransactionBody)(nil),         // 30: proto.TokenRevokeKycTransactionBody
-	(*TokenDeleteTransactionBody)(nil),            // 31: proto.TokenDeleteTransactionBody
-	(*TokenUpdateTransactionBody)(nil),            // 32: proto.TokenUpdateTransactionBody
-	(*TokenMintTransactionBody)(nil),              // 33: proto.TokenMintTransactionBody
-	(*TokenBurnTransactionBody)(nil),              // 34: proto.TokenBurnTransactionBody
-	(*TokenWipeAccountTransactionBody)(nil),       // 35: proto.TokenWipeAccountTransactionBody
-	(*TokenAssociateTransactionBody)(nil),         // 36: proto.TokenAssociateTransactionBody
-	(*TokenDissociateTransactionBody)(nil),        // 37: proto.TokenDissociateTransactionBody
-	(*ScheduleCreateTransactionBody)(nil),         // 38: proto.ScheduleCreateTransactionBody
-	(*ScheduleDeleteTransactionBody)(nil),         // 39: proto.ScheduleDeleteTransactionBody
-	(*ScheduleSignTransactionBody)(nil),           // 40: proto.ScheduleSignTransactionBody
-}
+var (
+	file_TransactionBody_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_TransactionBody_proto_goTypes  = []interface{}{
+		(*TransactionBody)(nil),                       // 0: proto.TransactionBody
+		(*TransactionID)(nil),                         // 1: proto.TransactionID
+		(*AccountID)(nil),                             // 2: proto.AccountID
+		(*Duration)(nil),                              // 3: proto.Duration
+		(*ContractCallTransactionBody)(nil),           // 4: proto.ContractCallTransactionBody
+		(*ContractCreateTransactionBody)(nil),         // 5: proto.ContractCreateTransactionBody
+		(*ContractUpdateTransactionBody)(nil),         // 6: proto.ContractUpdateTransactionBody
+		(*ContractDeleteTransactionBody)(nil),         // 7: proto.ContractDeleteTransactionBody
+		(*CryptoAddLiveHashTransactionBody)(nil),      // 8: proto.CryptoAddLiveHashTransactionBody
+		(*CryptoCreateTransactionBody)(nil),           // 9: proto.CryptoCreateTransactionBody
+		(*CryptoDeleteTransactionBody)(nil),           // 10: proto.CryptoDeleteTransactionBody
+		(*CryptoDeleteLiveHashTransactionBody)(nil),   // 11: proto.CryptoDeleteLiveHashTransactionBody
+		(*CryptoTransferTransactionBody)(nil),         // 12: proto.CryptoTransferTransactionBody
+		(*CryptoUpdateTransactionBody)(nil),           // 13: proto.CryptoUpdateTransactionBody
+		(*FileAppendTransactionBody)(nil),             // 14: proto.FileAppendTransactionBody
+		(*FileCreateTransactionBody)(nil),             // 15: proto.FileCreateTransactionBody
+		(*FileDeleteTransactionBody)(nil),             // 16: proto.FileDeleteTransactionBody
+		(*FileUpdateTransactionBody)(nil),             // 17: proto.FileUpdateTransactionBody
+		(*SystemDeleteTransactionBody)(nil),           // 18: proto.SystemDeleteTransactionBody
+		(*SystemUndeleteTransactionBody)(nil),         // 19: proto.SystemUndeleteTransactionBody
+		(*FreezeTransactionBody)(nil),                 // 20: proto.FreezeTransactionBody
+		(*ConsensusCreateTopicTransactionBody)(nil),   // 21: proto.ConsensusCreateTopicTransactionBody
+		(*ConsensusUpdateTopicTransactionBody)(nil),   // 22: proto.ConsensusUpdateTopicTransactionBody
+		(*ConsensusDeleteTopicTransactionBody)(nil),   // 23: proto.ConsensusDeleteTopicTransactionBody
+		(*ConsensusSubmitMessageTransactionBody)(nil), // 24: proto.ConsensusSubmitMessageTransactionBody
+		(*UncheckedSubmitBody)(nil),                   // 25: proto.UncheckedSubmitBody
+		(*TokenCreateTransactionBody)(nil),            // 26: proto.TokenCreateTransactionBody
+		(*TokenFreezeAccountTransactionBody)(nil),     // 27: proto.TokenFreezeAccountTransactionBody
+		(*TokenUnfreezeAccountTransactionBody)(nil),   // 28: proto.TokenUnfreezeAccountTransactionBody
+		(*TokenGrantKycTransactionBody)(nil),          // 29: proto.TokenGrantKycTransactionBody
+		(*TokenRevokeKycTransactionBody)(nil),         // 30: proto.TokenRevokeKycTransactionBody
+		(*TokenDeleteTransactionBody)(nil),            // 31: proto.TokenDeleteTransactionBody
+		(*TokenUpdateTransactionBody)(nil),            // 32: proto.TokenUpdateTransactionBody
+		(*TokenMintTransactionBody)(nil),              // 33: proto.TokenMintTransactionBody
+		(*TokenBurnTransactionBody)(nil),              // 34: proto.TokenBurnTransactionBody
+		(*TokenWipeAccountTransactionBody)(nil),       // 35: proto.TokenWipeAccountTransactionBody
+		(*TokenAssociateTransactionBody)(nil),         // 36: proto.TokenAssociateTransactionBody
+		(*TokenDissociateTransactionBody)(nil),        // 37: proto.TokenDissociateTransactionBody
+		(*ScheduleCreateTransactionBody)(nil),         // 38: proto.ScheduleCreateTransactionBody
+		(*ScheduleDeleteTransactionBody)(nil),         // 39: proto.ScheduleDeleteTransactionBody
+		(*ScheduleSignTransactionBody)(nil),           // 40: proto.ScheduleSignTransactionBody
+	}
+)
+
 var file_TransactionBody_proto_depIdxs = []int32{
 	1,  // 0: proto.TransactionBody.transactionID:type_name -> proto.TransactionID
 	2,  // 1: proto.TransactionBody.nodeAccountID:type_name -> proto.AccountID

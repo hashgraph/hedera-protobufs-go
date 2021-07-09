@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -570,33 +571,36 @@ func file_Query_proto_rawDescGZIP() []byte {
 	return file_Query_proto_rawDescData
 }
 
-var file_Query_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_Query_proto_goTypes = []interface{}{
-	(*Query)(nil),                         // 0: proto.Query
-	(*GetByKeyQuery)(nil),                 // 1: proto.GetByKeyQuery
-	(*GetBySolidityIDQuery)(nil),          // 2: proto.GetBySolidityIDQuery
-	(*ContractCallLocalQuery)(nil),        // 3: proto.ContractCallLocalQuery
-	(*ContractGetInfoQuery)(nil),          // 4: proto.ContractGetInfoQuery
-	(*ContractGetBytecodeQuery)(nil),      // 5: proto.ContractGetBytecodeQuery
-	(*ContractGetRecordsQuery)(nil),       // 6: proto.ContractGetRecordsQuery
-	(*CryptoGetAccountBalanceQuery)(nil),  // 7: proto.CryptoGetAccountBalanceQuery
-	(*CryptoGetAccountRecordsQuery)(nil),  // 8: proto.CryptoGetAccountRecordsQuery
-	(*CryptoGetInfoQuery)(nil),            // 9: proto.CryptoGetInfoQuery
-	(*CryptoGetLiveHashQuery)(nil),        // 10: proto.CryptoGetLiveHashQuery
-	(*CryptoGetStakersQuery)(nil),         // 11: proto.CryptoGetStakersQuery
-	(*FileGetContentsQuery)(nil),          // 12: proto.FileGetContentsQuery
-	(*FileGetInfoQuery)(nil),              // 13: proto.FileGetInfoQuery
-	(*TransactionGetReceiptQuery)(nil),    // 14: proto.TransactionGetReceiptQuery
-	(*TransactionGetRecordQuery)(nil),     // 15: proto.TransactionGetRecordQuery
-	(*TransactionGetFastRecordQuery)(nil), // 16: proto.TransactionGetFastRecordQuery
-	(*ConsensusGetTopicInfoQuery)(nil),    // 17: proto.ConsensusGetTopicInfoQuery
-	(*NetworkGetVersionInfoQuery)(nil),    // 18: proto.NetworkGetVersionInfoQuery
-	(*TokenGetInfoQuery)(nil),             // 19: proto.TokenGetInfoQuery
-	(*ScheduleGetInfoQuery)(nil),          // 20: proto.ScheduleGetInfoQuery
-	(*TokenGetAccountNftInfoQuery)(nil),   // 21: proto.TokenGetAccountNftInfoQuery
-	(*TokenGetNftInfoQuery)(nil),          // 22: proto.TokenGetNftInfoQuery
-	(*TokenGetNftInfosQuery)(nil),         // 23: proto.TokenGetNftInfosQuery
-}
+var (
+	file_Query_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_Query_proto_goTypes  = []interface{}{
+		(*Query)(nil),                         // 0: proto.Query
+		(*GetByKeyQuery)(nil),                 // 1: proto.GetByKeyQuery
+		(*GetBySolidityIDQuery)(nil),          // 2: proto.GetBySolidityIDQuery
+		(*ContractCallLocalQuery)(nil),        // 3: proto.ContractCallLocalQuery
+		(*ContractGetInfoQuery)(nil),          // 4: proto.ContractGetInfoQuery
+		(*ContractGetBytecodeQuery)(nil),      // 5: proto.ContractGetBytecodeQuery
+		(*ContractGetRecordsQuery)(nil),       // 6: proto.ContractGetRecordsQuery
+		(*CryptoGetAccountBalanceQuery)(nil),  // 7: proto.CryptoGetAccountBalanceQuery
+		(*CryptoGetAccountRecordsQuery)(nil),  // 8: proto.CryptoGetAccountRecordsQuery
+		(*CryptoGetInfoQuery)(nil),            // 9: proto.CryptoGetInfoQuery
+		(*CryptoGetLiveHashQuery)(nil),        // 10: proto.CryptoGetLiveHashQuery
+		(*CryptoGetStakersQuery)(nil),         // 11: proto.CryptoGetStakersQuery
+		(*FileGetContentsQuery)(nil),          // 12: proto.FileGetContentsQuery
+		(*FileGetInfoQuery)(nil),              // 13: proto.FileGetInfoQuery
+		(*TransactionGetReceiptQuery)(nil),    // 14: proto.TransactionGetReceiptQuery
+		(*TransactionGetRecordQuery)(nil),     // 15: proto.TransactionGetRecordQuery
+		(*TransactionGetFastRecordQuery)(nil), // 16: proto.TransactionGetFastRecordQuery
+		(*ConsensusGetTopicInfoQuery)(nil),    // 17: proto.ConsensusGetTopicInfoQuery
+		(*NetworkGetVersionInfoQuery)(nil),    // 18: proto.NetworkGetVersionInfoQuery
+		(*TokenGetInfoQuery)(nil),             // 19: proto.TokenGetInfoQuery
+		(*ScheduleGetInfoQuery)(nil),          // 20: proto.ScheduleGetInfoQuery
+		(*TokenGetAccountNftInfoQuery)(nil),   // 21: proto.TokenGetAccountNftInfoQuery
+		(*TokenGetNftInfoQuery)(nil),          // 22: proto.TokenGetNftInfoQuery
+		(*TokenGetNftInfosQuery)(nil),         // 23: proto.TokenGetNftInfosQuery
+	}
+)
+
 var file_Query_proto_depIdxs = []int32{
 	1,  // 0: proto.Query.getByKey:type_name -> proto.GetByKeyQuery
 	2,  // 1: proto.Query.getBySolidityID:type_name -> proto.GetBySolidityIDQuery

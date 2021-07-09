@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -172,13 +173,16 @@ func file_QueryHeader_proto_rawDescGZIP() []byte {
 	return file_QueryHeader_proto_rawDescData
 }
 
-var file_QueryHeader_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_QueryHeader_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_QueryHeader_proto_goTypes = []interface{}{
-	(ResponseType)(0),   // 0: proto.ResponseType
-	(*QueryHeader)(nil), // 1: proto.QueryHeader
-	(*Transaction)(nil), // 2: proto.Transaction
-}
+var (
+	file_QueryHeader_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+	file_QueryHeader_proto_msgTypes  = make([]protoimpl.MessageInfo, 1)
+	file_QueryHeader_proto_goTypes   = []interface{}{
+		(ResponseType)(0),   // 0: proto.ResponseType
+		(*QueryHeader)(nil), // 1: proto.QueryHeader
+		(*Transaction)(nil), // 2: proto.Transaction
+	}
+)
+
 var file_QueryHeader_proto_depIdxs = []int32{
 	2, // 0: proto.QueryHeader.payment:type_name -> proto.Transaction
 	0, // 1: proto.QueryHeader.responseType:type_name -> proto.ResponseType

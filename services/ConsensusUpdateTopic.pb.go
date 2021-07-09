@@ -7,11 +7,12 @@
 package services
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -192,16 +193,19 @@ func file_ConsensusUpdateTopic_proto_rawDescGZIP() []byte {
 	return file_ConsensusUpdateTopic_proto_rawDescData
 }
 
-var file_ConsensusUpdateTopic_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_ConsensusUpdateTopic_proto_goTypes = []interface{}{
-	(*ConsensusUpdateTopicTransactionBody)(nil), // 0: proto.ConsensusUpdateTopicTransactionBody
-	(*TopicID)(nil),              // 1: proto.TopicID
-	(*wrappers.StringValue)(nil), // 2: google.protobuf.StringValue
-	(*Timestamp)(nil),            // 3: proto.Timestamp
-	(*Key)(nil),                  // 4: proto.Key
-	(*Duration)(nil),             // 5: proto.Duration
-	(*AccountID)(nil),            // 6: proto.AccountID
-}
+var (
+	file_ConsensusUpdateTopic_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_ConsensusUpdateTopic_proto_goTypes  = []interface{}{
+		(*ConsensusUpdateTopicTransactionBody)(nil), // 0: proto.ConsensusUpdateTopicTransactionBody
+		(*TopicID)(nil),              // 1: proto.TopicID
+		(*wrappers.StringValue)(nil), // 2: google.protobuf.StringValue
+		(*Timestamp)(nil),            // 3: proto.Timestamp
+		(*Key)(nil),                  // 4: proto.Key
+		(*Duration)(nil),             // 5: proto.Duration
+		(*AccountID)(nil),            // 6: proto.AccountID
+	}
+)
+
 var file_ConsensusUpdateTopic_proto_depIdxs = []int32{
 	1, // 0: proto.ConsensusUpdateTopicTransactionBody.topicID:type_name -> proto.TopicID
 	2, // 1: proto.ConsensusUpdateTopicTransactionBody.memo:type_name -> google.protobuf.StringValue

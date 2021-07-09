@@ -1,0 +1,9 @@
+linters:
+    enable-all: true
+    disable:
+        - interfacer
+        - golint
+        - maligned
+        - scopelint
+        - forbidigo
+        - wrapcheck

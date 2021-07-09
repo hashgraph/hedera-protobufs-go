@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -86,7 +87,7 @@ type ContractGetRecordsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Header     *ResponseHeader      `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`         //Standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
+	Header     *ResponseHeader      `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`         // Standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
 	ContractID *ContractID          `protobuf:"bytes,2,opt,name=contractID,proto3" json:"contractID,omitempty"` // The smart contract instance that this record is for
 	Records    []*TransactionRecord `protobuf:"bytes,3,rep,name=records,proto3" json:"records,omitempty"`       // List of records, each with contractCreateResult or contractCallResult as its body
 }
@@ -191,15 +192,18 @@ func file_ContractGetRecords_proto_rawDescGZIP() []byte {
 	return file_ContractGetRecords_proto_rawDescData
 }
 
-var file_ContractGetRecords_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_ContractGetRecords_proto_goTypes = []interface{}{
-	(*ContractGetRecordsQuery)(nil),    // 0: proto.ContractGetRecordsQuery
-	(*ContractGetRecordsResponse)(nil), // 1: proto.ContractGetRecordsResponse
-	(*QueryHeader)(nil),                // 2: proto.QueryHeader
-	(*ContractID)(nil),                 // 3: proto.ContractID
-	(*ResponseHeader)(nil),             // 4: proto.ResponseHeader
-	(*TransactionRecord)(nil),          // 5: proto.TransactionRecord
-}
+var (
+	file_ContractGetRecords_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+	file_ContractGetRecords_proto_goTypes  = []interface{}{
+		(*ContractGetRecordsQuery)(nil),    // 0: proto.ContractGetRecordsQuery
+		(*ContractGetRecordsResponse)(nil), // 1: proto.ContractGetRecordsResponse
+		(*QueryHeader)(nil),                // 2: proto.QueryHeader
+		(*ContractID)(nil),                 // 3: proto.ContractID
+		(*ResponseHeader)(nil),             // 4: proto.ResponseHeader
+		(*TransactionRecord)(nil),          // 5: proto.TransactionRecord
+	}
+)
+
 var file_ContractGetRecords_proto_depIdxs = []int32{
 	2, // 0: proto.ContractGetRecordsQuery.header:type_name -> proto.QueryHeader
 	3, // 1: proto.ContractGetRecordsQuery.contractID:type_name -> proto.ContractID

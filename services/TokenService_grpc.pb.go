@@ -4,6 +4,7 @@ package services
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -244,54 +245,68 @@ type TokenServiceServer interface {
 }
 
 // UnimplementedTokenServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedTokenServiceServer struct {
-}
+type UnimplementedTokenServiceServer struct{}
 
 func (UnimplementedTokenServiceServer) CreateToken(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateToken not implemented")
 }
+
 func (UnimplementedTokenServiceServer) UpdateToken(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateToken not implemented")
 }
+
 func (UnimplementedTokenServiceServer) MintToken(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MintToken not implemented")
 }
+
 func (UnimplementedTokenServiceServer) BurnToken(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BurnToken not implemented")
 }
+
 func (UnimplementedTokenServiceServer) DeleteToken(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteToken not implemented")
 }
+
 func (UnimplementedTokenServiceServer) WipeTokenAccount(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method WipeTokenAccount not implemented")
 }
+
 func (UnimplementedTokenServiceServer) FreezeTokenAccount(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FreezeTokenAccount not implemented")
 }
+
 func (UnimplementedTokenServiceServer) UnfreezeTokenAccount(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnfreezeTokenAccount not implemented")
 }
+
 func (UnimplementedTokenServiceServer) GrantKycToTokenAccount(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GrantKycToTokenAccount not implemented")
 }
+
 func (UnimplementedTokenServiceServer) RevokeKycFromTokenAccount(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RevokeKycFromTokenAccount not implemented")
 }
+
 func (UnimplementedTokenServiceServer) AssociateTokens(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AssociateTokens not implemented")
 }
+
 func (UnimplementedTokenServiceServer) DissociateTokens(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DissociateTokens not implemented")
 }
+
 func (UnimplementedTokenServiceServer) GetTokenInfo(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTokenInfo not implemented")
 }
+
 func (UnimplementedTokenServiceServer) GetAccountNftInfo(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountNftInfo not implemented")
 }
+
 func (UnimplementedTokenServiceServer) GetTokenNftInfo(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTokenNftInfo not implemented")
 }
+
 func (UnimplementedTokenServiceServer) GetTokenNftInfos(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTokenNftInfos not implemented")
 }

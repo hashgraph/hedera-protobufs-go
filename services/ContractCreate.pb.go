@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -222,16 +223,19 @@ func file_ContractCreate_proto_rawDescGZIP() []byte {
 	return file_ContractCreate_proto_rawDescData
 }
 
-var file_ContractCreate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_ContractCreate_proto_goTypes = []interface{}{
-	(*ContractCreateTransactionBody)(nil), // 0: proto.ContractCreateTransactionBody
-	(*FileID)(nil),                        // 1: proto.FileID
-	(*Key)(nil),                           // 2: proto.Key
-	(*AccountID)(nil),                     // 3: proto.AccountID
-	(*Duration)(nil),                      // 4: proto.Duration
-	(*ShardID)(nil),                       // 5: proto.ShardID
-	(*RealmID)(nil),                       // 6: proto.RealmID
-}
+var (
+	file_ContractCreate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_ContractCreate_proto_goTypes  = []interface{}{
+		(*ContractCreateTransactionBody)(nil), // 0: proto.ContractCreateTransactionBody
+		(*FileID)(nil),                        // 1: proto.FileID
+		(*Key)(nil),                           // 2: proto.Key
+		(*AccountID)(nil),                     // 3: proto.AccountID
+		(*Duration)(nil),                      // 4: proto.Duration
+		(*ShardID)(nil),                       // 5: proto.ShardID
+		(*RealmID)(nil),                       // 6: proto.RealmID
+	}
+)
+
 var file_ContractCreate_proto_depIdxs = []int32{
 	1, // 0: proto.ContractCreateTransactionBody.fileID:type_name -> proto.FileID
 	2, // 1: proto.ContractCreateTransactionBody.adminKey:type_name -> proto.Key

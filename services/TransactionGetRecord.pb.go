@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -202,15 +203,18 @@ func file_TransactionGetRecord_proto_rawDescGZIP() []byte {
 	return file_TransactionGetRecord_proto_rawDescData
 }
 
-var file_TransactionGetRecord_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_TransactionGetRecord_proto_goTypes = []interface{}{
-	(*TransactionGetRecordQuery)(nil),    // 0: proto.TransactionGetRecordQuery
-	(*TransactionGetRecordResponse)(nil), // 1: proto.TransactionGetRecordResponse
-	(*QueryHeader)(nil),                  // 2: proto.QueryHeader
-	(*TransactionID)(nil),                // 3: proto.TransactionID
-	(*ResponseHeader)(nil),               // 4: proto.ResponseHeader
-	(*TransactionRecord)(nil),            // 5: proto.TransactionRecord
-}
+var (
+	file_TransactionGetRecord_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+	file_TransactionGetRecord_proto_goTypes  = []interface{}{
+		(*TransactionGetRecordQuery)(nil),    // 0: proto.TransactionGetRecordQuery
+		(*TransactionGetRecordResponse)(nil), // 1: proto.TransactionGetRecordResponse
+		(*QueryHeader)(nil),                  // 2: proto.QueryHeader
+		(*TransactionID)(nil),                // 3: proto.TransactionID
+		(*ResponseHeader)(nil),               // 4: proto.ResponseHeader
+		(*TransactionRecord)(nil),            // 5: proto.TransactionRecord
+	}
+)
+
 var file_TransactionGetRecord_proto_depIdxs = []int32{
 	2, // 0: proto.TransactionGetRecordQuery.header:type_name -> proto.QueryHeader
 	3, // 1: proto.TransactionGetRecordQuery.transactionID:type_name -> proto.TransactionID

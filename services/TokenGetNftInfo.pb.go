@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -316,18 +317,21 @@ func file_TokenGetNftInfo_proto_rawDescGZIP() []byte {
 	return file_TokenGetNftInfo_proto_rawDescData
 }
 
-var file_TokenGetNftInfo_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
-var file_TokenGetNftInfo_proto_goTypes = []interface{}{
-	(*NftID)(nil),                   // 0: proto.NftID
-	(*TokenGetNftInfoQuery)(nil),    // 1: proto.TokenGetNftInfoQuery
-	(*TokenNftInfo)(nil),            // 2: proto.TokenNftInfo
-	(*TokenGetNftInfoResponse)(nil), // 3: proto.TokenGetNftInfoResponse
-	(*TokenID)(nil),                 // 4: proto.TokenID
-	(*QueryHeader)(nil),             // 5: proto.QueryHeader
-	(*AccountID)(nil),               // 6: proto.AccountID
-	(*Timestamp)(nil),               // 7: proto.Timestamp
-	(*ResponseHeader)(nil),          // 8: proto.ResponseHeader
-}
+var (
+	file_TokenGetNftInfo_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+	file_TokenGetNftInfo_proto_goTypes  = []interface{}{
+		(*NftID)(nil),                   // 0: proto.NftID
+		(*TokenGetNftInfoQuery)(nil),    // 1: proto.TokenGetNftInfoQuery
+		(*TokenNftInfo)(nil),            // 2: proto.TokenNftInfo
+		(*TokenGetNftInfoResponse)(nil), // 3: proto.TokenGetNftInfoResponse
+		(*TokenID)(nil),                 // 4: proto.TokenID
+		(*QueryHeader)(nil),             // 5: proto.QueryHeader
+		(*AccountID)(nil),               // 6: proto.AccountID
+		(*Timestamp)(nil),               // 7: proto.Timestamp
+		(*ResponseHeader)(nil),          // 8: proto.ResponseHeader
+	}
+)
+
 var file_TokenGetNftInfo_proto_depIdxs = []int32{
 	4, // 0: proto.NftID.tokenID:type_name -> proto.TokenID
 	5, // 1: proto.TokenGetNftInfoQuery.header:type_name -> proto.QueryHeader

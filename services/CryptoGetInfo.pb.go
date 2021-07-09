@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -82,7 +83,7 @@ type CryptoGetInfoResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Header      *ResponseHeader                    `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`           //Standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
+	Header      *ResponseHeader                    `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`           // Standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
 	AccountInfo *CryptoGetInfoResponse_AccountInfo `protobuf:"bytes,2,opt,name=accountInfo,proto3" json:"accountInfo,omitempty"` // Info about the account (a state proof can be generated for this)
 }
 
@@ -401,20 +402,23 @@ func file_CryptoGetInfo_proto_rawDescGZIP() []byte {
 	return file_CryptoGetInfo_proto_rawDescData
 }
 
-var file_CryptoGetInfo_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_CryptoGetInfo_proto_goTypes = []interface{}{
-	(*CryptoGetInfoQuery)(nil),                // 0: proto.CryptoGetInfoQuery
-	(*CryptoGetInfoResponse)(nil),             // 1: proto.CryptoGetInfoResponse
-	(*CryptoGetInfoResponse_AccountInfo)(nil), // 2: proto.CryptoGetInfoResponse.AccountInfo
-	(*QueryHeader)(nil),                       // 3: proto.QueryHeader
-	(*AccountID)(nil),                         // 4: proto.AccountID
-	(*ResponseHeader)(nil),                    // 5: proto.ResponseHeader
-	(*Key)(nil),                               // 6: proto.Key
-	(*Timestamp)(nil),                         // 7: proto.Timestamp
-	(*Duration)(nil),                          // 8: proto.Duration
-	(*LiveHash)(nil),                          // 9: proto.LiveHash
-	(*TokenRelationship)(nil),                 // 10: proto.TokenRelationship
-}
+var (
+	file_CryptoGetInfo_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+	file_CryptoGetInfo_proto_goTypes  = []interface{}{
+		(*CryptoGetInfoQuery)(nil),                // 0: proto.CryptoGetInfoQuery
+		(*CryptoGetInfoResponse)(nil),             // 1: proto.CryptoGetInfoResponse
+		(*CryptoGetInfoResponse_AccountInfo)(nil), // 2: proto.CryptoGetInfoResponse.AccountInfo
+		(*QueryHeader)(nil),                       // 3: proto.QueryHeader
+		(*AccountID)(nil),                         // 4: proto.AccountID
+		(*ResponseHeader)(nil),                    // 5: proto.ResponseHeader
+		(*Key)(nil),                               // 6: proto.Key
+		(*Timestamp)(nil),                         // 7: proto.Timestamp
+		(*Duration)(nil),                          // 8: proto.Duration
+		(*LiveHash)(nil),                          // 9: proto.LiveHash
+		(*TokenRelationship)(nil),                 // 10: proto.TokenRelationship
+	}
+)
+
 var file_CryptoGetInfo_proto_depIdxs = []int32{
 	3,  // 0: proto.CryptoGetInfoQuery.header:type_name -> proto.QueryHeader
 	4,  // 1: proto.CryptoGetInfoQuery.accountID:type_name -> proto.AccountID

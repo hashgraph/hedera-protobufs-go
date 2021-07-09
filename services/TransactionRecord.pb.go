@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -244,17 +245,20 @@ func file_TransactionRecord_proto_rawDescGZIP() []byte {
 	return file_TransactionRecord_proto_rawDescData
 }
 
-var file_TransactionRecord_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_TransactionRecord_proto_goTypes = []interface{}{
-	(*TransactionRecord)(nil),      // 0: proto.TransactionRecord
-	(*TransactionReceipt)(nil),     // 1: proto.TransactionReceipt
-	(*Timestamp)(nil),              // 2: proto.Timestamp
-	(*TransactionID)(nil),          // 3: proto.TransactionID
-	(*ContractFunctionResult)(nil), // 4: proto.ContractFunctionResult
-	(*TransferList)(nil),           // 5: proto.TransferList
-	(*TokenTransferList)(nil),      // 6: proto.TokenTransferList
-	(*ScheduleID)(nil),             // 7: proto.ScheduleID
-}
+var (
+	file_TransactionRecord_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_TransactionRecord_proto_goTypes  = []interface{}{
+		(*TransactionRecord)(nil),      // 0: proto.TransactionRecord
+		(*TransactionReceipt)(nil),     // 1: proto.TransactionReceipt
+		(*Timestamp)(nil),              // 2: proto.Timestamp
+		(*TransactionID)(nil),          // 3: proto.TransactionID
+		(*ContractFunctionResult)(nil), // 4: proto.ContractFunctionResult
+		(*TransferList)(nil),           // 5: proto.TransferList
+		(*TokenTransferList)(nil),      // 6: proto.TokenTransferList
+		(*ScheduleID)(nil),             // 7: proto.ScheduleID
+	}
+)
+
 var file_TransactionRecord_proto_depIdxs = []int32{
 	1, // 0: proto.TransactionRecord.receipt:type_name -> proto.TransactionReceipt
 	2, // 1: proto.TransactionRecord.consensusTimestamp:type_name -> proto.Timestamp

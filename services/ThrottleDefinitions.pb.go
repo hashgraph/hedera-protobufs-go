@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -238,13 +239,16 @@ func file_ThrottleDefinitions_proto_rawDescGZIP() []byte {
 	return file_ThrottleDefinitions_proto_rawDescData
 }
 
-var file_ThrottleDefinitions_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_ThrottleDefinitions_proto_goTypes = []interface{}{
-	(*ThrottleGroup)(nil),       // 0: proto.ThrottleGroup
-	(*ThrottleBucket)(nil),      // 1: proto.ThrottleBucket
-	(*ThrottleDefinitions)(nil), // 2: proto.ThrottleDefinitions
-	(HederaFunctionality)(0),    // 3: proto.HederaFunctionality
-}
+var (
+	file_ThrottleDefinitions_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+	file_ThrottleDefinitions_proto_goTypes  = []interface{}{
+		(*ThrottleGroup)(nil),       // 0: proto.ThrottleGroup
+		(*ThrottleBucket)(nil),      // 1: proto.ThrottleBucket
+		(*ThrottleDefinitions)(nil), // 2: proto.ThrottleDefinitions
+		(HederaFunctionality)(0),    // 3: proto.HederaFunctionality
+	}
+)
+
 var file_ThrottleDefinitions_proto_depIdxs = []int32{
 	3, // 0: proto.ThrottleGroup.operations:type_name -> proto.HederaFunctionality
 	0, // 1: proto.ThrottleBucket.throttleGroups:type_name -> proto.ThrottleGroup

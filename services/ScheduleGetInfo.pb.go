@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -375,21 +376,24 @@ func file_ScheduleGetInfo_proto_rawDescGZIP() []byte {
 	return file_ScheduleGetInfo_proto_rawDescData
 }
 
-var file_ScheduleGetInfo_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_ScheduleGetInfo_proto_goTypes = []interface{}{
-	(*ScheduleGetInfoQuery)(nil),       // 0: proto.ScheduleGetInfoQuery
-	(*ScheduleInfo)(nil),               // 1: proto.ScheduleInfo
-	(*ScheduleGetInfoResponse)(nil),    // 2: proto.ScheduleGetInfoResponse
-	(*QueryHeader)(nil),                // 3: proto.QueryHeader
-	(*ScheduleID)(nil),                 // 4: proto.ScheduleID
-	(*Timestamp)(nil),                  // 5: proto.Timestamp
-	(*SchedulableTransactionBody)(nil), // 6: proto.SchedulableTransactionBody
-	(*Key)(nil),                        // 7: proto.Key
-	(*KeyList)(nil),                    // 8: proto.KeyList
-	(*AccountID)(nil),                  // 9: proto.AccountID
-	(*TransactionID)(nil),              // 10: proto.TransactionID
-	(*ResponseHeader)(nil),             // 11: proto.ResponseHeader
-}
+var (
+	file_ScheduleGetInfo_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+	file_ScheduleGetInfo_proto_goTypes  = []interface{}{
+		(*ScheduleGetInfoQuery)(nil),       // 0: proto.ScheduleGetInfoQuery
+		(*ScheduleInfo)(nil),               // 1: proto.ScheduleInfo
+		(*ScheduleGetInfoResponse)(nil),    // 2: proto.ScheduleGetInfoResponse
+		(*QueryHeader)(nil),                // 3: proto.QueryHeader
+		(*ScheduleID)(nil),                 // 4: proto.ScheduleID
+		(*Timestamp)(nil),                  // 5: proto.Timestamp
+		(*SchedulableTransactionBody)(nil), // 6: proto.SchedulableTransactionBody
+		(*Key)(nil),                        // 7: proto.Key
+		(*KeyList)(nil),                    // 8: proto.KeyList
+		(*AccountID)(nil),                  // 9: proto.AccountID
+		(*TransactionID)(nil),              // 10: proto.TransactionID
+		(*ResponseHeader)(nil),             // 11: proto.ResponseHeader
+	}
+)
+
 var file_ScheduleGetInfo_proto_depIdxs = []int32{
 	3,  // 0: proto.ScheduleGetInfoQuery.header:type_name -> proto.QueryHeader
 	4,  // 1: proto.ScheduleGetInfoQuery.scheduleID:type_name -> proto.ScheduleID

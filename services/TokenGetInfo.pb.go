@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -438,23 +439,26 @@ func file_TokenGetInfo_proto_rawDescGZIP() []byte {
 	return file_TokenGetInfo_proto_rawDescData
 }
 
-var file_TokenGetInfo_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_TokenGetInfo_proto_goTypes = []interface{}{
-	(*TokenGetInfoQuery)(nil),    // 0: proto.TokenGetInfoQuery
-	(*TokenInfo)(nil),            // 1: proto.TokenInfo
-	(*TokenGetInfoResponse)(nil), // 2: proto.TokenGetInfoResponse
-	(*QueryHeader)(nil),          // 3: proto.QueryHeader
-	(*TokenID)(nil),              // 4: proto.TokenID
-	(*AccountID)(nil),            // 5: proto.AccountID
-	(*Key)(nil),                  // 6: proto.Key
-	(TokenFreezeStatus)(0),       // 7: proto.TokenFreezeStatus
-	(TokenKycStatus)(0),          // 8: proto.TokenKycStatus
-	(*Duration)(nil),             // 9: proto.Duration
-	(*Timestamp)(nil),            // 10: proto.Timestamp
-	(TokenType)(0),               // 11: proto.TokenType
-	(TokenSupplyType)(0),         // 12: proto.TokenSupplyType
-	(*ResponseHeader)(nil),       // 13: proto.ResponseHeader
-}
+var (
+	file_TokenGetInfo_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+	file_TokenGetInfo_proto_goTypes  = []interface{}{
+		(*TokenGetInfoQuery)(nil),    // 0: proto.TokenGetInfoQuery
+		(*TokenInfo)(nil),            // 1: proto.TokenInfo
+		(*TokenGetInfoResponse)(nil), // 2: proto.TokenGetInfoResponse
+		(*QueryHeader)(nil),          // 3: proto.QueryHeader
+		(*TokenID)(nil),              // 4: proto.TokenID
+		(*AccountID)(nil),            // 5: proto.AccountID
+		(*Key)(nil),                  // 6: proto.Key
+		(TokenFreezeStatus)(0),       // 7: proto.TokenFreezeStatus
+		(TokenKycStatus)(0),          // 8: proto.TokenKycStatus
+		(*Duration)(nil),             // 9: proto.Duration
+		(*Timestamp)(nil),            // 10: proto.Timestamp
+		(TokenType)(0),               // 11: proto.TokenType
+		(TokenSupplyType)(0),         // 12: proto.TokenSupplyType
+		(*ResponseHeader)(nil),       // 13: proto.ResponseHeader
+	}
+)
+
 var file_TokenGetInfo_proto_depIdxs = []int32{
 	3,  // 0: proto.TokenGetInfoQuery.header:type_name -> proto.QueryHeader
 	4,  // 1: proto.TokenGetInfoQuery.token:type_name -> proto.TokenID

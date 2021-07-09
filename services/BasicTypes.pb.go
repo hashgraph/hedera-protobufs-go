@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -320,7 +321,7 @@ const (
 	HederaFunctionality_CreateTransactionRecord    HederaFunctionality = 32 // Create Tx Record
 	HederaFunctionality_CryptoAccountAutoRenew     HederaFunctionality = 33 // Crypto Auto Renew
 	HederaFunctionality_ContractAutoRenew          HederaFunctionality = 34 // Contract Auto Renew
-	HederaFunctionality_GetVersionInfo             HederaFunctionality = 35 //Get Version
+	HederaFunctionality_GetVersionInfo             HederaFunctionality = 35 // Get Version
 	HederaFunctionality_TransactionGetReceipt      HederaFunctionality = 36 // Transaction Get Receipt
 	HederaFunctionality_ConsensusCreateTopic       HederaFunctionality = 50 // Create Topic
 	HederaFunctionality_ConsensusUpdateTopic       HederaFunctionality = 51 // Update Topic
@@ -519,7 +520,7 @@ type ShardID struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ShardNum int64 `protobuf:"varint,1,opt,name=shardNum,proto3" json:"shardNum,omitempty"` //the shard number (nonnegative)
+	ShardNum int64 `protobuf:"varint,1,opt,name=shardNum,proto3" json:"shardNum,omitempty"` // the shard number (nonnegative)
 }
 
 func (x *ShardID) Reset() {
@@ -567,8 +568,8 @@ type RealmID struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ShardNum int64 `protobuf:"varint,1,opt,name=shardNum,proto3" json:"shardNum,omitempty"` //The shard number (nonnegative)
-	RealmNum int64 `protobuf:"varint,2,opt,name=realmNum,proto3" json:"realmNum,omitempty"` //The realm number (nonnegative)
+	ShardNum int64 `protobuf:"varint,1,opt,name=shardNum,proto3" json:"shardNum,omitempty"` // The shard number (nonnegative)
+	RealmNum int64 `protobuf:"varint,2,opt,name=realmNum,proto3" json:"realmNum,omitempty"` // The realm number (nonnegative)
 }
 
 func (x *RealmID) Reset() {
@@ -623,9 +624,9 @@ type AccountID struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ShardNum   int64 `protobuf:"varint,1,opt,name=shardNum,proto3" json:"shardNum,omitempty"`     //The shard number (nonnegative)
-	RealmNum   int64 `protobuf:"varint,2,opt,name=realmNum,proto3" json:"realmNum,omitempty"`     //The realm number (nonnegative)
-	AccountNum int64 `protobuf:"varint,3,opt,name=accountNum,proto3" json:"accountNum,omitempty"` //A nonnegative account number unique within its realm
+	ShardNum   int64 `protobuf:"varint,1,opt,name=shardNum,proto3" json:"shardNum,omitempty"`     // The shard number (nonnegative)
+	RealmNum   int64 `protobuf:"varint,2,opt,name=realmNum,proto3" json:"realmNum,omitempty"`     // The realm number (nonnegative)
+	AccountNum int64 `protobuf:"varint,3,opt,name=accountNum,proto3" json:"accountNum,omitempty"` // A nonnegative account number unique within its realm
 }
 
 func (x *AccountID) Reset() {
@@ -687,9 +688,9 @@ type FileID struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ShardNum int64 `protobuf:"varint,1,opt,name=shardNum,proto3" json:"shardNum,omitempty"` //The shard number (nonnegative)
-	RealmNum int64 `protobuf:"varint,2,opt,name=realmNum,proto3" json:"realmNum,omitempty"` //The realm number (nonnegative)
-	FileNum  int64 `protobuf:"varint,3,opt,name=fileNum,proto3" json:"fileNum,omitempty"`   //A nonnegative File number unique within its realm
+	ShardNum int64 `protobuf:"varint,1,opt,name=shardNum,proto3" json:"shardNum,omitempty"` // The shard number (nonnegative)
+	RealmNum int64 `protobuf:"varint,2,opt,name=realmNum,proto3" json:"realmNum,omitempty"` // The realm number (nonnegative)
+	FileNum  int64 `protobuf:"varint,3,opt,name=fileNum,proto3" json:"fileNum,omitempty"`   // A nonnegative File number unique within its realm
 }
 
 func (x *FileID) Reset() {
@@ -751,9 +752,9 @@ type ContractID struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ShardNum    int64 `protobuf:"varint,1,opt,name=shardNum,proto3" json:"shardNum,omitempty"`       //The shard number (nonnegative)
-	RealmNum    int64 `protobuf:"varint,2,opt,name=realmNum,proto3" json:"realmNum,omitempty"`       //The realm number (nonnegative)
-	ContractNum int64 `protobuf:"varint,3,opt,name=contractNum,proto3" json:"contractNum,omitempty"` //A nonnegative number unique within its realm
+	ShardNum    int64 `protobuf:"varint,1,opt,name=shardNum,proto3" json:"shardNum,omitempty"`       // The shard number (nonnegative)
+	RealmNum    int64 `protobuf:"varint,2,opt,name=realmNum,proto3" json:"realmNum,omitempty"`       // The realm number (nonnegative)
+	ContractNum int64 `protobuf:"varint,3,opt,name=contractNum,proto3" json:"contractNum,omitempty"` // A nonnegative number unique within its realm
 }
 
 func (x *ContractID) Reset() {
@@ -1667,11 +1668,11 @@ type Signature_Ed25519 struct {
 }
 
 type Signature_RSA_3072 struct {
-	RSA_3072 []byte `protobuf:"bytes,3,opt,name=RSA_3072,json=RSA3072,proto3,oneof"` //RSA-3072 signature bytes
+	RSA_3072 []byte `protobuf:"bytes,3,opt,name=RSA_3072,json=RSA3072,proto3,oneof"` // RSA-3072 signature bytes
 }
 
 type Signature_ECDSA_384 struct {
-	ECDSA_384 []byte `protobuf:"bytes,4,opt,name=ECDSA_384,json=ECDSA384,proto3,oneof"` //ECDSA p-384 signature bytes
+	ECDSA_384 []byte `protobuf:"bytes,4,opt,name=ECDSA_384,json=ECDSA384,proto3,oneof"` // ECDSA p-384 signature bytes
 }
 
 type Signature_ThresholdSignature struct {
@@ -1903,11 +1904,11 @@ type SignaturePair_Ed25519 struct {
 }
 
 type SignaturePair_RSA_3072 struct {
-	RSA_3072 []byte `protobuf:"bytes,4,opt,name=RSA_3072,json=RSA3072,proto3,oneof"` //RSA-3072 signature
+	RSA_3072 []byte `protobuf:"bytes,4,opt,name=RSA_3072,json=RSA3072,proto3,oneof"` // RSA-3072 signature
 }
 
 type SignaturePair_ECDSA_384 struct {
-	ECDSA_384 []byte `protobuf:"bytes,5,opt,name=ECDSA_384,json=ECDSA384,proto3,oneof"` //ECDSA p-384 signature
+	ECDSA_384 []byte `protobuf:"bytes,5,opt,name=ECDSA_384,json=ECDSA384,proto3,oneof"` // ECDSA p-384 signature
 }
 
 func (*SignaturePair_Contract) isSignaturePair_Signature() {}
@@ -2602,8 +2603,8 @@ func (x *NodeAddressBook) GetNodeAddress() []*NodeAddress {
 }
 
 // Hedera follows semantic versioning (https://semver.org/) for both the HAPI protobufs and the Services software.
-//This type allows the <tt>getVersionInfo</tt> query in the <tt>NetworkService</tt> to return the deployed versions
-//of both protobufs and software on the node answering the query.
+// This type allows the <tt>getVersionInfo</tt> query in the <tt>NetworkService</tt> to return the deployed versions
+// of both protobufs and software on the node answering the query.
 type SemanticVersion struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3415,53 +3416,56 @@ func file_BasicTypes_proto_rawDescGZIP() []byte {
 	return file_BasicTypes_proto_rawDescData
 }
 
-var file_BasicTypes_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_BasicTypes_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
-var file_BasicTypes_proto_goTypes = []interface{}{
-	(TokenType)(0),                    // 0: proto.TokenType
-	(SubType)(0),                      // 1: proto.SubType
-	(TokenSupplyType)(0),              // 2: proto.TokenSupplyType
-	(TokenFreezeStatus)(0),            // 3: proto.TokenFreezeStatus
-	(TokenKycStatus)(0),               // 4: proto.TokenKycStatus
-	(HederaFunctionality)(0),          // 5: proto.HederaFunctionality
-	(*ShardID)(nil),                   // 6: proto.ShardID
-	(*RealmID)(nil),                   // 7: proto.RealmID
-	(*AccountID)(nil),                 // 8: proto.AccountID
-	(*FileID)(nil),                    // 9: proto.FileID
-	(*ContractID)(nil),                // 10: proto.ContractID
-	(*TransactionID)(nil),             // 11: proto.TransactionID
-	(*AccountAmount)(nil),             // 12: proto.AccountAmount
-	(*TransferList)(nil),              // 13: proto.TransferList
-	(*NftTransfer)(nil),               // 14: proto.NftTransfer
-	(*TokenTransferList)(nil),         // 15: proto.TokenTransferList
-	(*TopicID)(nil),                   // 16: proto.TopicID
-	(*TokenID)(nil),                   // 17: proto.TokenID
-	(*ScheduleID)(nil),                // 18: proto.ScheduleID
-	(*Key)(nil),                       // 19: proto.Key
-	(*ThresholdKey)(nil),              // 20: proto.ThresholdKey
-	(*KeyList)(nil),                   // 21: proto.KeyList
-	(*Signature)(nil),                 // 22: proto.Signature
-	(*ThresholdSignature)(nil),        // 23: proto.ThresholdSignature
-	(*SignatureList)(nil),             // 24: proto.SignatureList
-	(*SignaturePair)(nil),             // 25: proto.SignaturePair
-	(*SignatureMap)(nil),              // 26: proto.SignatureMap
-	(*FeeComponents)(nil),             // 27: proto.FeeComponents
-	(*TransactionFeeSchedule)(nil),    // 28: proto.TransactionFeeSchedule
-	(*FeeData)(nil),                   // 29: proto.FeeData
-	(*FeeSchedule)(nil),               // 30: proto.FeeSchedule
-	(*CurrentAndNextFeeSchedule)(nil), // 31: proto.CurrentAndNextFeeSchedule
-	(*ServiceEndpoint)(nil),           // 32: proto.ServiceEndpoint
-	(*NodeAddress)(nil),               // 33: proto.NodeAddress
-	(*NodeAddressBook)(nil),           // 34: proto.NodeAddressBook
-	(*SemanticVersion)(nil),           // 35: proto.SemanticVersion
-	(*Setting)(nil),                   // 36: proto.Setting
-	(*ServicesConfigurationList)(nil), // 37: proto.ServicesConfigurationList
-	(*TokenRelationship)(nil),         // 38: proto.TokenRelationship
-	(*TokenBalance)(nil),              // 39: proto.TokenBalance
-	(*TokenBalances)(nil),             // 40: proto.TokenBalances
-	(*Timestamp)(nil),                 // 41: proto.Timestamp
-	(*TimestampSeconds)(nil),          // 42: proto.TimestampSeconds
-}
+var (
+	file_BasicTypes_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
+	file_BasicTypes_proto_msgTypes  = make([]protoimpl.MessageInfo, 35)
+	file_BasicTypes_proto_goTypes   = []interface{}{
+		(TokenType)(0),                    // 0: proto.TokenType
+		(SubType)(0),                      // 1: proto.SubType
+		(TokenSupplyType)(0),              // 2: proto.TokenSupplyType
+		(TokenFreezeStatus)(0),            // 3: proto.TokenFreezeStatus
+		(TokenKycStatus)(0),               // 4: proto.TokenKycStatus
+		(HederaFunctionality)(0),          // 5: proto.HederaFunctionality
+		(*ShardID)(nil),                   // 6: proto.ShardID
+		(*RealmID)(nil),                   // 7: proto.RealmID
+		(*AccountID)(nil),                 // 8: proto.AccountID
+		(*FileID)(nil),                    // 9: proto.FileID
+		(*ContractID)(nil),                // 10: proto.ContractID
+		(*TransactionID)(nil),             // 11: proto.TransactionID
+		(*AccountAmount)(nil),             // 12: proto.AccountAmount
+		(*TransferList)(nil),              // 13: proto.TransferList
+		(*NftTransfer)(nil),               // 14: proto.NftTransfer
+		(*TokenTransferList)(nil),         // 15: proto.TokenTransferList
+		(*TopicID)(nil),                   // 16: proto.TopicID
+		(*TokenID)(nil),                   // 17: proto.TokenID
+		(*ScheduleID)(nil),                // 18: proto.ScheduleID
+		(*Key)(nil),                       // 19: proto.Key
+		(*ThresholdKey)(nil),              // 20: proto.ThresholdKey
+		(*KeyList)(nil),                   // 21: proto.KeyList
+		(*Signature)(nil),                 // 22: proto.Signature
+		(*ThresholdSignature)(nil),        // 23: proto.ThresholdSignature
+		(*SignatureList)(nil),             // 24: proto.SignatureList
+		(*SignaturePair)(nil),             // 25: proto.SignaturePair
+		(*SignatureMap)(nil),              // 26: proto.SignatureMap
+		(*FeeComponents)(nil),             // 27: proto.FeeComponents
+		(*TransactionFeeSchedule)(nil),    // 28: proto.TransactionFeeSchedule
+		(*FeeData)(nil),                   // 29: proto.FeeData
+		(*FeeSchedule)(nil),               // 30: proto.FeeSchedule
+		(*CurrentAndNextFeeSchedule)(nil), // 31: proto.CurrentAndNextFeeSchedule
+		(*ServiceEndpoint)(nil),           // 32: proto.ServiceEndpoint
+		(*NodeAddress)(nil),               // 33: proto.NodeAddress
+		(*NodeAddressBook)(nil),           // 34: proto.NodeAddressBook
+		(*SemanticVersion)(nil),           // 35: proto.SemanticVersion
+		(*Setting)(nil),                   // 36: proto.Setting
+		(*ServicesConfigurationList)(nil), // 37: proto.ServicesConfigurationList
+		(*TokenRelationship)(nil),         // 38: proto.TokenRelationship
+		(*TokenBalance)(nil),              // 39: proto.TokenBalance
+		(*TokenBalances)(nil),             // 40: proto.TokenBalances
+		(*Timestamp)(nil),                 // 41: proto.Timestamp
+		(*TimestampSeconds)(nil),          // 42: proto.TimestampSeconds
+	}
+)
+
 var file_BasicTypes_proto_depIdxs = []int32{
 	41, // 0: proto.TransactionID.transactionValidStart:type_name -> proto.Timestamp
 	8,  // 1: proto.TransactionID.accountID:type_name -> proto.AccountID

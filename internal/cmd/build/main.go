@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"io/fs"
 	"io/ioutil"
@@ -14,11 +15,11 @@ import (
 
 func main() {
 	// which module are we building
-
 	moduleName := os.Args[1]
 
 	// get project directory
 
+	// nolint:dogsled
 	_, buildFilename, _, _ := runtime.Caller(0)
 	projectDir := path.Join(buildFilename, "../../../..")
 
@@ -31,26 +32,19 @@ func main() {
 	switch moduleName {
 	case "services":
 		buildServices(projectDir)
-		break
 
 	case "mirror":
 		buildMirror(projectDir)
-		break
 
 	case "streams":
 		buildStreams(projectDir)
-		break
-
-	default:
-		// unknown module
 	}
 }
 
 func buildServices(dir string) {
-
 	// collect all files from proto/services/_
-
 	var servicesProtoFiles []string
+
 	var servicesModuleDecls []string
 
 	err := filepath.Walk(path.Join(dir, "proto/services"), func(filename string, info fs.FileInfo, err error) error {
@@ -72,7 +66,6 @@ func buildServices(dir string) {
 
 		return nil
 	})
-
 	if err != nil {
 		panic(err)
 	}
@@ -95,7 +88,6 @@ func buildServices(dir string) {
 
 	mustRunCommand(cmd)
 	renamePackageDeclGrpcFiles(dir, "proto", "services")
-
 }
 
 func buildMirror(dir string) {
@@ -121,7 +113,6 @@ func buildMirror(dir string) {
 
 	mustRunCommand(cmd)
 	renamePackageDeclGrpcFiles(dir, "com_hedera_mirror_api_proto", "mirror")
-
 }
 
 func buildStreams(dir string) {
@@ -148,9 +139,9 @@ func buildStreams(dir string) {
 
 func mustRunCommand(cmd *exec.Cmd) {
 	_, err := cmd.Output()
-
 	if err != nil {
-		if exitErr, ok := err.(*exec.ExitError); ok {
+		var exitErr *exec.ExitError
+		if errors.As(err, &exitErr) {
 			fmt.Print(string(exitErr.Stderr))
 			os.Exit(exitErr.ExitCode())
 		}
@@ -170,7 +161,6 @@ func removeAllWithExt(dir string, module string, ext string) {
 
 		return nil
 	})
-
 	if err != nil {
 		panic(err)
 	}
@@ -196,9 +186,7 @@ func renamePackageDeclGrpcFiles(dir string, oldPackage string, newPackage string
 
 		return nil
 	})
-
 	if err != nil {
 		panic(err)
 	}
-
 }

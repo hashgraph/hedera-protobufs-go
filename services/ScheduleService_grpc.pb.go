@@ -4,6 +4,7 @@ package services
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -88,18 +89,20 @@ type ScheduleServiceServer interface {
 }
 
 // UnimplementedScheduleServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedScheduleServiceServer struct {
-}
+type UnimplementedScheduleServiceServer struct{}
 
 func (UnimplementedScheduleServiceServer) CreateSchedule(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateSchedule not implemented")
 }
+
 func (UnimplementedScheduleServiceServer) SignSchedule(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SignSchedule not implemented")
 }
+
 func (UnimplementedScheduleServiceServer) DeleteSchedule(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteSchedule not implemented")
 }
+
 func (UnimplementedScheduleServiceServer) GetScheduleInfo(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetScheduleInfo not implemented")
 }

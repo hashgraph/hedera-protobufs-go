@@ -7,9 +7,10 @@
 package services
 
 import (
+	reflect "reflect"
+
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	reflect "reflect"
 )
 
 const (
@@ -41,6 +42,7 @@ var file_FreezeService_proto_goTypes = []interface{}{
 	(*Transaction)(nil),         // 0: proto.Transaction
 	(*TransactionResponse)(nil), // 1: proto.TransactionResponse
 }
+
 var file_FreezeService_proto_depIdxs = []int32{
 	0, // 0: proto.FreezeService.freeze:input_type -> proto.Transaction
 	1, // 1: proto.FreezeService.freeze:output_type -> proto.TransactionResponse

@@ -7,11 +7,12 @@
 package services
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -346,17 +347,20 @@ func file_CryptoUpdate_proto_rawDescGZIP() []byte {
 	return file_CryptoUpdate_proto_rawDescData
 }
 
-var file_CryptoUpdate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_CryptoUpdate_proto_goTypes = []interface{}{
-	(*CryptoUpdateTransactionBody)(nil), // 0: proto.CryptoUpdateTransactionBody
-	(*AccountID)(nil),                   // 1: proto.AccountID
-	(*Key)(nil),                         // 2: proto.Key
-	(*wrappers.UInt64Value)(nil),        // 3: google.protobuf.UInt64Value
-	(*Duration)(nil),                    // 4: proto.Duration
-	(*Timestamp)(nil),                   // 5: proto.Timestamp
-	(*wrappers.BoolValue)(nil),          // 6: google.protobuf.BoolValue
-	(*wrappers.StringValue)(nil),        // 7: google.protobuf.StringValue
-}
+var (
+	file_CryptoUpdate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_CryptoUpdate_proto_goTypes  = []interface{}{
+		(*CryptoUpdateTransactionBody)(nil), // 0: proto.CryptoUpdateTransactionBody
+		(*AccountID)(nil),                   // 1: proto.AccountID
+		(*Key)(nil),                         // 2: proto.Key
+		(*wrappers.UInt64Value)(nil),        // 3: google.protobuf.UInt64Value
+		(*Duration)(nil),                    // 4: proto.Duration
+		(*Timestamp)(nil),                   // 5: proto.Timestamp
+		(*wrappers.BoolValue)(nil),          // 6: google.protobuf.BoolValue
+		(*wrappers.StringValue)(nil),        // 7: google.protobuf.StringValue
+	}
+)
+
 var file_CryptoUpdate_proto_depIdxs = []int32{
 	1, // 0: proto.CryptoUpdateTransactionBody.accountIDToUpdate:type_name -> proto.AccountID
 	2, // 1: proto.CryptoUpdateTransactionBody.key:type_name -> proto.Key

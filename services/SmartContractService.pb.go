@@ -7,9 +7,10 @@
 package services
 
 import (
+	reflect "reflect"
+
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	reflect "reflect"
 )
 
 const (
@@ -84,6 +85,7 @@ var file_SmartContractService_proto_goTypes = []interface{}{
 	(*TransactionResponse)(nil), // 2: proto.TransactionResponse
 	(*Response)(nil),            // 3: proto.Response
 }
+
 var file_SmartContractService_proto_depIdxs = []int32{
 	0,  // 0: proto.SmartContractService.createContract:input_type -> proto.Transaction
 	0,  // 1: proto.SmartContractService.updateContract:input_type -> proto.Transaction

@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -21,13 +22,13 @@ const (
 )
 
 // Unfreezes transfers of the specified token for the account. Must be signed by the Token's freezeKey.
-//If the provided account is not found, the transaction will resolve to INVALID_ACCOUNT_ID.
-//If the provided account has been deleted, the transaction will resolve to ACCOUNT_DELETED.
-//If the provided token is not found, the transaction will resolve to INVALID_TOKEN_ID.
-//If the provided token has been deleted, the transaction will resolve to TOKEN_WAS_DELETED.
-//If an Association between the provided token and account is not found, the transaction will resolve to TOKEN_NOT_ASSOCIATED_TO_ACCOUNT.
-//If no Freeze Key is defined, the transaction will resolve to TOKEN_HAS_NO_FREEZE_KEY.
-//Once executed the Account is marked as Unfrozen and will be able to receive or send tokens. The operation is idempotent.
+// If the provided account is not found, the transaction will resolve to INVALID_ACCOUNT_ID.
+// If the provided account has been deleted, the transaction will resolve to ACCOUNT_DELETED.
+// If the provided token is not found, the transaction will resolve to INVALID_TOKEN_ID.
+// If the provided token has been deleted, the transaction will resolve to TOKEN_WAS_DELETED.
+// If an Association between the provided token and account is not found, the transaction will resolve to TOKEN_NOT_ASSOCIATED_TO_ACCOUNT.
+// If no Freeze Key is defined, the transaction will resolve to TOKEN_HAS_NO_FREEZE_KEY.
+// Once executed the Account is marked as Unfrozen and will be able to receive or send tokens. The operation is idempotent.
 type TokenUnfreezeAccountTransactionBody struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -114,12 +115,15 @@ func file_TokenUnfreezeAccount_proto_rawDescGZIP() []byte {
 	return file_TokenUnfreezeAccount_proto_rawDescData
 }
 
-var file_TokenUnfreezeAccount_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_TokenUnfreezeAccount_proto_goTypes = []interface{}{
-	(*TokenUnfreezeAccountTransactionBody)(nil), // 0: proto.TokenUnfreezeAccountTransactionBody
-	(*TokenID)(nil),   // 1: proto.TokenID
-	(*AccountID)(nil), // 2: proto.AccountID
-}
+var (
+	file_TokenUnfreezeAccount_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_TokenUnfreezeAccount_proto_goTypes  = []interface{}{
+		(*TokenUnfreezeAccountTransactionBody)(nil), // 0: proto.TokenUnfreezeAccountTransactionBody
+		(*TokenID)(nil),   // 1: proto.TokenID
+		(*AccountID)(nil), // 2: proto.AccountID
+	}
+)
+
 var file_TokenUnfreezeAccount_proto_depIdxs = []int32{
 	1, // 0: proto.TokenUnfreezeAccountTransactionBody.token:type_name -> proto.TokenID
 	2, // 1: proto.TokenUnfreezeAccountTransactionBody.account:type_name -> proto.AccountID

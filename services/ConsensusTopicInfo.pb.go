@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -182,14 +183,17 @@ func file_ConsensusTopicInfo_proto_rawDescGZIP() []byte {
 	return file_ConsensusTopicInfo_proto_rawDescData
 }
 
-var file_ConsensusTopicInfo_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_ConsensusTopicInfo_proto_goTypes = []interface{}{
-	(*ConsensusTopicInfo)(nil), // 0: proto.ConsensusTopicInfo
-	(*Timestamp)(nil),          // 1: proto.Timestamp
-	(*Key)(nil),                // 2: proto.Key
-	(*Duration)(nil),           // 3: proto.Duration
-	(*AccountID)(nil),          // 4: proto.AccountID
-}
+var (
+	file_ConsensusTopicInfo_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_ConsensusTopicInfo_proto_goTypes  = []interface{}{
+		(*ConsensusTopicInfo)(nil), // 0: proto.ConsensusTopicInfo
+		(*Timestamp)(nil),          // 1: proto.Timestamp
+		(*Key)(nil),                // 2: proto.Key
+		(*Duration)(nil),           // 3: proto.Duration
+		(*AccountID)(nil),          // 4: proto.AccountID
+	}
+)
+
 var file_ConsensusTopicInfo_proto_depIdxs = []int32{
 	1, // 0: proto.ConsensusTopicInfo.expirationTime:type_name -> proto.Timestamp
 	2, // 1: proto.ConsensusTopicInfo.adminKey:type_name -> proto.Key

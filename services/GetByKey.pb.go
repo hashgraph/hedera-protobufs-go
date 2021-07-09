@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -191,7 +192,7 @@ type GetByKeyResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Header   *ResponseHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`     //Standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
+	Header   *ResponseHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`     // Standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
 	Entities []*EntityID     `protobuf:"bytes,2,rep,name=entities,proto3" json:"entities,omitempty"` // The list of entities that include this public key in their associated Key list
 }
 
@@ -294,19 +295,22 @@ func file_GetByKey_proto_rawDescGZIP() []byte {
 	return file_GetByKey_proto_rawDescData
 }
 
-var file_GetByKey_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_GetByKey_proto_goTypes = []interface{}{
-	(*GetByKeyQuery)(nil),    // 0: proto.GetByKeyQuery
-	(*EntityID)(nil),         // 1: proto.EntityID
-	(*GetByKeyResponse)(nil), // 2: proto.GetByKeyResponse
-	(*QueryHeader)(nil),      // 3: proto.QueryHeader
-	(*Key)(nil),              // 4: proto.Key
-	(*AccountID)(nil),        // 5: proto.AccountID
-	(*LiveHash)(nil),         // 6: proto.LiveHash
-	(*FileID)(nil),           // 7: proto.FileID
-	(*ContractID)(nil),       // 8: proto.ContractID
-	(*ResponseHeader)(nil),   // 9: proto.ResponseHeader
-}
+var (
+	file_GetByKey_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+	file_GetByKey_proto_goTypes  = []interface{}{
+		(*GetByKeyQuery)(nil),    // 0: proto.GetByKeyQuery
+		(*EntityID)(nil),         // 1: proto.EntityID
+		(*GetByKeyResponse)(nil), // 2: proto.GetByKeyResponse
+		(*QueryHeader)(nil),      // 3: proto.QueryHeader
+		(*Key)(nil),              // 4: proto.Key
+		(*AccountID)(nil),        // 5: proto.AccountID
+		(*LiveHash)(nil),         // 6: proto.LiveHash
+		(*FileID)(nil),           // 7: proto.FileID
+		(*ContractID)(nil),       // 8: proto.ContractID
+		(*ResponseHeader)(nil),   // 9: proto.ResponseHeader
+	}
+)
+
 var file_GetByKey_proto_depIdxs = []int32{
 	3, // 0: proto.GetByKeyQuery.header:type_name -> proto.QueryHeader
 	4, // 1: proto.GetByKeyQuery.key:type_name -> proto.Key

@@ -7,11 +7,12 @@
 package services
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -223,17 +224,20 @@ func file_ContractUpdate_proto_rawDescGZIP() []byte {
 	return file_ContractUpdate_proto_rawDescData
 }
 
-var file_ContractUpdate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_ContractUpdate_proto_goTypes = []interface{}{
-	(*ContractUpdateTransactionBody)(nil), // 0: proto.ContractUpdateTransactionBody
-	(*ContractID)(nil),                    // 1: proto.ContractID
-	(*Timestamp)(nil),                     // 2: proto.Timestamp
-	(*Key)(nil),                           // 3: proto.Key
-	(*AccountID)(nil),                     // 4: proto.AccountID
-	(*Duration)(nil),                      // 5: proto.Duration
-	(*FileID)(nil),                        // 6: proto.FileID
-	(*wrappers.StringValue)(nil),          // 7: google.protobuf.StringValue
-}
+var (
+	file_ContractUpdate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_ContractUpdate_proto_goTypes  = []interface{}{
+		(*ContractUpdateTransactionBody)(nil), // 0: proto.ContractUpdateTransactionBody
+		(*ContractID)(nil),                    // 1: proto.ContractID
+		(*Timestamp)(nil),                     // 2: proto.Timestamp
+		(*Key)(nil),                           // 3: proto.Key
+		(*AccountID)(nil),                     // 4: proto.AccountID
+		(*Duration)(nil),                      // 5: proto.Duration
+		(*FileID)(nil),                        // 6: proto.FileID
+		(*wrappers.StringValue)(nil),          // 7: google.protobuf.StringValue
+	}
+)
+
 var file_ContractUpdate_proto_depIdxs = []int32{
 	1, // 0: proto.ContractUpdateTransactionBody.contractID:type_name -> proto.ContractID
 	2, // 1: proto.ContractUpdateTransactionBody.expirationTime:type_name -> proto.Timestamp

@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -109,11 +110,14 @@ func file_CryptoDelete_proto_rawDescGZIP() []byte {
 	return file_CryptoDelete_proto_rawDescData
 }
 
-var file_CryptoDelete_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_CryptoDelete_proto_goTypes = []interface{}{
-	(*CryptoDeleteTransactionBody)(nil), // 0: proto.CryptoDeleteTransactionBody
-	(*AccountID)(nil),                   // 1: proto.AccountID
-}
+var (
+	file_CryptoDelete_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_CryptoDelete_proto_goTypes  = []interface{}{
+		(*CryptoDeleteTransactionBody)(nil), // 0: proto.CryptoDeleteTransactionBody
+		(*AccountID)(nil),                   // 1: proto.AccountID
+	}
+)
+
 var file_CryptoDelete_proto_depIdxs = []int32{
 	1, // 0: proto.CryptoDeleteTransactionBody.transferAccountID:type_name -> proto.AccountID
 	1, // 1: proto.CryptoDeleteTransactionBody.deleteAccountID:type_name -> proto.AccountID

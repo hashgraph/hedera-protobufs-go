@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -21,13 +22,13 @@ const (
 )
 
 // Dissociates the provided account with the provided tokens. Must be signed by the provided Account's key.
-//If the provided account is not found, the transaction will resolve to INVALID_ACCOUNT_ID.
-//If the provided account has been deleted, the transaction will resolve to ACCOUNT_DELETED.
-//If any of the provided tokens is not found, the transaction will resolve to INVALID_TOKEN_REF.
-//If any of the provided tokens has been deleted, the transaction will resolve to TOKEN_WAS_DELETED.
-//If an association between the provided account and any of the tokens does not exist, the transaction will resolve to TOKEN_NOT_ASSOCIATED_TO_ACCOUNT.
-//If the provided account has a nonzero balance with any of the provided tokens, the transaction will resolve to TRANSACTION_REQUIRES_ZERO_TOKEN_BALANCES.
-//On success, associations between the provided account and tokens are removed.
+// If the provided account is not found, the transaction will resolve to INVALID_ACCOUNT_ID.
+// If the provided account has been deleted, the transaction will resolve to ACCOUNT_DELETED.
+// If any of the provided tokens is not found, the transaction will resolve to INVALID_TOKEN_REF.
+// If any of the provided tokens has been deleted, the transaction will resolve to TOKEN_WAS_DELETED.
+// If an association between the provided account and any of the tokens does not exist, the transaction will resolve to TOKEN_NOT_ASSOCIATED_TO_ACCOUNT.
+// If the provided account has a nonzero balance with any of the provided tokens, the transaction will resolve to TRANSACTION_REQUIRES_ZERO_TOKEN_BALANCES.
+// On success, associations between the provided account and tokens are removed.
 type TokenDissociateTransactionBody struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -114,12 +115,15 @@ func file_TokenDissociate_proto_rawDescGZIP() []byte {
 	return file_TokenDissociate_proto_rawDescData
 }
 
-var file_TokenDissociate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_TokenDissociate_proto_goTypes = []interface{}{
-	(*TokenDissociateTransactionBody)(nil), // 0: proto.TokenDissociateTransactionBody
-	(*AccountID)(nil),                      // 1: proto.AccountID
-	(*TokenID)(nil),                        // 2: proto.TokenID
-}
+var (
+	file_TokenDissociate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_TokenDissociate_proto_goTypes  = []interface{}{
+		(*TokenDissociateTransactionBody)(nil), // 0: proto.TokenDissociateTransactionBody
+		(*AccountID)(nil),                      // 1: proto.AccountID
+		(*TokenID)(nil),                        // 2: proto.TokenID
+	}
+)
+
 var file_TokenDissociate_proto_depIdxs = []int32{
 	1, // 0: proto.TokenDissociateTransactionBody.account:type_name -> proto.AccountID
 	2, // 1: proto.TokenDissociateTransactionBody.tokens:type_name -> proto.TokenID

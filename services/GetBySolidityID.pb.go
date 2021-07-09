@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -194,16 +195,19 @@ func file_GetBySolidityID_proto_rawDescGZIP() []byte {
 	return file_GetBySolidityID_proto_rawDescData
 }
 
-var file_GetBySolidityID_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_GetBySolidityID_proto_goTypes = []interface{}{
-	(*GetBySolidityIDQuery)(nil),    // 0: proto.GetBySolidityIDQuery
-	(*GetBySolidityIDResponse)(nil), // 1: proto.GetBySolidityIDResponse
-	(*QueryHeader)(nil),             // 2: proto.QueryHeader
-	(*ResponseHeader)(nil),          // 3: proto.ResponseHeader
-	(*AccountID)(nil),               // 4: proto.AccountID
-	(*FileID)(nil),                  // 5: proto.FileID
-	(*ContractID)(nil),              // 6: proto.ContractID
-}
+var (
+	file_GetBySolidityID_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+	file_GetBySolidityID_proto_goTypes  = []interface{}{
+		(*GetBySolidityIDQuery)(nil),    // 0: proto.GetBySolidityIDQuery
+		(*GetBySolidityIDResponse)(nil), // 1: proto.GetBySolidityIDResponse
+		(*QueryHeader)(nil),             // 2: proto.QueryHeader
+		(*ResponseHeader)(nil),          // 3: proto.ResponseHeader
+		(*AccountID)(nil),               // 4: proto.AccountID
+		(*FileID)(nil),                  // 5: proto.FileID
+		(*ContractID)(nil),              // 6: proto.ContractID
+	}
+)
+
 var file_GetBySolidityID_proto_depIdxs = []int32{
 	2, // 0: proto.GetBySolidityIDQuery.header:type_name -> proto.QueryHeader
 	3, // 1: proto.GetBySolidityIDResponse.header:type_name -> proto.ResponseHeader

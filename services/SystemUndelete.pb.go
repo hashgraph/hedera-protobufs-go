@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -134,12 +135,15 @@ func file_SystemUndelete_proto_rawDescGZIP() []byte {
 	return file_SystemUndelete_proto_rawDescData
 }
 
-var file_SystemUndelete_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_SystemUndelete_proto_goTypes = []interface{}{
-	(*SystemUndeleteTransactionBody)(nil), // 0: proto.SystemUndeleteTransactionBody
-	(*FileID)(nil),                        // 1: proto.FileID
-	(*ContractID)(nil),                    // 2: proto.ContractID
-}
+var (
+	file_SystemUndelete_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_SystemUndelete_proto_goTypes  = []interface{}{
+		(*SystemUndeleteTransactionBody)(nil), // 0: proto.SystemUndeleteTransactionBody
+		(*FileID)(nil),                        // 1: proto.FileID
+		(*ContractID)(nil),                    // 2: proto.ContractID
+	}
+)
+
 var file_SystemUndelete_proto_depIdxs = []int32{
 	1, // 0: proto.SystemUndeleteTransactionBody.fileID:type_name -> proto.FileID
 	2, // 1: proto.SystemUndeleteTransactionBody.contractID:type_name -> proto.ContractID

@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -21,7 +22,7 @@ const (
 )
 
 // Get the balance of a cryptocurrency account. This returns only the balance, so it is a smaller
-//reply than CryptoGetInfo, which returns the balance plus additional information.
+// reply than CryptoGetInfo, which returns the balance plus additional information.
 type CryptoGetAccountBalanceQuery struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -235,16 +236,19 @@ func file_CryptoGetAccountBalance_proto_rawDescGZIP() []byte {
 	return file_CryptoGetAccountBalance_proto_rawDescData
 }
 
-var file_CryptoGetAccountBalance_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_CryptoGetAccountBalance_proto_goTypes = []interface{}{
-	(*CryptoGetAccountBalanceQuery)(nil),    // 0: proto.CryptoGetAccountBalanceQuery
-	(*CryptoGetAccountBalanceResponse)(nil), // 1: proto.CryptoGetAccountBalanceResponse
-	(*QueryHeader)(nil),                     // 2: proto.QueryHeader
-	(*AccountID)(nil),                       // 3: proto.AccountID
-	(*ContractID)(nil),                      // 4: proto.ContractID
-	(*ResponseHeader)(nil),                  // 5: proto.ResponseHeader
-	(*TokenBalance)(nil),                    // 6: proto.TokenBalance
-}
+var (
+	file_CryptoGetAccountBalance_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+	file_CryptoGetAccountBalance_proto_goTypes  = []interface{}{
+		(*CryptoGetAccountBalanceQuery)(nil),    // 0: proto.CryptoGetAccountBalanceQuery
+		(*CryptoGetAccountBalanceResponse)(nil), // 1: proto.CryptoGetAccountBalanceResponse
+		(*QueryHeader)(nil),                     // 2: proto.QueryHeader
+		(*AccountID)(nil),                       // 3: proto.AccountID
+		(*ContractID)(nil),                      // 4: proto.ContractID
+		(*ResponseHeader)(nil),                  // 5: proto.ResponseHeader
+		(*TokenBalance)(nil),                    // 6: proto.TokenBalance
+	}
+)
+
 var file_CryptoGetAccountBalance_proto_depIdxs = []int32{
 	2, // 0: proto.CryptoGetAccountBalanceQuery.header:type_name -> proto.QueryHeader
 	3, // 1: proto.CryptoGetAccountBalanceQuery.accountID:type_name -> proto.AccountID

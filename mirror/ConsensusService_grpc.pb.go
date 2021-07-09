@@ -4,6 +4,7 @@ package mirror
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -70,8 +71,7 @@ type ConsensusServiceServer interface {
 }
 
 // UnimplementedConsensusServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedConsensusServiceServer struct {
-}
+type UnimplementedConsensusServiceServer struct{}
 
 func (UnimplementedConsensusServiceServer) SubscribeTopic(*ConsensusTopicQuery, ConsensusService_SubscribeTopicServer) error {
 	return status.Errorf(codes.Unimplemented, "method SubscribeTopic not implemented")

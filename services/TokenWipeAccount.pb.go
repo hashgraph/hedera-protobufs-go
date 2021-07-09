@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -138,12 +139,15 @@ func file_TokenWipeAccount_proto_rawDescGZIP() []byte {
 	return file_TokenWipeAccount_proto_rawDescData
 }
 
-var file_TokenWipeAccount_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_TokenWipeAccount_proto_goTypes = []interface{}{
-	(*TokenWipeAccountTransactionBody)(nil), // 0: proto.TokenWipeAccountTransactionBody
-	(*TokenID)(nil),                         // 1: proto.TokenID
-	(*AccountID)(nil),                       // 2: proto.AccountID
-}
+var (
+	file_TokenWipeAccount_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_TokenWipeAccount_proto_goTypes  = []interface{}{
+		(*TokenWipeAccountTransactionBody)(nil), // 0: proto.TokenWipeAccountTransactionBody
+		(*TokenID)(nil),                         // 1: proto.TokenID
+		(*AccountID)(nil),                       // 2: proto.AccountID
+	}
+)
+
 var file_TokenWipeAccount_proto_depIdxs = []int32{
 	1, // 0: proto.TokenWipeAccountTransactionBody.token:type_name -> proto.TokenID
 	2, // 1: proto.TokenWipeAccountTransactionBody.account:type_name -> proto.AccountID

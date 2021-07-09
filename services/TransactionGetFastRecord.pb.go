@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -82,7 +83,7 @@ type TransactionGetFastRecordResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Header            *ResponseHeader    `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`                       //Standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
+	Header            *ResponseHeader    `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`                       // Standard response from node to client, including the requested fields: cost, or state proof, or both, or neither
 	TransactionRecord *TransactionRecord `protobuf:"bytes,2,opt,name=transactionRecord,proto3" json:"transactionRecord,omitempty"` // The requested transaction records
 }
 
@@ -179,15 +180,18 @@ func file_TransactionGetFastRecord_proto_rawDescGZIP() []byte {
 	return file_TransactionGetFastRecord_proto_rawDescData
 }
 
-var file_TransactionGetFastRecord_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_TransactionGetFastRecord_proto_goTypes = []interface{}{
-	(*TransactionGetFastRecordQuery)(nil),    // 0: proto.TransactionGetFastRecordQuery
-	(*TransactionGetFastRecordResponse)(nil), // 1: proto.TransactionGetFastRecordResponse
-	(*QueryHeader)(nil),                      // 2: proto.QueryHeader
-	(*TransactionID)(nil),                    // 3: proto.TransactionID
-	(*ResponseHeader)(nil),                   // 4: proto.ResponseHeader
-	(*TransactionRecord)(nil),                // 5: proto.TransactionRecord
-}
+var (
+	file_TransactionGetFastRecord_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+	file_TransactionGetFastRecord_proto_goTypes  = []interface{}{
+		(*TransactionGetFastRecordQuery)(nil),    // 0: proto.TransactionGetFastRecordQuery
+		(*TransactionGetFastRecordResponse)(nil), // 1: proto.TransactionGetFastRecordResponse
+		(*QueryHeader)(nil),                      // 2: proto.QueryHeader
+		(*TransactionID)(nil),                    // 3: proto.TransactionID
+		(*ResponseHeader)(nil),                   // 4: proto.ResponseHeader
+		(*TransactionRecord)(nil),                // 5: proto.TransactionRecord
+	}
+)
+
 var file_TransactionGetFastRecord_proto_depIdxs = []int32{
 	2, // 0: proto.TransactionGetFastRecordQuery.header:type_name -> proto.QueryHeader
 	3, // 1: proto.TransactionGetFastRecordQuery.transactionID:type_name -> proto.TransactionID

@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -158,13 +159,16 @@ func file_ConsensusCreateTopic_proto_rawDescGZIP() []byte {
 	return file_ConsensusCreateTopic_proto_rawDescData
 }
 
-var file_ConsensusCreateTopic_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_ConsensusCreateTopic_proto_goTypes = []interface{}{
-	(*ConsensusCreateTopicTransactionBody)(nil), // 0: proto.ConsensusCreateTopicTransactionBody
-	(*Key)(nil),       // 1: proto.Key
-	(*Duration)(nil),  // 2: proto.Duration
-	(*AccountID)(nil), // 3: proto.AccountID
-}
+var (
+	file_ConsensusCreateTopic_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_ConsensusCreateTopic_proto_goTypes  = []interface{}{
+		(*ConsensusCreateTopicTransactionBody)(nil), // 0: proto.ConsensusCreateTopicTransactionBody
+		(*Key)(nil),       // 1: proto.Key
+		(*Duration)(nil),  // 2: proto.Duration
+		(*AccountID)(nil), // 3: proto.AccountID
+	}
+)
+
 var file_ConsensusCreateTopic_proto_depIdxs = []int32{
 	1, // 0: proto.ConsensusCreateTopicTransactionBody.adminKey:type_name -> proto.Key
 	1, // 1: proto.ConsensusCreateTopicTransactionBody.submitKey:type_name -> proto.Key

@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -123,11 +124,14 @@ func file_Transaction_proto_rawDescGZIP() []byte {
 	return file_Transaction_proto_rawDescData
 }
 
-var file_Transaction_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_Transaction_proto_goTypes = []interface{}{
-	(*Transaction)(nil),  // 0: proto.Transaction
-	(*SignatureMap)(nil), // 1: proto.SignatureMap
-}
+var (
+	file_Transaction_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_Transaction_proto_goTypes  = []interface{}{
+		(*Transaction)(nil),  // 0: proto.Transaction
+		(*SignatureMap)(nil), // 1: proto.SignatureMap
+	}
+)
+
 var file_Transaction_proto_depIdxs = []int32{
 	1, // 0: proto.Transaction.sigMap:type_name -> proto.SignatureMap
 	1, // [1:1] is the sub-list for method output_type

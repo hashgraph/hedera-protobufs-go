@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -21,13 +22,13 @@ const (
 )
 
 // Revokes KYC to the account for the given token. Must be signed by the Token's kycKey.
-//If the provided account is not found, the transaction will resolve to INVALID_ACCOUNT_ID.
-//If the provided account has been deleted, the transaction will resolve to ACCOUNT_DELETED.
-//If the provided token is not found, the transaction will resolve to INVALID_TOKEN_ID.
-//If the provided token has been deleted, the transaction will resolve to TOKEN_WAS_DELETED.
-//If an Association between the provided token and account is not found, the transaction will resolve to TOKEN_NOT_ASSOCIATED_TO_ACCOUNT.
-//If no KYC Key is defined, the transaction will resolve to TOKEN_HAS_NO_KYC_KEY.
-//Once executed the Account is marked as KYC Revoked
+// If the provided account is not found, the transaction will resolve to INVALID_ACCOUNT_ID.
+// If the provided account has been deleted, the transaction will resolve to ACCOUNT_DELETED.
+// If the provided token is not found, the transaction will resolve to INVALID_TOKEN_ID.
+// If the provided token has been deleted, the transaction will resolve to TOKEN_WAS_DELETED.
+// If an Association between the provided token and account is not found, the transaction will resolve to TOKEN_NOT_ASSOCIATED_TO_ACCOUNT.
+// If no KYC Key is defined, the transaction will resolve to TOKEN_HAS_NO_KYC_KEY.
+// Once executed the Account is marked as KYC Revoked
 type TokenRevokeKycTransactionBody struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -114,12 +115,15 @@ func file_TokenRevokeKyc_proto_rawDescGZIP() []byte {
 	return file_TokenRevokeKyc_proto_rawDescData
 }
 
-var file_TokenRevokeKyc_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_TokenRevokeKyc_proto_goTypes = []interface{}{
-	(*TokenRevokeKycTransactionBody)(nil), // 0: proto.TokenRevokeKycTransactionBody
-	(*TokenID)(nil),                       // 1: proto.TokenID
-	(*AccountID)(nil),                     // 2: proto.AccountID
-}
+var (
+	file_TokenRevokeKyc_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_TokenRevokeKyc_proto_goTypes  = []interface{}{
+		(*TokenRevokeKycTransactionBody)(nil), // 0: proto.TokenRevokeKycTransactionBody
+		(*TokenID)(nil),                       // 1: proto.TokenID
+		(*AccountID)(nil),                     // 2: proto.AccountID
+	}
+)
+
 var file_TokenRevokeKyc_proto_depIdxs = []int32{
 	1, // 0: proto.TokenRevokeKycTransactionBody.token:type_name -> proto.TokenID
 	2, // 1: proto.TokenRevokeKycTransactionBody.account:type_name -> proto.AccountID

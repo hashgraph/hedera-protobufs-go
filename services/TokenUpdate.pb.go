@@ -7,11 +7,12 @@
 package services
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -236,16 +237,19 @@ func file_TokenUpdate_proto_rawDescGZIP() []byte {
 	return file_TokenUpdate_proto_rawDescData
 }
 
-var file_TokenUpdate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_TokenUpdate_proto_goTypes = []interface{}{
-	(*TokenUpdateTransactionBody)(nil), // 0: proto.TokenUpdateTransactionBody
-	(*TokenID)(nil),                    // 1: proto.TokenID
-	(*AccountID)(nil),                  // 2: proto.AccountID
-	(*Key)(nil),                        // 3: proto.Key
-	(*Duration)(nil),                   // 4: proto.Duration
-	(*Timestamp)(nil),                  // 5: proto.Timestamp
-	(*wrappers.StringValue)(nil),       // 6: google.protobuf.StringValue
-}
+var (
+	file_TokenUpdate_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_TokenUpdate_proto_goTypes  = []interface{}{
+		(*TokenUpdateTransactionBody)(nil), // 0: proto.TokenUpdateTransactionBody
+		(*TokenID)(nil),                    // 1: proto.TokenID
+		(*AccountID)(nil),                  // 2: proto.AccountID
+		(*Key)(nil),                        // 3: proto.Key
+		(*Duration)(nil),                   // 4: proto.Duration
+		(*Timestamp)(nil),                  // 5: proto.Timestamp
+		(*wrappers.StringValue)(nil),       // 6: google.protobuf.StringValue
+	}
+)
+
 var file_TokenUpdate_proto_depIdxs = []int32{
 	1,  // 0: proto.TokenUpdateTransactionBody.token:type_name -> proto.TokenID
 	2,  // 1: proto.TokenUpdateTransactionBody.treasury:type_name -> proto.AccountID

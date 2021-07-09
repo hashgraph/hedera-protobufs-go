@@ -7,10 +7,11 @@
 package services
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -186,12 +187,15 @@ func file_ExchangeRate_proto_rawDescGZIP() []byte {
 	return file_ExchangeRate_proto_rawDescData
 }
 
-var file_ExchangeRate_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_ExchangeRate_proto_goTypes = []interface{}{
-	(*ExchangeRate)(nil),     // 0: proto.ExchangeRate
-	(*ExchangeRateSet)(nil),  // 1: proto.ExchangeRateSet
-	(*TimestampSeconds)(nil), // 2: proto.TimestampSeconds
-}
+var (
+	file_ExchangeRate_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+	file_ExchangeRate_proto_goTypes  = []interface{}{
+		(*ExchangeRate)(nil),     // 0: proto.ExchangeRate
+		(*ExchangeRateSet)(nil),  // 1: proto.ExchangeRateSet
+		(*TimestampSeconds)(nil), // 2: proto.TimestampSeconds
+	}
+)
+
 var file_ExchangeRate_proto_depIdxs = []int32{
 	2, // 0: proto.ExchangeRate.expirationTime:type_name -> proto.TimestampSeconds
 	0, // 1: proto.ExchangeRateSet.currentRate:type_name -> proto.ExchangeRate
