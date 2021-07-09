@@ -1,0 +1,7 @@
+{
+    "files.exclude": {
+        // exclude examples/ from this folder, must
+        // be added to VS Code as a workspace folder
+        "examples/": true
+    }
+}
