@@ -4,7 +4,6 @@ package services
 
 import (
 	context "context"
-
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -141,36 +140,30 @@ type FileServiceServer interface {
 }
 
 // UnimplementedFileServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedFileServiceServer struct{}
+type UnimplementedFileServiceServer struct {
+}
 
 func (UnimplementedFileServiceServer) CreateFile(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateFile not implemented")
 }
-
 func (UnimplementedFileServiceServer) UpdateFile(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateFile not implemented")
 }
-
 func (UnimplementedFileServiceServer) DeleteFile(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteFile not implemented")
 }
-
 func (UnimplementedFileServiceServer) AppendContent(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AppendContent not implemented")
 }
-
 func (UnimplementedFileServiceServer) GetFileContent(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFileContent not implemented")
 }
-
 func (UnimplementedFileServiceServer) GetFileInfo(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFileInfo not implemented")
 }
-
 func (UnimplementedFileServiceServer) SystemDelete(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SystemDelete not implemented")
 }
-
 func (UnimplementedFileServiceServer) SystemUndelete(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SystemUndelete not implemented")
 }

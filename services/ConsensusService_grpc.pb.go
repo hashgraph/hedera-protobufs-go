@@ -4,7 +4,6 @@ package services
 
 import (
 	context "context"
-
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -144,24 +143,21 @@ type ConsensusServiceServer interface {
 }
 
 // UnimplementedConsensusServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedConsensusServiceServer struct{}
+type UnimplementedConsensusServiceServer struct {
+}
 
 func (UnimplementedConsensusServiceServer) CreateTopic(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTopic not implemented")
 }
-
 func (UnimplementedConsensusServiceServer) UpdateTopic(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTopic not implemented")
 }
-
 func (UnimplementedConsensusServiceServer) DeleteTopic(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTopic not implemented")
 }
-
 func (UnimplementedConsensusServiceServer) GetTopicInfo(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTopicInfo not implemented")
 }
-
 func (UnimplementedConsensusServiceServer) SubmitMessage(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubmitMessage not implemented")
 }

@@ -4,7 +4,6 @@ package services
 
 import (
 	context "context"
-
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -59,12 +58,12 @@ type NetworkServiceServer interface {
 }
 
 // UnimplementedNetworkServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedNetworkServiceServer struct{}
+type UnimplementedNetworkServiceServer struct {
+}
 
 func (UnimplementedNetworkServiceServer) GetVersionInfo(context.Context, *Query) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetVersionInfo not implemented")
 }
-
 func (UnimplementedNetworkServiceServer) UncheckedSubmit(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UncheckedSubmit not implemented")
 }
