@@ -38,6 +38,9 @@ func main() {
 
 	case "streams":
 		buildStreams(projectDir)
+
+	case "sdk":
+		buildSdk(projectDir)
 	}
 }
 
@@ -93,20 +96,20 @@ func buildServices(dir string) {
 func buildMirror(dir string) {
 	cmd := exec.Command("protoc",
 		"--go_out=mirror/",
-		"--go_opt=MBasicTypes.proto=github.com/hashgraph/hedera-protobufs-go/services",
-		"--go_opt=MTimestamp.proto=github.com/hashgraph/hedera-protobufs-go/services",
-		"--go_opt=MConsensusSubmitMessage.proto=github.com/hashgraph/hedera-protobufs-go/services",
-		"--go_opt=MConsensusService.proto=github.com/hashgraph/hedera-protobufs-go/mirror",
+		"--go_opt=Mbasic_types.proto=github.com/hashgraph/hedera-protobufs-go/services",
+		"--go_opt=Mtimestamp.proto=github.com/hashgraph/hedera-protobufs-go/services",
+		"--go_opt=Mconsensus_submit_message.proto=github.com/hashgraph/hedera-protobufs-go/services",
+		"--go_opt=Mconsensus_service.proto=github.com/hashgraph/hedera-protobufs-go/mirror",
 		"--go_opt=paths=source_relative",
 		"--go-grpc_out=mirror/",
-		"--go-grpc_opt=MBasicTypes.proto=github.com/hashgraph/hedera-protobufs-go/services",
-		"--go-grpc_opt=MTimestamp.proto=github.com/hashgraph/hedera-protobufs-go/services",
-		"--go-grpc_opt=MConsensusSubmitMessage.proto=github.com/hashgraph/hedera-protobufs-go/services",
-		"--go-grpc_opt=MConsensusService.proto=github.com/hashgraph/hedera-protobufs-go/mirror",
+		"--go-grpc_opt=Mbasic_types.proto=github.com/hashgraph/hedera-protobufs-go/services",
+		"--go-grpc_opt=Mtimestamp.proto=github.com/hashgraph/hedera-protobufs-go/services",
+		"--go-grpc_opt=Mconsensus_submit_message.proto=github.com/hashgraph/hedera-protobufs-go/services",
+		"--go-grpc_opt=Mconsensus_service.proto=github.com/hashgraph/hedera-protobufs-go/mirror",
 		"--go-grpc_opt=paths=source_relative",
 		"-Iproto/mirror",
 		"-Iproto/services",
-		"proto/mirror/ConsensusService.proto",
+		"proto/mirror/consensus_service.proto",
 	)
 
 	cmd.Dir = dir
@@ -118,20 +121,69 @@ func buildMirror(dir string) {
 func buildStreams(dir string) {
 	cmd := exec.Command("protoc",
 		"--go_out=streams/",
-		"--go_opt=MBasicTypes.proto=github.com/hashgraph/hedera-protobufs-go/services",
-		"--go_opt=MTimestamp.proto=github.com/hashgraph/hedera-protobufs-go/services",
-		"--go_opt=MAccountBalanceFile.proto=github.com/hashgraph/hedera-protobufs-go/streams",
+		"--go_opt=Mbasic_types.proto=github.com/hashgraph/hedera-protobufs-go/services",
+		"--go_opt=Mtimestamp.proto=github.com/hashgraph/hedera-protobufs-go/services",
+		"--go_opt=Maccount_balance_file.proto=github.com/hashgraph/hedera-protobufs-go/streams",
 		"--go_opt=paths=source_relative",
 		"--go-grpc_out=streams/",
-		"--go-grpc_opt=MBasicTypes.proto=github.com/hashgraph/hedera-protobufs-go/services",
-		"--go-grpc_opt=MTimestamp.proto=github.com/hashgraph/hedera-protobufs-go/services",
-		"--go-grpc_opt=MAccountBalanceFile.proto=github.com/hashgraph/hedera-protobufs-go/streams",
+		"--go-grpc_opt=Mbasic_types.proto=github.com/hashgraph/hedera-protobufs-go/services",
+		"--go-grpc_opt=Mtimestamp.proto=github.com/hashgraph/hedera-protobufs-go/services",
+		"--go-grpc_opt=Maccount_balance_file.proto=github.com/hashgraph/hedera-protobufs-go/streams",
 		"--go-grpc_opt=paths=source_relative",
 		"-Iproto/streams",
 		"-Iproto/services",
-		"proto/streams/AccountBalanceFile.proto",
+		"proto/streams/account_balance_file.proto",
 	)
 
+	cmd.Dir = dir
+
+	mustRunCommand(cmd)
+}
+
+func buildSdk(dir string) {
+	var servicesProtoFiles []string
+
+	var servicesModuleDecls []string
+
+	err := filepath.Walk(path.Join(dir, "proto/services"), func(filename string, info fs.FileInfo, err error) error {
+		if !strings.HasSuffix(filename, ".proto") {
+			return nil
+		}
+
+		pathFromRoot := strings.TrimPrefix(filename, dir+"/")
+		pathBase := path.Base(filename)
+		servicesProtoFiles = append(servicesProtoFiles, pathFromRoot)
+
+		servicesModuleDecls = append(servicesModuleDecls,
+			fmt.Sprintf("--go_opt=M%v=github.com/hashgraph/hedera-protobufs-go/services", pathBase),
+			fmt.Sprintf("--go-grpc_opt=M%v=github.com/hashgraph/hedera-protobufs-go/services", pathBase),
+		)
+
+		return nil
+	})
+	if err != nil {
+		panic(err)
+	}
+
+	cmdArguments := []string{
+		"--go_out=sdk/",
+		"--go_opt=Mtransaction_list.proto=github.com/hashgraph/hedera-protobufs-go/sdk",
+		"--go_opt=paths=source_relative",
+		"--go-grpc_out=sdk/",
+		"--go-grpc_opt=Mtransaction_list.proto=github.com/hashgraph/hedera-protobufs-go/sdk",
+		"--go-grpc_opt=paths=source_relative",
+		"-Iproto/sdk",
+		"-Iproto/services",
+	}
+
+	cmdArguments = append(cmdArguments, servicesModuleDecls...)
+	cmdArguments = append(cmdArguments, "proto/sdk/transaction_list.proto")
+
+	for _, k := range cmdArguments {
+		println(k)
+	}
+
+	cmd := exec.Command("protoc", cmdArguments...)
 	cmd.Dir = dir
 
 	mustRunCommand(cmd)
