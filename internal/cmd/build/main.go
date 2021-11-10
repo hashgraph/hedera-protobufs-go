@@ -179,10 +179,6 @@ func buildSdk(dir string) {
 	cmdArguments = append(cmdArguments, servicesModuleDecls...)
 	cmdArguments = append(cmdArguments, "proto/sdk/transaction_list.proto")
 
-	for _, k := range cmdArguments {
-		println(k)
-	}
-
 	cmd := exec.Command("protoc", cmdArguments...)
 	cmd.Dir = dir
 
