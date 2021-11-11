@@ -114,12 +114,8 @@ func buildMirror(dir string) {
 
 	cmd.Dir = dir
 
-	println(dir)
-
 	mustRunCommand(cmd)
 	renamePackageDeclGrpcFiles(dir, "com_hedera_mirror_api_proto", "mirror")
-	_ = os.Rename(dir + "/mirror/consensus_service.pb.go", dir + "/mirror/mirror_consensus_service.pb.go")
-	_ = os.Rename(dir + "/mirror/consensus_service_grpc.pb.go", dir + "/mirror/mirror_consensus_service_grpc.pb.go")
 }
 
 func buildStreams(dir string) {
