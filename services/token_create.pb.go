@@ -66,12 +66,12 @@ type TokenCreateTransactionBody struct {
 	unknownFields protoimpl.UnknownFields
 
 	//*
-	// The publicly visible name of the token, limited to a UTF-8 encoding of
-	// length <tt>tokens.maxSymbolUtf8Bytes</tt>.
+	// The publicly visible name of the token. The token name is specified as a Unicode string.
+	// Its UTF-8 encoding cannot exceed 100 bytes, and cannot contain the 0 byte (NUL).
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	//*
-	// The publicly visible token symbol, limited to a UTF-8 encoding of length
-	// <tt>tokens.maxTokenNameUtf8Bytes</tt>.
+	// The publicly visible token symbol. The token symbol is specified as a Unicode string.
+	// Its UTF-8 encoding cannot exceed 100 bytes, and cannot contain the 0 byte (NUL).
 	Symbol string `protobuf:"bytes,2,opt,name=symbol,proto3" json:"symbol,omitempty"`
 	//*
 	// For tokens of type FUNGIBLE_COMMON - the number of decimal places a

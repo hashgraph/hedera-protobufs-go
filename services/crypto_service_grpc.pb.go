@@ -31,6 +31,12 @@ type CryptoServiceClient interface {
 	// Deletes and account by submitting the transaction
 	CryptoDelete(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
 	//*
+	// Adds one or more approved allowances for spenders to transfer the paying account's hbar or tokens.
+	ApproveAllowances(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
+	//*
+	// Adjusts the approved allowance for a spender to transfer the paying account's hbar or tokens.
+	AdjustAllowance(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
+	//*
 	// (NOT CURRENTLY SUPPORTED) Adds a livehash
 	AddLiveHash(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
 	//*
@@ -104,6 +110,24 @@ func (c *cryptoServiceClient) CryptoTransfer(ctx context.Context, in *Transactio
 func (c *cryptoServiceClient) CryptoDelete(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error) {
 	out := new(TransactionResponse)
 	err := c.cc.Invoke(ctx, "/proto.CryptoService/cryptoDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cryptoServiceClient) ApproveAllowances(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error) {
+	out := new(TransactionResponse)
+	err := c.cc.Invoke(ctx, "/proto.CryptoService/approveAllowances", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cryptoServiceClient) AdjustAllowance(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error) {
+	out := new(TransactionResponse)
+	err := c.cc.Invoke(ctx, "/proto.CryptoService/adjustAllowance", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -217,6 +241,12 @@ type CryptoServiceServer interface {
 	// Deletes and account by submitting the transaction
 	CryptoDelete(context.Context, *Transaction) (*TransactionResponse, error)
 	//*
+	// Adds one or more approved allowances for spenders to transfer the paying account's hbar or tokens.
+	ApproveAllowances(context.Context, *Transaction) (*TransactionResponse, error)
+	//*
+	// Adjusts the approved allowance for a spender to transfer the paying account's hbar or tokens.
+	AdjustAllowance(context.Context, *Transaction) (*TransactionResponse, error)
+	//*
 	// (NOT CURRENTLY SUPPORTED) Adds a livehash
 	AddLiveHash(context.Context, *Transaction) (*TransactionResponse, error)
 	//*
@@ -268,6 +298,12 @@ func (UnimplementedCryptoServiceServer) CryptoTransfer(context.Context, *Transac
 }
 func (UnimplementedCryptoServiceServer) CryptoDelete(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CryptoDelete not implemented")
+}
+func (UnimplementedCryptoServiceServer) ApproveAllowances(context.Context, *Transaction) (*TransactionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ApproveAllowances not implemented")
+}
+func (UnimplementedCryptoServiceServer) AdjustAllowance(context.Context, *Transaction) (*TransactionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AdjustAllowance not implemented")
 }
 func (UnimplementedCryptoServiceServer) AddLiveHash(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddLiveHash not implemented")
@@ -380,6 +416,42 @@ func _CryptoService_CryptoDelete_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CryptoServiceServer).CryptoDelete(ctx, req.(*Transaction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CryptoService_ApproveAllowances_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Transaction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CryptoServiceServer).ApproveAllowances(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.CryptoService/approveAllowances",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CryptoServiceServer).ApproveAllowances(ctx, req.(*Transaction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CryptoService_AdjustAllowance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Transaction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CryptoServiceServer).AdjustAllowance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.CryptoService/adjustAllowance",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CryptoServiceServer).AdjustAllowance(ctx, req.(*Transaction))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -586,6 +658,14 @@ var CryptoService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "cryptoDelete",
 			Handler:    _CryptoService_CryptoDelete_Handler,
+		},
+		{
+			MethodName: "approveAllowances",
+			Handler:    _CryptoService_ApproveAllowances_Handler,
+		},
+		{
+			MethodName: "adjustAllowance",
+			Handler:    _CryptoService_AdjustAllowance_Handler,
 		},
 		{
 			MethodName: "addLiveHash",

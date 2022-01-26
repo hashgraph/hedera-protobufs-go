@@ -50,12 +50,12 @@ type TokenUpdateTransactionBody struct {
 	// The Token to be updated
 	Token *TokenID `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	//*
-	// The new publicly visible Token symbol, limited to a UTF-8 encoding of length
-	// <tt>tokens.maxTokenNameUtf8Bytes</tt>.
+	// The new publicly visible token symbol. The token symbol is specified as a Unicode string.
+	// Its UTF-8 encoding cannot exceed 100 bytes, and cannot contain the 0 byte (NUL).
 	Symbol string `protobuf:"bytes,2,opt,name=symbol,proto3" json:"symbol,omitempty"`
 	//*
-	// The new publicly visible name of the Token, limited to a UTF-8 encoding of length
-	// <tt>tokens.maxSymbolUtf8Bytes</tt>.
+	// The new publicly visible name of the token. The token name is specified as a Unicode string.
+	// Its UTF-8 encoding cannot exceed 100 bytes, and cannot contain the 0 byte (NUL).
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	//*
 	// The new Treasury account of the Token. If the provided treasury account is not existing or
