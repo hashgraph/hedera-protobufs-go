@@ -100,16 +100,19 @@ func buildMirror(dir string) {
 		"--go_opt=Mtimestamp.proto=github.com/hashgraph/hedera-protobufs-go/services",
 		"--go_opt=Mconsensus_submit_message.proto=github.com/hashgraph/hedera-protobufs-go/services",
 		"--go_opt=Mconsensus_service.proto=github.com/hashgraph/hedera-protobufs-go/mirror",
+        "--go_opt=Mmirror_network_service.proto=github.com/hashgraph/hedera-protobufs-go/mirror",
 		"--go_opt=paths=source_relative",
 		"--go-grpc_out=mirror/",
 		"--go-grpc_opt=Mbasic_types.proto=github.com/hashgraph/hedera-protobufs-go/services",
 		"--go-grpc_opt=Mtimestamp.proto=github.com/hashgraph/hedera-protobufs-go/services",
 		"--go-grpc_opt=Mconsensus_submit_message.proto=github.com/hashgraph/hedera-protobufs-go/services",
 		"--go-grpc_opt=Mconsensus_service.proto=github.com/hashgraph/hedera-protobufs-go/mirror",
+        "--go-grpc_opt=Mmirror_network_service.proto=github.com/hashgraph/hedera-protobufs-go/mirror",
 		"--go-grpc_opt=paths=source_relative",
 		"-Iproto/mirror",
 		"-Iproto/services",
 		"proto/mirror/consensus_service.proto",
+        "proto/mirror/mirror_network_service.proto",
 	)
 
 	cmd.Dir = dir
