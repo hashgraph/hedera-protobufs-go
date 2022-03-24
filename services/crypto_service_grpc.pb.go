@@ -37,6 +37,9 @@ type CryptoServiceClient interface {
 	// Adjusts the approved allowance for a spender to transfer the paying account's hbar or tokens.
 	AdjustAllowance(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
 	//*
+	// Deletes the approved hbar or token allowance on an owner account.
+	DeleteAllowance(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
+	//*
 	// (NOT CURRENTLY SUPPORTED) Adds a livehash
 	AddLiveHash(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
 	//*
@@ -128,6 +131,15 @@ func (c *cryptoServiceClient) ApproveAllowances(ctx context.Context, in *Transac
 func (c *cryptoServiceClient) AdjustAllowance(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error) {
 	out := new(TransactionResponse)
 	err := c.cc.Invoke(ctx, "/proto.CryptoService/adjustAllowance", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cryptoServiceClient) DeleteAllowance(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error) {
+	out := new(TransactionResponse)
+	err := c.cc.Invoke(ctx, "/proto.CryptoService/deleteAllowance", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -247,6 +259,9 @@ type CryptoServiceServer interface {
 	// Adjusts the approved allowance for a spender to transfer the paying account's hbar or tokens.
 	AdjustAllowance(context.Context, *Transaction) (*TransactionResponse, error)
 	//*
+	// Deletes the approved hbar or token allowance on an owner account.
+	DeleteAllowance(context.Context, *Transaction) (*TransactionResponse, error)
+	//*
 	// (NOT CURRENTLY SUPPORTED) Adds a livehash
 	AddLiveHash(context.Context, *Transaction) (*TransactionResponse, error)
 	//*
@@ -304,6 +319,9 @@ func (UnimplementedCryptoServiceServer) ApproveAllowances(context.Context, *Tran
 }
 func (UnimplementedCryptoServiceServer) AdjustAllowance(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AdjustAllowance not implemented")
+}
+func (UnimplementedCryptoServiceServer) DeleteAllowance(context.Context, *Transaction) (*TransactionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAllowance not implemented")
 }
 func (UnimplementedCryptoServiceServer) AddLiveHash(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddLiveHash not implemented")
@@ -452,6 +470,24 @@ func _CryptoService_AdjustAllowance_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CryptoServiceServer).AdjustAllowance(ctx, req.(*Transaction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CryptoService_DeleteAllowance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Transaction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CryptoServiceServer).DeleteAllowance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.CryptoService/deleteAllowance",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CryptoServiceServer).DeleteAllowance(ctx, req.(*Transaction))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -666,6 +702,10 @@ var CryptoService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "adjustAllowance",
 			Handler:    _CryptoService_AdjustAllowance_Handler,
+		},
+		{
+			MethodName: "deleteAllowance",
+			Handler:    _CryptoService_DeleteAllowance_Handler,
 		},
 		{
 			MethodName: "addLiveHash",
