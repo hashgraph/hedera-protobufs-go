@@ -33,6 +33,10 @@ type NetworkServiceClient interface {
 	// including an authorization requirement that its payer be either the treasury or system admin
 	// account.)
 	UncheckedSubmit(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
+	//*
+	// Get all the information about an account, including balance and allowances. This does not get the list of
+	// account records.
+	GetAccountDetails(ctx context.Context, in *Query, opts ...grpc.CallOption) (*Response, error)
 }
 
 type networkServiceClient struct {
@@ -70,6 +74,15 @@ func (c *networkServiceClient) UncheckedSubmit(ctx context.Context, in *Transact
 	return out, nil
 }
 
+func (c *networkServiceClient) GetAccountDetails(ctx context.Context, in *Query, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := c.cc.Invoke(ctx, "/proto.NetworkService/getAccountDetails", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NetworkServiceServer is the server API for NetworkService service.
 // All implementations must embed UnimplementedNetworkServiceServer
 // for forward compatibility
@@ -89,6 +102,10 @@ type NetworkServiceServer interface {
 	// including an authorization requirement that its payer be either the treasury or system admin
 	// account.)
 	UncheckedSubmit(context.Context, *Transaction) (*TransactionResponse, error)
+	//*
+	// Get all the information about an account, including balance and allowances. This does not get the list of
+	// account records.
+	GetAccountDetails(context.Context, *Query) (*Response, error)
 	mustEmbedUnimplementedNetworkServiceServer()
 }
 
@@ -104,6 +121,9 @@ func (UnimplementedNetworkServiceServer) GetExecutionTime(context.Context, *Quer
 }
 func (UnimplementedNetworkServiceServer) UncheckedSubmit(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UncheckedSubmit not implemented")
+}
+func (UnimplementedNetworkServiceServer) GetAccountDetails(context.Context, *Query) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountDetails not implemented")
 }
 func (UnimplementedNetworkServiceServer) mustEmbedUnimplementedNetworkServiceServer() {}
 
@@ -172,6 +192,24 @@ func _NetworkService_UncheckedSubmit_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NetworkService_GetAccountDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Query)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NetworkServiceServer).GetAccountDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.NetworkService/getAccountDetails",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NetworkServiceServer).GetAccountDetails(ctx, req.(*Query))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // NetworkService_ServiceDesc is the grpc.ServiceDesc for NetworkService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -190,6 +228,10 @@ var NetworkService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "uncheckedSubmit",
 			Handler:    _NetworkService_UncheckedSubmit_Handler,
+		},
+		{
+			MethodName: "getAccountDetails",
+			Handler:    _NetworkService_GetAccountDetails_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
