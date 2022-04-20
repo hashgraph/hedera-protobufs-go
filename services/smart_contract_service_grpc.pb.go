@@ -34,7 +34,7 @@ type SmartContractServiceClient interface {
 	// Calls a smart contract to be run on a single node
 	ContractCallLocalMethod(ctx context.Context, in *Query, opts ...grpc.CallOption) (*Response, error)
 	//*
-	// Retrieves the byte code of a contract
+	// Retrieves the runtime code of a contract
 	ContractGetBytecode(ctx context.Context, in *Query, opts ...grpc.CallOption) (*Response, error)
 	//*
 	// Retrieves a contract by its Solidity address
@@ -53,6 +53,9 @@ type SmartContractServiceClient interface {
 	//*
 	// Undeletes a contract if the submitting account has network admin privileges
 	SystemUndelete(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
+	//*
+	// Ethereum transaction
+	CallEthereum(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
 }
 
 type smartContractServiceClient struct {
@@ -163,6 +166,15 @@ func (c *smartContractServiceClient) SystemUndelete(ctx context.Context, in *Tra
 	return out, nil
 }
 
+func (c *smartContractServiceClient) CallEthereum(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error) {
+	out := new(TransactionResponse)
+	err := c.cc.Invoke(ctx, "/proto.SmartContractService/callEthereum", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SmartContractServiceServer is the server API for SmartContractService service.
 // All implementations must embed UnimplementedSmartContractServiceServer
 // for forward compatibility
@@ -183,7 +195,7 @@ type SmartContractServiceServer interface {
 	// Calls a smart contract to be run on a single node
 	ContractCallLocalMethod(context.Context, *Query) (*Response, error)
 	//*
-	// Retrieves the byte code of a contract
+	// Retrieves the runtime code of a contract
 	ContractGetBytecode(context.Context, *Query) (*Response, error)
 	//*
 	// Retrieves a contract by its Solidity address
@@ -202,6 +214,9 @@ type SmartContractServiceServer interface {
 	//*
 	// Undeletes a contract if the submitting account has network admin privileges
 	SystemUndelete(context.Context, *Transaction) (*TransactionResponse, error)
+	//*
+	// Ethereum transaction
+	CallEthereum(context.Context, *Transaction) (*TransactionResponse, error)
 	mustEmbedUnimplementedSmartContractServiceServer()
 }
 
@@ -241,6 +256,9 @@ func (UnimplementedSmartContractServiceServer) SystemDelete(context.Context, *Tr
 }
 func (UnimplementedSmartContractServiceServer) SystemUndelete(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SystemUndelete not implemented")
+}
+func (UnimplementedSmartContractServiceServer) CallEthereum(context.Context, *Transaction) (*TransactionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CallEthereum not implemented")
 }
 func (UnimplementedSmartContractServiceServer) mustEmbedUnimplementedSmartContractServiceServer() {}
 
@@ -453,6 +471,24 @@ func _SmartContractService_SystemUndelete_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SmartContractService_CallEthereum_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Transaction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SmartContractServiceServer).CallEthereum(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.SmartContractService/callEthereum",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SmartContractServiceServer).CallEthereum(ctx, req.(*Transaction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SmartContractService_ServiceDesc is the grpc.ServiceDesc for SmartContractService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -503,6 +539,10 @@ var SmartContractService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "systemUndelete",
 			Handler:    _SmartContractService_SystemUndelete_Handler,
+		},
+		{
+			MethodName: "callEthereum",
+			Handler:    _SmartContractService_CallEthereum_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

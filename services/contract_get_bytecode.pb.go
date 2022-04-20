@@ -21,7 +21,7 @@ const (
 )
 
 //*
-// Get the bytecode for a smart contract instance
+// Get the runtime bytecode for a smart contract instance
 type ContractGetBytecodeQuery struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -94,7 +94,7 @@ type ContractGetBytecodeResponse struct {
 	// or both, or neither
 	Header *ResponseHeader `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
 	//*
-	// the bytecode
+	// the runtime bytecode of the contract
 	Bytecode []byte `protobuf:"bytes,6,opt,name=bytecode,proto3" json:"bytecode,omitempty"`
 }
 

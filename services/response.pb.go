@@ -295,7 +295,7 @@ type Response_ContractCallLocal struct {
 
 type Response_ContractGetBytecodeResponse struct {
 	//*
-	// Get the bytecode for a smart contract instance
+	// Get the runtime code for a smart contract instance
 	ContractGetBytecodeResponse *ContractGetBytecodeResponse `protobuf:"bytes,5,opt,name=contractGetBytecodeResponse,proto3,oneof"`
 }
 

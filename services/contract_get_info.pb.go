@@ -22,7 +22,7 @@ const (
 
 //*
 // Get information about a smart contract instance. This includes the account that it uses, the file
-// containing its bytecode, and the time when it will expire.
+// containing its initcode (if a file was used to initialize the contract), and the time when it will expire.
 type ContractGetInfoQuery struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

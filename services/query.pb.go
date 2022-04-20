@@ -301,7 +301,7 @@ type Query_ContractGetInfo struct {
 
 type Query_ContractGetBytecode struct {
 	//*
-	// Get bytecode used by a smart contract instance
+	// Get runtime code used by a smart contract instance
 	ContractGetBytecode *ContractGetBytecodeQuery `protobuf:"bytes,5,opt,name=contractGetBytecode,proto3,oneof"`
 }
 

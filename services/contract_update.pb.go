@@ -60,8 +60,7 @@ type ContractUpdateTransactionBody struct {
 	// (by the same interval)
 	AutoRenewPeriod *Duration `protobuf:"bytes,7,opt,name=autoRenewPeriod,proto3" json:"autoRenewPeriod,omitempty"`
 	//*
-	// The new id of the file asserted to contain the bytecode of the Solidity transaction that
-	// created this contract
+	// This field is unused and will have no impact on the specified smart contract.
 	//
 	// Deprecated: Do not use.
 	FileID *FileID `protobuf:"bytes,8,opt,name=fileID,proto3" json:"fileID,omitempty"`
