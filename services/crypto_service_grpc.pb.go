@@ -34,7 +34,7 @@ type CryptoServiceClient interface {
 	// Adds one or more approved allowances for spenders to transfer the paying account's hbar or tokens.
 	ApproveAllowances(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
 	//*
-	// Deletes the approved hbar or token allowances on an owner account.
+	// Deletes one or more of the specific approved NFT serial numbers on an owner account.
 	DeleteAllowances(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
 	//*
 	// (NOT CURRENTLY SUPPORTED) Adds a livehash
@@ -244,7 +244,7 @@ type CryptoServiceServer interface {
 	// Adds one or more approved allowances for spenders to transfer the paying account's hbar or tokens.
 	ApproveAllowances(context.Context, *Transaction) (*TransactionResponse, error)
 	//*
-	// Deletes the approved hbar or token allowances on an owner account.
+	// Deletes one or more of the specific approved NFT serial numbers on an owner account.
 	DeleteAllowances(context.Context, *Transaction) (*TransactionResponse, error)
 	//*
 	// (NOT CURRENTLY SUPPORTED) Adds a livehash

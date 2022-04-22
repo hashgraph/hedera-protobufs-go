@@ -526,7 +526,7 @@ type TransactionBody_CryptoApproveAllowance struct {
 
 type TransactionBody_CryptoDeleteAllowance struct {
 	//*
-	// Deletes one or more approved hbar or token allowances from an owner's account
+	// Deletes one or more of the specific approved NFT serial numbers on an owner account.
 	CryptoDeleteAllowance *CryptoDeleteAllowanceTransactionBody `protobuf:"bytes,49,opt,name=cryptoDeleteAllowance,proto3,oneof"`
 }
 
