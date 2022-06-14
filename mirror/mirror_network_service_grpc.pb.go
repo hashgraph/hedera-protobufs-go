@@ -133,5 +133,5 @@ var NetworkService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "mirror_network_service.proto",
+	Metadata: "mirror/mirror_network_service.proto",
 }

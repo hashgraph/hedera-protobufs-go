@@ -124,5 +124,5 @@ var ConsensusService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "consensus_service.proto",
+	Metadata: "mirror/consensus_service.proto",
 }
