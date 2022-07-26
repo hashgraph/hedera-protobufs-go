@@ -298,7 +298,7 @@ type isTransactionRecord_Entropy interface {
 
 type TransactionRecord_PrngBytes struct {
 	//*
-	// In the record of a PRNG transaction with no output range, a pseudorandom 384-bit string.
+	// In the record of a UtilPrng transaction with no output range, a pseudorandom 384-bit string.
 	PrngBytes []byte `protobuf:"bytes,19,opt,name=prng_bytes,json=prngBytes,proto3,oneof"`
 }
 

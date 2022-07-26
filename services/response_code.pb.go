@@ -850,7 +850,7 @@ const (
 	// Native staking, while implemented, has not yet enabled by the council.
 	ResponseCodeEnum_STAKING_NOT_ENABLED ResponseCodeEnum = 323
 	//*
-	// The range provided in PRNG transaction is negative.
+	// The range provided in UtilPrng transaction is negative.
 	ResponseCodeEnum_INVALID_PRNG_RANGE ResponseCodeEnum = 324
 	//*
 	// The maximum number of entities allowed in the current price regime have been created.
