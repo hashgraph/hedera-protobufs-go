@@ -75,8 +75,8 @@ type TransactionRecord struct {
 	// transaction that spawned it.
 	ParentConsensusTimestamp *Timestamp `protobuf:"bytes,15,opt,name=parent_consensus_timestamp,json=parentConsensusTimestamp,proto3" json:"parent_consensus_timestamp,omitempty"`
 	//*
-	// In the record of an internal CryptoCreate transaction triggered by a user
-	// transaction with a (previously unused) alias, the new account's alias.
+	// In the record of a CryptoCreate transaction triggered by a user transaction with a
+	// (previously unused) alias, the new account's alias.
 	Alias []byte `protobuf:"bytes,16,opt,name=alias,proto3" json:"alias,omitempty"`
 	//*
 	// The keccak256 hash of the ethereumData. This field will only be populated for
