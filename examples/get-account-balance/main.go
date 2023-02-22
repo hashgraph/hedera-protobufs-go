@@ -23,7 +23,8 @@ func main() {
 			CryptogetAccountBalance: &services.CryptoGetAccountBalanceQuery{
 				BalanceSource: &services.CryptoGetAccountBalanceQuery_AccountID{
 					AccountID: &services.AccountID{
-						AccountNum: 1001,
+						Account: &services.AccountID_AccountNum{
+							AccountNum: 1001,},
 					},
 				},
 			},
