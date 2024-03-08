@@ -34,8 +34,8 @@ When updating the protobufs submodule, the generated code should be updated.
 -   Go plugins for the protobuf compiler
 
     ```sh
-    $ go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.27.1
-    $ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1.0
+    $ go install google.golang.org/protobuf/cmd/protoc-gen-go
+    $ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc
     ```
 
 ### Build
@@ -50,6 +50,13 @@ $ go generate ./...
 # ensure the projects build
 $ go vet ./...
 ```
+
+If you are experiencing generation difficulties:
+
+-   Make sure all protobuf files in the proto subproject
+    are at one folder level(no subdirs)
+-   Remove protobuf import directory `state/` in the
+    generated `.go` code.
 
 ## License
 
