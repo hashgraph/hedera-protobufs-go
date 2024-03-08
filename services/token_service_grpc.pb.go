@@ -79,6 +79,9 @@ type TokenServiceClient interface {
 	PauseToken(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
 	// Unpause the token
 	UnpauseToken(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
+	// *
+	// Updates the NFTs in a collection by TokenID and serial number
+	UpdateNfts(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
 }
 
 type tokenServiceClient struct {
@@ -262,6 +265,15 @@ func (c *tokenServiceClient) UnpauseToken(ctx context.Context, in *Transaction, 
 	return out, nil
 }
 
+func (c *tokenServiceClient) UpdateNfts(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error) {
+	out := new(TransactionResponse)
+	err := c.cc.Invoke(ctx, "/proto.TokenService/updateNfts", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TokenServiceServer is the server API for TokenService service.
 // All implementations must embed UnimplementedTokenServiceServer
 // for forward compatibility
@@ -323,6 +335,9 @@ type TokenServiceServer interface {
 	PauseToken(context.Context, *Transaction) (*TransactionResponse, error)
 	// Unpause the token
 	UnpauseToken(context.Context, *Transaction) (*TransactionResponse, error)
+	// *
+	// Updates the NFTs in a collection by TokenID and serial number
+	UpdateNfts(context.Context, *Transaction) (*TransactionResponse, error)
 	mustEmbedUnimplementedTokenServiceServer()
 }
 
@@ -386,6 +401,9 @@ func (UnimplementedTokenServiceServer) PauseToken(context.Context, *Transaction)
 }
 func (UnimplementedTokenServiceServer) UnpauseToken(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnpauseToken not implemented")
+}
+func (UnimplementedTokenServiceServer) UpdateNfts(context.Context, *Transaction) (*TransactionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNfts not implemented")
 }
 func (UnimplementedTokenServiceServer) mustEmbedUnimplementedTokenServiceServer() {}
 
@@ -742,6 +760,24 @@ func _TokenService_UnpauseToken_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TokenService_UpdateNfts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Transaction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TokenServiceServer).UpdateNfts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.TokenService/updateNfts",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TokenServiceServer).UpdateNfts(ctx, req.(*Transaction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TokenService_ServiceDesc is the grpc.ServiceDesc for TokenService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -824,6 +860,10 @@ var TokenService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "unpauseToken",
 			Handler:    _TokenService_UnpauseToken_Handler,
+		},
+		{
+			MethodName: "updateNfts",
+			Handler:    _TokenService_UpdateNfts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

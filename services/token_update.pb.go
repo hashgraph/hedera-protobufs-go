@@ -112,6 +112,8 @@ type TokenUpdateTransactionBody struct {
 	// *
 	// The key which can change the metadata of a token
 	// (token definition, partition definition, and individual NFTs).
+	// If the Token does not have currently a Metadata key,
+	// transaction will resolve to TOKEN_HAS_NO_METADATA_KEY
 	MetadataKey *Key `protobuf:"bytes,17,opt,name=metadata_key,json=metadataKey,proto3" json:"metadata_key,omitempty"`
 }
 
