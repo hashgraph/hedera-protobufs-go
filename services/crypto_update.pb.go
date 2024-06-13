@@ -82,8 +82,12 @@ type CryptoUpdateTransactionBody struct {
 	// If set, the new memo to be associated with the account (UTF-8 encoding max 100 bytes)
 	Memo *wrapperspb.StringValue `protobuf:"bytes,14,opt,name=memo,proto3" json:"memo,omitempty"`
 	// *
-	// The maximum number of tokens that an Account can be implicitly associated with. Up to a 1000
-	// including implicit and explicit associations.
+	// If set, modify the maximum number of tokens that can be auto-associated with the
+	// account.<br/>
+	// If this is set and less than or equal to `used_auto_associations`, or 0, then this account
+	// MUST manually associate with a token before transacting in that token.<br/>
+	// This value MAY also be `-1` to indicate no limit.<br/>
+	// This value MUST NOT be less than `-1`.
 	MaxAutomaticTokenAssociations *wrapperspb.Int32Value `protobuf:"bytes,15,opt,name=max_automatic_token_associations,json=maxAutomaticTokenAssociations,proto3" json:"max_automatic_token_associations,omitempty"`
 	// *
 	// ID of the account or node to which this account is staking.

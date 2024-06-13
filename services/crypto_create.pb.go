@@ -105,8 +105,12 @@ type CryptoCreateTransactionBody struct {
 	// The memo associated with the account (UTF-8 encoding max 100 bytes)
 	Memo string `protobuf:"bytes,13,opt,name=memo,proto3" json:"memo,omitempty"`
 	// *
-	// The maximum number of tokens that an Account can be implicitly associated with. Defaults to 0
-	// and up to a maximum value of 1000.
+	// The maximum number of tokens that can be auto-associated with the account.<br/>
+	// If this is less than or equal to `used_auto_associations`, or 0, then this account
+	// MUST manually associate with a token before transacting in that token.<br/>
+	// This value MAY also be `-1` to indicate no limit.<br/>
+	// This value MUST NOT be less than `-1`.<br/>
+	// By default this value is 0 for accounts except for auto-created accounts which default -1.
 	MaxAutomaticTokenAssociations int32 `protobuf:"varint,14,opt,name=max_automatic_token_associations,json=maxAutomaticTokenAssociations,proto3" json:"max_automatic_token_associations,omitempty"`
 	// *
 	// ID of the account or node to which this account is staking.

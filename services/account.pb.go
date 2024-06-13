@@ -32,10 +32,9 @@ type Account struct {
 	// The alias to use for this account, if any.
 	Alias []byte `protobuf:"bytes,2,opt,name=alias,proto3" json:"alias,omitempty"`
 	// *
-	// (Optional) The key to be used to sign transactions from the account, if
-	// any. This key will not be set for hollow accounts until the account is
-	// finalized. This key should be set on all the accounts, except for immutable
-	// accounts (0.0.800 and 0.0.801).
+	// (Optional) The key to be used to sign transactions from the account, if any.
+	// This key will not be set for hollow accounts until the account is finalized.
+	// This key should be set on all the accounts, except for immutable accounts (0.0.800 and 0.0.801).
 	Key *Key `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"`
 	// *
 	// The expiration time of the account, in seconds since the epoch.
@@ -71,16 +70,13 @@ type Account struct {
 	// A boolean marking if the account requires a receiver signature.
 	ReceiverSigRequired bool `protobuf:"varint,13,opt,name=receiver_sig_required,json=receiverSigRequired,proto3" json:"receiver_sig_required,omitempty"`
 	// *
-	// The token ID of the head of the linked list from token relations map for
-	// the account.
+	// The token ID of the head of the linked list from token relations map for the account.
 	HeadTokenId *TokenID `protobuf:"bytes,14,opt,name=head_token_id,json=headTokenId,proto3" json:"head_token_id,omitempty"`
 	// *
-	// The NftID of the head of the linked list from unique tokens map for the
-	// account.
+	// The NftID of the head of the linked list from unique tokens map for the account.
 	HeadNftId *NftID `protobuf:"bytes,15,opt,name=head_nft_id,json=headNftId,proto3" json:"head_nft_id,omitempty"`
 	// *
-	// The serial number of the head NftID of the linked list from unique tokens
-	// map for the account.
+	// The serial number of the head NftID of the linked list from unique tokens map for the account.
 	HeadNftSerialNumber int64 `protobuf:"varint,16,opt,name=head_nft_serial_number,json=headNftSerialNumber,proto3" json:"head_nft_serial_number,omitempty"`
 	// *
 	// The number of NFTs owned by the account.
@@ -106,26 +102,22 @@ type Account struct {
 	// The nonce of the account, used for Ethereum interoperability.
 	EthereumNonce int64 `protobuf:"varint,23,opt,name=ethereum_nonce,json=ethereumNonce,proto3" json:"ethereum_nonce,omitempty"`
 	// *
-	// The amount of hbars staked to the account at the start of the last rewarded
-	// period.
+	// The amount of hbars staked to the account at the start of the last rewarded period.
 	StakeAtStartOfLastRewardedPeriod int64 `protobuf:"varint,24,opt,name=stake_at_start_of_last_rewarded_period,json=stakeAtStartOfLastRewardedPeriod,proto3" json:"stake_at_start_of_last_rewarded_period,omitempty"`
 	// *
-	// (Optional) The id of an auto-renew account, in the same shard and realm as
-	// the account, that has signed a transaction allowing the network to use its
-	// balance to automatically extend the account's expiration time when it
-	// passes.
+	// (Optional) The id of an auto-renew account, in the same shard and realm as the account, that
+	// has signed a transaction allowing the network to use its balance to automatically extend the account's
+	// expiration time when it passes.
 	AutoRenewAccountId *AccountID `protobuf:"bytes,25,opt,name=auto_renew_account_id,json=autoRenewAccountId,proto3" json:"auto_renew_account_id,omitempty"`
 	// *
-	// The number of seconds the network should automatically extend the account's
-	// expiration by, if the account has a valid auto-renew account, and is not
-	// deleted upon expiration. If this is not provided in an allowed range on
-	// account creation, the transaction will fail with
-	// INVALID_AUTO_RENEWAL_PERIOD. The default values for the minimum period and
-	// maximum period are 30 days and 90 days, respectively.
+	// The number of seconds the network should automatically extend the account's expiration by, if the
+	// account has a valid auto-renew account, and is not deleted upon expiration.
+	// If this is not provided in an allowed range on account creation, the transaction will fail with INVALID_AUTO_RENEWAL_PERIOD.
+	// The default values for the minimum period and maximum period are 30 days and 90 days, respectively.
 	AutoRenewSeconds int64 `protobuf:"varint,26,opt,name=auto_renew_seconds,json=autoRenewSeconds,proto3" json:"auto_renew_seconds,omitempty"`
 	// *
-	// If this account is a smart-contract, number of key-value pairs stored on
-	// the contract. This is used to determine the storage rent for the contract.
+	// If this account is a smart-contract, number of key-value pairs stored on the contract.
+	// This is used to determine the storage rent for the contract.
 	ContractKvPairsNumber int32 `protobuf:"varint,27,opt,name=contract_kv_pairs_number,json=contractKvPairsNumber,proto3" json:"contract_kv_pairs_number,omitempty"`
 	// *
 	// (Optional) List of crypto allowances approved by the account.
@@ -133,33 +125,30 @@ type Account struct {
 	// the amount approved for that account.
 	CryptoAllowances []*AccountCryptoAllowance `protobuf:"bytes,28,rep,name=crypto_allowances,json=cryptoAllowances,proto3" json:"crypto_allowances,omitempty"`
 	// *
-	// (Optional) List of non-fungible token allowances approved for all by the
-	// account. It contains account number approved for spending all serial
-	// numbers for the given NFT token number using approved_for_all flag.
-	// Allowances for a specific serial number is stored in the NFT itself in
-	// state.
+	// (Optional) List of non-fungible token allowances approved for all by the account.
+	// It contains account number approved for spending all serial numbers for the given
+	// NFT token number using approved_for_all flag.
+	// Allowances for a specific serial number is stored in the NFT itself in state.
 	ApproveForAllNftAllowances []*AccountApprovalForAllAllowance `protobuf:"bytes,29,rep,name=approve_for_all_nft_allowances,json=approveForAllNftAllowances,proto3" json:"approve_for_all_nft_allowances,omitempty"`
 	// *
 	// (Optional) List of fungible token allowances approved by the account.
-	// It contains account number for which the allowance is approved to and  the
-	// token number. It also contains and the amount approved for that account.
+	// It contains account number for which the allowance is approved to and  the token number.
+	// It also contains and the amount approved for that account.
 	TokenAllowances []*AccountFungibleTokenAllowance `protobuf:"bytes,30,rep,name=token_allowances,json=tokenAllowances,proto3" json:"token_allowances,omitempty"`
 	// *
 	// The number of tokens for which this account is treasury
 	NumberTreasuryTitles uint32 `protobuf:"varint,31,opt,name=number_treasury_titles,json=numberTreasuryTitles,proto3" json:"number_treasury_titles,omitempty"`
 	// *
 	// A flag indicating if the account is expired and pending removal.
-	// Only the entity expiration system task toggles this flag when it reaches
-	// this account and finds it expired. Before setting the flag the system task
-	// checks if the account has an auto-renew account with balance. This is done
-	// to prevent a zero-balance account with a funded auto-renew account from
-	// being treated as expired in the interval between its expiration and the
-	// time the system task actually auto-renews it.
+	// Only the entity expiration system task toggles this flag when it reaches this account
+	// and finds it expired. Before setting the flag the system task checks if the account has
+	// an auto-renew account with balance. This is done to prevent a zero-balance account with a funded
+	// auto-renew account from being treated as expired in the interval between its expiration
+	// and the time the system task actually auto-renews it.
 	ExpiredAndPendingRemoval bool `protobuf:"varint,32,opt,name=expired_and_pending_removal,json=expiredAndPendingRemoval,proto3" json:"expired_and_pending_removal,omitempty"`
 	// *
-	// The first key in the doubly-linked list of this contract's storage
-	// mappings; It will be null if if the account is not a contract or the
-	// contract has no storage mappings.
+	// The first key in the doubly-linked list of this contract's storage mappings;
+	// It will be null if if the account is not a contract or the contract has no storage mappings.
 	FirstContractStorageKey []byte `protobuf:"bytes,33,opt,name=first_contract_storage_key,json=firstContractStorageKey,proto3" json:"first_contract_storage_key,omitempty"`
 }
 
@@ -439,16 +428,15 @@ type isAccount_StakedId interface {
 
 type Account_StakedAccountId struct {
 	// *
-	// ID of the new account to which this account is staking. If set to the
-	// sentinel <tt>0.0.0</tt> AccountID, this field removes this account's
-	// staked account ID.
+	// ID of the new account to which this account is staking. If set to the sentinel <tt>0.0.0</tt> AccountID,
+	// this field removes this account's staked account ID.
 	StakedAccountId *AccountID `protobuf:"bytes,10,opt,name=staked_account_id,json=stakedAccountId,proto3,oneof"`
 }
 
 type Account_StakedNodeId struct {
 	// *
-	// ID of the new node this account is staked to. If set to the sentinel
-	// <tt>-1</tt>, this field removes this account's staked node ID.
+	// ID of the new node this account is staked to. If set to the sentinel <tt>-1</tt>, this field
+	// removes this account's staked node ID.
 	StakedNodeId int64 `protobuf:"varint,11,opt,name=staked_node_id,json=stakedNodeId,proto3,oneof"`
 }
 
@@ -457,9 +445,9 @@ func (*Account_StakedAccountId) isAccount_StakedId() {}
 func (*Account_StakedNodeId) isAccount_StakedId() {}
 
 // *
-// Allowance granted by this account to a spender for a specific non-fungible
-// token using ApproveForAll. This allows spender to spend all serial numbers
-// for the given non-fungible token id.
+// Allowance granted by this account to a spender for a specific non-fungible token
+// using ApproveForAll. This allows spender to spend all serial numbers for the given
+// non-fungible token id.
 type AccountApprovalForAllAllowance struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -516,10 +504,9 @@ func (x *AccountApprovalForAllAllowance) GetSpenderId() *AccountID {
 }
 
 // *
-// Allowance granted by this account to another account for a specific fungible
-// token. This also contains the amount of the token that is approved for the
-// account. This allows spender to spend the amount of tokens approved for the
-// account.
+// Allowance granted by this account to another account for a specific fungible token.
+// This also contains the amount of the token that is approved for the account.
+// This allows spender to spend the amount of tokens approved for the account.
 type AccountFungibleTokenAllowance struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

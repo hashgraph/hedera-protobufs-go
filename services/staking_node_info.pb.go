@@ -21,74 +21,62 @@ const (
 )
 
 // *
-// Representation of a Hedera Token Service staking info entity in the network
-// Merkle tree.
+// Representation of a Hedera Token Service staking info entity in the network Merkle tree.
 //
-// As with all network entities, staking info is per node and has a unique
-// entity number represented as shard.realm.X.
+// As with all network entities, staking info is per node and has a unique entity number represented as shard.realm.X.
 type StakingNodeInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	// *
-	// The unique entity number of the node. The shard and realm numbers are
-	// implied, based on the network this entity came from.
+	// The unique entity number of the node. The shard and realm numbers are implied, based on the network
+	// this entity came from.
 	NodeNumber int64 `protobuf:"varint,1,opt,name=node_number,json=nodeNumber,proto3" json:"node_number,omitempty"`
 	// *
-	// The minimum stake on this node that is required for this node to have a
-	// non-zero weight to participate in the network consensus.
+	// The minimum stake on this node that is required for this node to have a non-zero weight to
+	// participate in the network consensus.
 	MinStake int64 `protobuf:"varint,2,opt,name=min_stake,json=minStake,proto3" json:"min_stake,omitempty"`
 	// *
-	// The maximum stake on this node that is considered to calculate its weight
-	// to participate in the network consensus.
+	// The maximum stake on this node that is considered to calculate its weight to participate in the network consensus.
 	MaxStake int64 `protobuf:"varint,3,opt,name=max_stake,json=maxStake,proto3" json:"max_stake,omitempty"`
 	// *
-	// The sum of balances of all accounts staked to this node who have opted to
-	// receive rewards.
+	// The sum of balances of all accounts staked to this node who have opted to receive rewards.
 	StakeToReward int64 `protobuf:"varint,4,opt,name=stake_to_reward,json=stakeToReward,proto3" json:"stake_to_reward,omitempty"`
 	// *
-	// The sum of balances of all accounts staked to this node who have opted to
-	// decline rewards.
+	// The sum of balances of all accounts staked to this node who have opted to decline rewards.
 	StakeToNotReward int64 `protobuf:"varint,5,opt,name=stake_to_not_reward,json=stakeToNotReward,proto3" json:"stake_to_not_reward,omitempty"`
 	// *
-	// The snapshot of stake_to_reward value at the beginning of the current
-	// staking period. This is needed for calculating rewards for current staking
-	// period without considering changes to stake_to_reward in the current
-	// staking period. It is reset at the beginning of every period.
+	// The snapshot of stake_to_reward value at the beginning of the current staking period.
+	// This is needed for calculating rewards for current staking period without considering changes to
+	// stake_to_reward in the current staking period. It is reset at the beginning of every period.
 	StakeRewardStart int64 `protobuf:"varint,6,opt,name=stake_reward_start,json=stakeRewardStart,proto3" json:"stake_reward_start,omitempty"`
 	// *
-	// Tracks how much stake from stakeRewardStart will have unclaimed rewards due
-	// to accounts changing their staking metadata in a way that disqualifies them
-	// for the current period; It is reset at the beginning of every period
+	// Tracks how much stake from stakeRewardStart will have unclaimed rewards due to accounts changing their staking
+	// metadata in a way that disqualifies them for the current period; It is reset at the beginning of every period
 	UnclaimedStakeRewardStart int64 `protobuf:"varint,7,opt,name=unclaimed_stake_reward_start,json=unclaimedStakeRewardStart,proto3" json:"unclaimed_stake_reward_start,omitempty"`
 	// *
-	// The total amount of effective hbar staked to this node. This is sum of
-	// stake_to_reward and stake_to_not_reward. If the sum is greater than
-	// max_stake, then the effective stake is max_stake. If the sum is less than
-	// min_stake, then the effective stake is 0.
+	// The total amount of effective hbar staked to this node. This is sum of stake_to_reward and stake_to_not_reward.
+	// If the sum is greater than max_stake, then the effective stake is max_stake.
+	// If the sum is less than min_stake, then the effective stake is 0.
 	Stake int64 `protobuf:"varint,8,opt,name=stake,proto3" json:"stake,omitempty"`
 	// *
-	// An running sum of reward rates per hbar for the last 365+1 staking periods.
-	// The first element is the is the reward up to and including the last full
-	// period that finished before the present. Second element is the reward up to
-	// and including the period before that
+	// An running sum of reward rates per hbar for the last 365+1 staking periods. The first element is the
+	// is the reward up to and including the last full period that finished before the present. Second element is
+	// the reward up to and including the period before that
 	RewardSumHistory []int64 `protobuf:"varint,9,rep,packed,name=reward_sum_history,json=rewardSumHistory,proto3" json:"reward_sum_history,omitempty"`
 	// *
-	// The consensus weight of this node in the network. This is computed based on
-	// the stake of this node at midnight UTC of the current day. If the stake of
-	// this node is less than minStake, then the weight is 0. Sum of all weights
-	// of nodes in the network should be less than 500. If the stake of this node
-	// A is greater than minStake, then the weight of this node A is calculated
-	// as: (node A stake * 500/ total stake of all nodes)
+	// The consensus weight of this node in the network. This is computed based on the stake of this node
+	// at midnight UTC of the current day. If the stake of this node is less than minStake, then the weight is 0.
+	// Sum of all weights of nodes in the network should be less than 500.
+	// If the stake of this node A is greater than minStake, then the weight of this node A is calculated as:
+	// (node A stake * 500/ total stake of all nodes)
 	Weight int32 `protobuf:"varint,10,opt,name=weight,proto3" json:"weight,omitempty"`
 	// *
-	// The total staking rewards in tinybars that COULD be collected by all
-	// accounts staking to the current node after the end of this staking period;
-	// assuming that no account "renounces" its rewards by, for example, setting
-	// declineReward=true. When the current node is deleted, this amount will be
-	// subtracted from the total pending rewards of all accounts staking to all
-	// nodes in the network in NetworkStakingRewards.
+	// The total staking rewards in tinybars that COULD be collected by all accounts staking to the current node after the end
+	// of this staking period; assuming that no account "renounces" its rewards by, for example, setting declineReward=true.
+	// When the current node is deleted, this amount will be subtracted from the total pending rewards of all accounts staking
+	// to all nodes in the network in NetworkStakingRewards.
 	PendingRewards int64 `protobuf:"varint,11,opt,name=pending_rewards,json=pendingRewards,proto3" json:"pending_rewards,omitempty"`
 	// *
 	// True if this node has been deleted from network.
