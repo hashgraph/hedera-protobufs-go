@@ -82,6 +82,23 @@ type TokenServiceClient interface {
 	// *
 	// Updates the NFTs in a collection by TokenID and serial number
 	UpdateNfts(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
+	// *
+	// Reject one or more tokens.<br/>
+	// This transaction SHALL transfer the full balance of one or more tokens from the requesting
+	// account to the treasury for each token. This transfer SHALL NOT charge any custom fee or
+	// royalty defined for the token(s) to be rejected.<br/>
+	// <h3>Effects on success</h3>
+	// <ul>
+	//
+	//	<li>If the rejected token is fungible/common, the requesting account SHALL have a balance
+	//	    of 0 for the rejected token. The treasury balance SHALL increase by the amount that
+	//	    the requesting account decreased.</li>
+	//	<li>If the rejected token is non-fungible/unique the requesting account SHALL NOT hold
+	//	    the specific serialized token that is rejected. The treasury account SHALL hold each
+	//	    specific serialized token that was rejected.</li>
+	//
+	// </li>
+	RejectToken(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
 }
 
 type tokenServiceClient struct {
@@ -274,6 +291,15 @@ func (c *tokenServiceClient) UpdateNfts(ctx context.Context, in *Transaction, op
 	return out, nil
 }
 
+func (c *tokenServiceClient) RejectToken(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error) {
+	out := new(TransactionResponse)
+	err := c.cc.Invoke(ctx, "/proto.TokenService/rejectToken", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TokenServiceServer is the server API for TokenService service.
 // All implementations must embed UnimplementedTokenServiceServer
 // for forward compatibility
@@ -338,6 +364,23 @@ type TokenServiceServer interface {
 	// *
 	// Updates the NFTs in a collection by TokenID and serial number
 	UpdateNfts(context.Context, *Transaction) (*TransactionResponse, error)
+	// *
+	// Reject one or more tokens.<br/>
+	// This transaction SHALL transfer the full balance of one or more tokens from the requesting
+	// account to the treasury for each token. This transfer SHALL NOT charge any custom fee or
+	// royalty defined for the token(s) to be rejected.<br/>
+	// <h3>Effects on success</h3>
+	// <ul>
+	//
+	//	<li>If the rejected token is fungible/common, the requesting account SHALL have a balance
+	//	    of 0 for the rejected token. The treasury balance SHALL increase by the amount that
+	//	    the requesting account decreased.</li>
+	//	<li>If the rejected token is non-fungible/unique the requesting account SHALL NOT hold
+	//	    the specific serialized token that is rejected. The treasury account SHALL hold each
+	//	    specific serialized token that was rejected.</li>
+	//
+	// </li>
+	RejectToken(context.Context, *Transaction) (*TransactionResponse, error)
 	mustEmbedUnimplementedTokenServiceServer()
 }
 
@@ -404,6 +447,9 @@ func (UnimplementedTokenServiceServer) UnpauseToken(context.Context, *Transactio
 }
 func (UnimplementedTokenServiceServer) UpdateNfts(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateNfts not implemented")
+}
+func (UnimplementedTokenServiceServer) RejectToken(context.Context, *Transaction) (*TransactionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RejectToken not implemented")
 }
 func (UnimplementedTokenServiceServer) mustEmbedUnimplementedTokenServiceServer() {}
 
@@ -778,6 +824,24 @@ func _TokenService_UpdateNfts_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TokenService_RejectToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Transaction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TokenServiceServer).RejectToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.TokenService/rejectToken",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TokenServiceServer).RejectToken(ctx, req.(*Transaction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TokenService_ServiceDesc is the grpc.ServiceDesc for TokenService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -864,6 +928,10 @@ var TokenService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "updateNfts",
 			Handler:    _TokenService_UpdateNfts_Handler,
+		},
+		{
+			MethodName: "rejectToken",
+			Handler:    _TokenService_RejectToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

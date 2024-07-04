@@ -23,23 +23,35 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AddressBookServiceClient interface {
 	// *
-	// Prepare to add a new node to the network.
-	// When a valid council member initiates a HAPI transaction to add a new node,
-	// then the network should acknowledge the transaction and update the network’s Address Book within 24 hours.
-	// The added node will not be active until the network is upgraded.
+	// A transaction to create a new consensus node in the network.
+	// address book.
+	// <p>
+	// This transaction, once complete, SHALL add a new consensus node to the
+	// network state.<br/>
+	// The new consensus node SHALL remain in state, but SHALL NOT participate
+	// in network consensus until the network updates the network configuration.
+	// <p>
+	// Hedera governing council authorization is REQUIRED for this transaction.
 	CreateNode(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
 	// *
-	// Prepare to delete the node to the network.
-	// The deleted node will not be deleted until the network is upgraded.
-	// Such a deleted node can never be reused.
+	// A transaction to remove a consensus node from the network address
+	// book.
+	// <p>
+	// This transaction, once complete, SHALL remove the identified consensus
+	// node from the network state.
+	// <p>
+	// Hedera governing council authorization is REQUIRED for this transaction.
 	DeleteNode(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
 	// *
-	// Prepare to update the node to the network.
-	// The node will not be updated until the network is upgraded.
+	// A transaction to update an existing consensus node from the network
+	// address book.
+	// <p>
+	// This transaction, once complete, SHALL modify the identified consensus
+	// node state as requested.
+	// <p>
+	// This transaction MAY be authorized by either the node operator OR the
+	// Hedera governing council.
 	UpdateNode(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
-	// *
-	// Retrieves the node information by node Id.
-	GetNodeInfo(ctx context.Context, in *Query, opts ...grpc.CallOption) (*Response, error)
 }
 
 type addressBookServiceClient struct {
@@ -77,37 +89,40 @@ func (c *addressBookServiceClient) UpdateNode(ctx context.Context, in *Transacti
 	return out, nil
 }
 
-func (c *addressBookServiceClient) GetNodeInfo(ctx context.Context, in *Query, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
-	err := c.cc.Invoke(ctx, "/proto.AddressBookService/getNodeInfo", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // AddressBookServiceServer is the server API for AddressBookService service.
 // All implementations must embed UnimplementedAddressBookServiceServer
 // for forward compatibility
 type AddressBookServiceServer interface {
 	// *
-	// Prepare to add a new node to the network.
-	// When a valid council member initiates a HAPI transaction to add a new node,
-	// then the network should acknowledge the transaction and update the network’s Address Book within 24 hours.
-	// The added node will not be active until the network is upgraded.
+	// A transaction to create a new consensus node in the network.
+	// address book.
+	// <p>
+	// This transaction, once complete, SHALL add a new consensus node to the
+	// network state.<br/>
+	// The new consensus node SHALL remain in state, but SHALL NOT participate
+	// in network consensus until the network updates the network configuration.
+	// <p>
+	// Hedera governing council authorization is REQUIRED for this transaction.
 	CreateNode(context.Context, *Transaction) (*TransactionResponse, error)
 	// *
-	// Prepare to delete the node to the network.
-	// The deleted node will not be deleted until the network is upgraded.
-	// Such a deleted node can never be reused.
+	// A transaction to remove a consensus node from the network address
+	// book.
+	// <p>
+	// This transaction, once complete, SHALL remove the identified consensus
+	// node from the network state.
+	// <p>
+	// Hedera governing council authorization is REQUIRED for this transaction.
 	DeleteNode(context.Context, *Transaction) (*TransactionResponse, error)
 	// *
-	// Prepare to update the node to the network.
-	// The node will not be updated until the network is upgraded.
+	// A transaction to update an existing consensus node from the network
+	// address book.
+	// <p>
+	// This transaction, once complete, SHALL modify the identified consensus
+	// node state as requested.
+	// <p>
+	// This transaction MAY be authorized by either the node operator OR the
+	// Hedera governing council.
 	UpdateNode(context.Context, *Transaction) (*TransactionResponse, error)
-	// *
-	// Retrieves the node information by node Id.
-	GetNodeInfo(context.Context, *Query) (*Response, error)
 	mustEmbedUnimplementedAddressBookServiceServer()
 }
 
@@ -123,9 +138,6 @@ func (UnimplementedAddressBookServiceServer) DeleteNode(context.Context, *Transa
 }
 func (UnimplementedAddressBookServiceServer) UpdateNode(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateNode not implemented")
-}
-func (UnimplementedAddressBookServiceServer) GetNodeInfo(context.Context, *Query) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetNodeInfo not implemented")
 }
 func (UnimplementedAddressBookServiceServer) mustEmbedUnimplementedAddressBookServiceServer() {}
 
@@ -194,24 +206,6 @@ func _AddressBookService_UpdateNode_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AddressBookService_GetNodeInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Query)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AddressBookServiceServer).GetNodeInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/proto.AddressBookService/getNodeInfo",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AddressBookServiceServer).GetNodeInfo(ctx, req.(*Query))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // AddressBookService_ServiceDesc is the grpc.ServiceDesc for AddressBookService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -230,10 +224,6 @@ var AddressBookService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "updateNode",
 			Handler:    _AddressBookService_UpdateNode_Handler,
-		},
-		{
-			MethodName: "getNodeInfo",
-			Handler:    _AddressBookService_GetNodeInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

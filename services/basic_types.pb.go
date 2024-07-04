@@ -680,8 +680,8 @@ const (
 	// Delete a node
 	HederaFunctionality_NodeDelete HederaFunctionality = 91
 	// *
-	// Get Node information
-	HederaFunctionality_NodeGetInfo HederaFunctionality = 92
+	// Transfer one or more token balances held by the requesting account to the treasury for each token type.
+	HederaFunctionality_TokenReject HederaFunctionality = 92
 )
 
 // Enum value maps for HederaFunctionality.
@@ -765,7 +765,7 @@ var (
 		89: "NodeCreate",
 		90: "NodeUpdate",
 		91: "NodeDelete",
-		92: "NodeGetInfo",
+		92: "TokenReject",
 	}
 	HederaFunctionality_value = map[string]int32{
 		"NONE":                       0,
@@ -846,7 +846,7 @@ var (
 		"NodeCreate":                 89,
 		"NodeUpdate":                 90,
 		"NodeDelete":                 91,
-		"NodeGetInfo":                92,
+		"TokenReject":                92,
 	}
 )
 
@@ -3314,24 +3314,33 @@ func (x *CurrentAndNextFeeSchedule) GetNextFeeSchedule() *FeeSchedule {
 }
 
 // *
-// Contains the IP address and the port representing a service endpoint of a Node in a network. Used
-// to reach the Hedera API and submit transactions to the network.
+// Contains the IP address and the port representing a service endpoint of
+// a Node in a network. Used to reach the Hedera API and submit transactions
+// to the network.
+//
+// When the `domain_name` field is set, the `ipAddressV4` field
+// MUST NOT be set.<br/>
+// When the `ipAddressV4` field is set, the `domain_name` field
+// MUST NOT be set.
 type ServiceEndpoint struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	// *
-	// The 32-bit IPv4 address of the node encoded in left to right order (e.g.  127.0.0.1 has 127
-	// as its first byte)
+	// The 4-byte IPv4 address of the endpoint encoded in left to right order
+	// (e.g. 127.0.0.1 has bytes [127, 0, 0, 1])
 	IpAddressV4 []byte `protobuf:"bytes,1,opt,name=ipAddressV4,proto3" json:"ipAddressV4,omitempty"`
 	// *
-	// The port of the node
+	// The port of the service endpoint
 	Port int32 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
 	// *
-	// A node domain name
-	// This MUST be the fully qualified domain name of the node.
+	// A node domain name.<br/>
+	// This MUST be the fully qualified domain(DNS) name of the node.<br/>
 	// This value MUST NOT be more than 253 characters.
+	// domain_name and ipAddressV4 are mutually exclusive.
+	// When the `domain_name` field is set, the `ipAddressV4` field MUST NOT be set.<br/>
+	// When the `ipAddressV4` field is set, the `domain_name` field MUST NOT be set.
 	DomainName string `protobuf:"bytes,3,opt,name=domain_name,json=domainName,proto3" json:"domain_name,omitempty"`
 }
 
@@ -3392,8 +3401,8 @@ func (x *ServiceEndpoint) GetDomainName() string {
 // The data about a node, including its service endpoints and the Hedera account to be paid for
 // services provided by the node (that is, queries answered and transactions submitted.)
 //
-// If the <tt>serviceEndpoint</tt> list is not set, or empty, then the endpoint given by the
-// (deprecated) <tt>ipAddress</tt> and <tt>portno</tt> fields should be used.
+// If the `serviceEndpoint` list is not set, or empty, then the endpoint given by the
+// (deprecated) `ipAddress` and `portno` fields should be used.
 //
 // All fields are populated in the 0.0.102 address book file while only fields that start with # are
 // populated in the 0.0.101 address book file.
@@ -4768,8 +4777,8 @@ var file_basic_types_proto_rawDesc = []byte{
 	0x65, 0x4e, 0x66, 0x74, 0x73, 0x10, 0x58, 0x12, 0x0e, 0x0a, 0x0a, 0x4e, 0x6f, 0x64, 0x65, 0x43,
 	0x72, 0x65, 0x61, 0x74, 0x65, 0x10, 0x59, 0x12, 0x0e, 0x0a, 0x0a, 0x4e, 0x6f, 0x64, 0x65, 0x55,
 	0x70, 0x64, 0x61, 0x74, 0x65, 0x10, 0x5a, 0x12, 0x0e, 0x0a, 0x0a, 0x4e, 0x6f, 0x64, 0x65, 0x44,
-	0x65, 0x6c, 0x65, 0x74, 0x65, 0x10, 0x5b, 0x12, 0x0f, 0x0a, 0x0b, 0x4e, 0x6f, 0x64, 0x65, 0x47,
-	0x65, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x10, 0x5c, 0x42, 0x26, 0x0a, 0x22, 0x63, 0x6f, 0x6d, 0x2e,
+	0x65, 0x6c, 0x65, 0x74, 0x65, 0x10, 0x5b, 0x12, 0x0f, 0x0a, 0x0b, 0x54, 0x6f, 0x6b, 0x65, 0x6e,
+	0x52, 0x65, 0x6a, 0x65, 0x63, 0x74, 0x10, 0x5c, 0x42, 0x26, 0x0a, 0x22, 0x63, 0x6f, 0x6d, 0x2e,
 	0x68, 0x65, 0x64, 0x65, 0x72, 0x61, 0x68, 0x61, 0x73, 0x68, 0x67, 0x72, 0x61, 0x70, 0x68, 0x2e,
 	0x61, 0x70, 0x69, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x6a, 0x61, 0x76, 0x61, 0x50, 0x01,
 	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
