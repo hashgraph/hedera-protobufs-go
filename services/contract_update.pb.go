@@ -76,8 +76,12 @@ type ContractUpdateTransactionBody struct {
 	//	*ContractUpdateTransactionBody_MemoWrapper
 	MemoField isContractUpdateTransactionBody_MemoField `protobuf_oneof:"memoField"`
 	// *
-	// If set, the new maximum number of tokens that this contract can be
-	// automatically associated with (i.e., receive air-drops from).
+	// If set, modify the maximum number of tokens that can be auto-associated with the
+	// contract.<br/>
+	// If this is set and less than or equal to `used_auto_associations`, or 0, then this contract
+	// MUST manually associate with a token before transacting in that token.<br/>
+	// This value MAY also be `-1` to indicate no limit.<br/>
+	// This value MUST NOT be less than `-1`.
 	MaxAutomaticTokenAssociations *wrapperspb.Int32Value `protobuf:"bytes,11,opt,name=max_automatic_token_associations,json=maxAutomaticTokenAssociations,proto3" json:"max_automatic_token_associations,omitempty"`
 	// *
 	// If set to the sentinel <tt>0.0.0</tt> AccountID, this field removes the contract's auto-renew

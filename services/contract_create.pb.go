@@ -132,8 +132,12 @@ type ContractCreateTransactionBody struct {
 	// the memo that was submitted as part of the contract (max 100 bytes)
 	Memo string `protobuf:"bytes,13,opt,name=memo,proto3" json:"memo,omitempty"`
 	// *
-	// The maximum number of tokens that this contract can be automatically associated
-	// with (i.e., receive air-drops from).
+	// The maximum number of tokens that can be auto-associated with the contract.<br/>
+	// If this is less than or equal to `used_auto_associations`, or 0, then this contract
+	// MUST manually associate with a token before transacting in that token.<br/>
+	// This value MAY also be `-1` to indicate no limit.<br/>
+	// This value MUST NOT be less than `-1`.<br/>
+	// By default this value is 0 for contracts.
 	MaxAutomaticTokenAssociations int32 `protobuf:"varint,14,opt,name=max_automatic_token_associations,json=maxAutomaticTokenAssociations,proto3" json:"max_automatic_token_associations,omitempty"`
 	// *
 	// An account to charge for auto-renewal of this contract. If not set, or set to an
