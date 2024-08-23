@@ -99,6 +99,43 @@ type TokenServiceClient interface {
 	//
 	// </li>
 	RejectToken(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
+	// *
+	// Airdrop one or more tokens to one or more accounts.<br/>
+	// This distributes tokens from the balance of one or more sending account(s) to the balance
+	// of one or more recipient accounts. Accounts will receive the tokens in one of four ways.
+	// <ul>
+	//
+	//	<li>An account already associated to the token to be distributed SHALL receive the
+	//	    airdropped tokens immediately to the recipient account balance.</li>
+	//	<li>An account with available automatic association slots SHALL be automatically
+	//	    associated to the token, and SHALL immediately receive the airdropped tokens to the
+	//	    recipient account balance.</li>
+	//	<li>An account with "receiver signature required" set SHALL have a "Pending Airdrop"
+	//	    created and MUST claim that airdrop with a `claimAirdrop` transaction.</li>
+	//	<li>An account with no available automatic association slots SHALL have a
+	//	    "Pending Airdrop" created and MUST claim that airdrop with a `claimAirdrop`
+	//	    transaction. </li>
+	//
+	// </ul>
+	// Any airdrop that completes immediately SHALL be irreversible. Any airdrop that results in a
+	// "Pending Airdrop" MAY be canceled via a `cancelAirdrop` transaction.<br/>
+	// All transfer fees (including custom fees and royalties), as well as the rent cost for the
+	// first auto-renewal period for any automatic-association slot occupied by the airdropped
+	// tokens, SHALL be charged to the account submitting this transaction.
+	AirdropTokens(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
+	// *
+	// Cancel one or more pending airdrops.
+	// <p>
+	// This transaction MUST be signed by _each_ account *sending* an airdrop to be canceled.
+	CancelAirdrop(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
+	// *
+	// Claim one or more pending airdrops.
+	// <p>
+	// This transaction MUST be signed by _each_ account **receiving** an
+	// airdrop to be claimed.<br>
+	// If a "Sender" lacks sufficient balance to fulfill the airdrop at the
+	// time the claim is made, that claim SHALL fail.
+	ClaimAirdrop(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error)
 }
 
 type tokenServiceClient struct {
@@ -300,6 +337,33 @@ func (c *tokenServiceClient) RejectToken(ctx context.Context, in *Transaction, o
 	return out, nil
 }
 
+func (c *tokenServiceClient) AirdropTokens(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error) {
+	out := new(TransactionResponse)
+	err := c.cc.Invoke(ctx, "/proto.TokenService/airdropTokens", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tokenServiceClient) CancelAirdrop(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error) {
+	out := new(TransactionResponse)
+	err := c.cc.Invoke(ctx, "/proto.TokenService/cancelAirdrop", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tokenServiceClient) ClaimAirdrop(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*TransactionResponse, error) {
+	out := new(TransactionResponse)
+	err := c.cc.Invoke(ctx, "/proto.TokenService/claimAirdrop", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TokenServiceServer is the server API for TokenService service.
 // All implementations must embed UnimplementedTokenServiceServer
 // for forward compatibility
@@ -381,6 +445,43 @@ type TokenServiceServer interface {
 	//
 	// </li>
 	RejectToken(context.Context, *Transaction) (*TransactionResponse, error)
+	// *
+	// Airdrop one or more tokens to one or more accounts.<br/>
+	// This distributes tokens from the balance of one or more sending account(s) to the balance
+	// of one or more recipient accounts. Accounts will receive the tokens in one of four ways.
+	// <ul>
+	//
+	//	<li>An account already associated to the token to be distributed SHALL receive the
+	//	    airdropped tokens immediately to the recipient account balance.</li>
+	//	<li>An account with available automatic association slots SHALL be automatically
+	//	    associated to the token, and SHALL immediately receive the airdropped tokens to the
+	//	    recipient account balance.</li>
+	//	<li>An account with "receiver signature required" set SHALL have a "Pending Airdrop"
+	//	    created and MUST claim that airdrop with a `claimAirdrop` transaction.</li>
+	//	<li>An account with no available automatic association slots SHALL have a
+	//	    "Pending Airdrop" created and MUST claim that airdrop with a `claimAirdrop`
+	//	    transaction. </li>
+	//
+	// </ul>
+	// Any airdrop that completes immediately SHALL be irreversible. Any airdrop that results in a
+	// "Pending Airdrop" MAY be canceled via a `cancelAirdrop` transaction.<br/>
+	// All transfer fees (including custom fees and royalties), as well as the rent cost for the
+	// first auto-renewal period for any automatic-association slot occupied by the airdropped
+	// tokens, SHALL be charged to the account submitting this transaction.
+	AirdropTokens(context.Context, *Transaction) (*TransactionResponse, error)
+	// *
+	// Cancel one or more pending airdrops.
+	// <p>
+	// This transaction MUST be signed by _each_ account *sending* an airdrop to be canceled.
+	CancelAirdrop(context.Context, *Transaction) (*TransactionResponse, error)
+	// *
+	// Claim one or more pending airdrops.
+	// <p>
+	// This transaction MUST be signed by _each_ account **receiving** an
+	// airdrop to be claimed.<br>
+	// If a "Sender" lacks sufficient balance to fulfill the airdrop at the
+	// time the claim is made, that claim SHALL fail.
+	ClaimAirdrop(context.Context, *Transaction) (*TransactionResponse, error)
 	mustEmbedUnimplementedTokenServiceServer()
 }
 
@@ -450,6 +551,15 @@ func (UnimplementedTokenServiceServer) UpdateNfts(context.Context, *Transaction)
 }
 func (UnimplementedTokenServiceServer) RejectToken(context.Context, *Transaction) (*TransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RejectToken not implemented")
+}
+func (UnimplementedTokenServiceServer) AirdropTokens(context.Context, *Transaction) (*TransactionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AirdropTokens not implemented")
+}
+func (UnimplementedTokenServiceServer) CancelAirdrop(context.Context, *Transaction) (*TransactionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CancelAirdrop not implemented")
+}
+func (UnimplementedTokenServiceServer) ClaimAirdrop(context.Context, *Transaction) (*TransactionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ClaimAirdrop not implemented")
 }
 func (UnimplementedTokenServiceServer) mustEmbedUnimplementedTokenServiceServer() {}
 
@@ -842,6 +952,60 @@ func _TokenService_RejectToken_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TokenService_AirdropTokens_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Transaction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TokenServiceServer).AirdropTokens(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.TokenService/airdropTokens",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TokenServiceServer).AirdropTokens(ctx, req.(*Transaction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TokenService_CancelAirdrop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Transaction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TokenServiceServer).CancelAirdrop(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.TokenService/cancelAirdrop",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TokenServiceServer).CancelAirdrop(ctx, req.(*Transaction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TokenService_ClaimAirdrop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Transaction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TokenServiceServer).ClaimAirdrop(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.TokenService/claimAirdrop",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TokenServiceServer).ClaimAirdrop(ctx, req.(*Transaction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TokenService_ServiceDesc is the grpc.ServiceDesc for TokenService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -932,6 +1096,18 @@ var TokenService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "rejectToken",
 			Handler:    _TokenService_RejectToken_Handler,
+		},
+		{
+			MethodName: "airdropTokens",
+			Handler:    _TokenService_AirdropTokens_Handler,
+		},
+		{
+			MethodName: "cancelAirdrop",
+			Handler:    _TokenService_CancelAirdrop_Handler,
+		},
+		{
+			MethodName: "claimAirdrop",
+			Handler:    _TokenService_ClaimAirdrop_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
